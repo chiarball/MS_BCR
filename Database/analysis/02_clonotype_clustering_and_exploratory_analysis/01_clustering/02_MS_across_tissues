@@ -1,0 +1,723 @@
+## 0. LOAD AND FILTER MS DATA (USED FOR ANALYSES)
+
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(tidyr)
+library(tibble)
+
+df <- fread("/doctorai/chiarba/analysis/MS_HC_naive_h0h1.tsv")
+
+unique(df$study)
+
+# removing healthy control (Ghraichy)
+df <- df %>%
+  filter(study != "Ghraichy")
+
+
+## 1. JUNCTION_AA_LENGTH DISTRIBUTION ACROSS TISSUES FOR MS 
+
+# barplot: disease_diagnosis x study, faceted by tissue
+ggplot(df, aes(x = disease_diagnosis, fill = factor(study))) +
+  geom_bar(color = "black") +
+  labs(x = "disease", y = "Number of Sequences", fill = "study") +
+  theme_minimal() +
+  theme_bw() +
+  facet_wrap(~ tissue,  scales = "free_x", nrow = 1) +
+  scale_y_log10() +
+  geom_text(
+    stat = "count",
+    aes(label = after_stat(count)),
+    position = position_stack(vjust = 0.3),
+    size = 2,
+    angle = 90
+  ) +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      vjust = 0.5,
+      size  = 7
+    )
+  )
+
+# barplot: tissue x study
+ggplot(df, aes(x = tissue, fill = factor(study))) +
+  geom_bar(color = "black", position = "dodge") +
+  labs(x = "tissue", y = "Number of Sequences", fill = "study") +
+  theme_minimal() +
+  theme_bw() +
+  scale_y_log10() +
+  geom_text(
+    stat = "count",
+    aes(label = after_stat(count)),
+    position = position_dodge(width = 0.9),
+    vjust    = -0.3,
+    hjust    = 0.5,
+    angle    = 0,
+    size     = 2
+  ) +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      vjust = 0.5,
+      size  = 7
+    )
+  )
+
+# distribution across tissues: CDR3 length
+plot_data <- df %>% 
+  group_by(subject_number, tissue, junction_aa_length) %>% 
+  summarise(n = n(), .groups = "drop") %>% 
+  group_by(subject_number, tissue) %>% 
+  mutate(rel_freq = n / sum(n)) %>% 
+  ungroup()
+
+# Kruskal–Wallis with BH correction
+kruskal_results_mixcr <- plot_data %>%
+  group_by(junction_aa_length) %>%
+  filter(n_distinct(tissue) > 1) %>%
+  do({
+    test <- kruskal.test(rel_freq ~ tissue, data = .)
+    data.frame(
+      junction_aa_length = unique(.$junction_aa_length),
+      p_value            = test$p.value
+    )
+  }) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  )
+
+plot_data <- plot_data %>%
+  left_join(kruskal_results_mixcr, by = "junction_aa_length") %>%
+  filter(junction_aa_length > 5, junction_aa_length < 36)
+
+# median-based smoothing per tissue
+median_data_mixcr <- plot_data %>%
+  group_by(junction_aa_length, tissue) %>%
+  summarise(mean_rel_freq = median(rel_freq), .groups = "drop") %>% 
+  filter(junction_aa_length > 5, junction_aa_length < 36)
+
+ggplot(plot_data, aes(x = junction_aa_length, y = rel_freq, fill = tissue)) +
+  geom_smooth(
+    data   = median_data_mixcr,
+    aes(
+      x      = junction_aa_length,
+      y      = mean_rel_freq,
+      colour = tissue,
+      group  = tissue
+    ),
+    method = "loess",
+    span   = 0.2,
+    size   = 0.5,
+    se     = FALSE
+  ) +
+  geom_text(
+    aes(
+      x     = junction_aa_length,
+      y     = 0.00005,
+      label = significance
+    ),
+    inherit.aes = FALSE,
+    size   = 4,
+    angle  = 90,
+    hjust  = 1
+  ) +
+  scale_x_continuous(
+    breaks = sort(unique(plot_data$junction_aa_length)),
+    expand = c(0, 0)
+  ) +
+  labs(
+    x     = "Junction AA Length",
+    y     = "Median relative frequency\nof sequences per Junction AA Length",
+    title = "Distribution of Junction AA Length across tissues in MS patients"
+  ) +
+  theme_bw()
+
+
+## 2. JUNCTION_AA_LENGTH DISTRIBUTION: INTRA vs EXTRA CRANIAL TISSUES
+
+plot_data_cdr3 <- df %>% 
+  group_by(subject_number, tissue, junction_aa_length) %>% 
+  summarise(n = n()) %>% 
+  group_by(subject_number, tissue) %>% 
+  summarise(rel_freq = n / sum(n), junction_aa_length) %>% 
+  ungroup()
+
+plot_data_cdr3 <- plot_data_cdr3 %>%
+  mutate(tissue_type = case_when(
+    tissue %in% c("blood", "CLN") ~ "extra",
+    TRUE                          ~ "intra"
+  ))
+
+unique(df$tissue_type)           # df non ha tissue_type esplicito, verrà NULL
+unique(plot_data_cdr3$tissue_type)
+
+# Test for normality distribution (Shapiro per lunghezza x tissue_type)
+normality_results <- plot_data_cdr3 %>%
+  group_by(junction_aa_length, tissue_type) %>%
+  summarise(
+    n = n_distinct(subject_number),
+    p_shapiro = if (n >= 3) stats::shapiro.test(rel_freq)$p.value else NA_real_,
+    .groups = "drop"
+  )
+
+normality_summary <- normality_results %>%
+  tidyr::pivot_wider(
+    names_from  = tissue_type,
+    values_from = c(n, p_shapiro),
+    names_sep   = "__"
+  ) %>%
+  mutate(
+    both_testable = !is.na(p_shapiro__intra) & !is.na(p_shapiro__extra),
+    both_normal   = both_testable &
+                    p_shapiro__intra >= 0.05 &
+                    p_shapiro__extra >= 0.05
+  )
+
+normality_summary %>% summarise(
+  total_lenght  = n(),
+  both_testable = sum(both_testable, na.rm = TRUE),
+  both_normal   = sum(both_normal,   na.rm = TRUE)
+) %>% print()
+
+genes_to_plot <- unique(plot_data_cdr3$junction_aa_length)[1:16]
+
+plot_data_cdr3 %>%
+  dplyr::filter(junction_aa_length %in% genes_to_plot) %>%
+  ggplot(aes(sample = rel_freq)) +
+  stat_qq() +
+  stat_qq_line() +
+  facet_wrap(~ junction_aa_length + tissue_type, scales = "free") +
+  theme_bw() +
+  labs(title = "QQ-plot for CDR3 length relative frequencies")
+
+# Wilcoxon tests per lunghezza (>=2 soggetti per gruppo)
+results_listcdr3 <- list()
+junction_values  <- unique(plot_data_cdr3$junction_aa_length) %>% sort()
+
+for (junc in junction_values) {
+  subset_data <- plot_data_cdr3 %>% filter(junction_aa_length == junc)
+  
+  n_extra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "extra"]))
+  n_intra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "intra"]))
+  
+  if (n_extra < 2 || n_intra < 2) next
+  
+  wt <- wilcox.test(rel_freq ~ tissue_type, data = subset_data, exact = FALSE)
+  
+  results_listcdr3[[length(results_listcdr3) + 1]] <- data.frame(
+    junction_aa_length = junc,
+    p_value            = wt$p.value,
+    stringsAsFactors   = FALSE
+  )
+}
+
+if (length(results_listcdr3) == 0) {
+  results_df <- tibble::tibble(
+    junction_aa_length = integer(0),
+    p_value            = numeric(0)
+  )
+} else {
+  results_df <- dplyr::bind_rows(results_listcdr3)
+}
+
+results_df <- results_df %>%
+  group_by(junction_aa_length) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  ) %>%
+  mutate(junction_aa_length = as.integer(as.character(junction_aa_length)))
+
+plot_data_cdr3 <- plot_data_cdr3 %>%
+  select(-any_of(c("p_value", "p_adj", "significance"))) %>%
+  left_join(
+    results_df %>% select(junction_aa_length, p_value, p_adj, significance),
+    by = "junction_aa_length"
+  ) %>%
+  filter(junction_aa_length > 5, junction_aa_length < 36)
+
+ggplot(plot_data_cdr3,
+       aes(x = as.factor(junction_aa_length), y = rel_freq, fill = tissue_type)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_text(
+    data = plot_data_cdr3,
+    aes(
+      x     = as.character(junction_aa_length),
+      y     = -0.005,
+      label = significance
+    ),
+    inherit.aes = FALSE,
+    size   = 4,
+    angle  = 0,
+    hjust  = -0.005
+  ) +
+  labs(
+    x    = "Junction AA Length",
+    y    = "Median Junction AA Length Frequencies",
+    fill = "status"
+  ) +
+  theme_bw()
+
+
+## 3. V GENE DISTRIBUTION ACROSS TISSUES
+
+plot_dataV_tissue <- df %>%
+  group_by(subject_number, tissue, v_gene) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(subject_number, tissue) %>%
+  mutate(total = sum(n)) %>%
+  ungroup() %>%
+  mutate(rel_freq = n / total) %>%
+  select(subject_number, tissue, v_gene, rel_freq) %>%
+  mutate(tissue_type = case_when(
+    tissue %in% c("blood", "CLN") ~ "extra",
+    TRUE                          ~ "intra"
+  ))
+
+v_genes     <- unique(plot_dataV_tissue$v_gene)
+results_list <- list()
+
+# Wilcoxon tests per v_gene (>=2 soggetti per gruppo)
+for (vg in v_genes) {
+  subset_data <- plot_dataV_tissue %>% filter(v_gene == vg)
+  
+  n_extra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "extra"]))
+  n_intra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "intra"]))
+  
+  if (n_extra < 2 || n_intra < 2) next
+  
+  wt <- wilcox.test(rel_freq ~ tissue_type, data = subset_data, exact = FALSE)
+  
+  results_list[[length(results_list) + 1]] <- data.frame(
+    v_gene        = vg,
+    p_value       = wt$p.value,
+    stringsAsFactors = FALSE
+  )
+}
+
+if (length(results_list) == 0) {
+  results_df <- tibble::tibble(v_gene = character(0), p_value = numeric(0))
+} else {
+  results_df <- bind_rows(results_list)
+}
+
+results_df <- results_df %>%
+  group_by(v_gene) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  )
+
+plot_dataV_tissue <- plot_dataV_tissue %>%
+  select(-any_of(c("p_value", "p_adj", "significance"))) %>%
+  left_join(results_df %>% select(v_gene, p_value, p_adj, significance), by = "v_gene")
+
+plot_for_plotting <- plot_dataV_tissue %>% filter(rel_freq > 0.001)
+plot_df          <- plot_for_plotting
+
+if (nrow(plot_for_plotting) == 0) {
+  stop("No points to plot after rel_freq > 0.001 filter; adjust threshold or skip filter.")
+}
+
+y_min   <- min(plot_for_plotting$rel_freq, na.rm = TRUE)
+y_max   <- max(plot_for_plotting$rel_freq, na.rm = TRUE)
+y_range <- ifelse(y_max - y_min == 0, abs(y_min) + 1e-6, y_max - y_min)
+asterisk_y <- y_min - 0.01 * y_range
+
+asterisk_data <- results_df %>%
+  filter(significance != "") %>%
+  distinct(v_gene, .keep_all = TRUE) %>%
+  filter(v_gene %in% unique(plot_for_plotting$v_gene)) %>%
+  mutate(y = asterisk_y)
+
+ggplot(plot_df, aes(x = v_gene, y = rel_freq, fill = tissue_type)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_text(
+    data = asterisk_data,
+    aes(x = v_gene, y = y, label = significance),
+    inherit.aes = FALSE,
+    size        = 5,
+    angle       = 0,
+    hjust       = 0.5
+  ) +
+  labs(
+    x   = "v_gene",
+    y   = "Relative Frequency of V Gene Usage per Subject and Tissue",
+    fill = "tissue_type"
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+## 4. V FAMILY DISTRIBUTION ACROSS TISSUES
+
+plot_dataV_family <- df %>%
+  group_by(subject_number, tissue, v_gene) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  mutate(v_family = str_extract(v_gene, "^[^-]+")) %>%
+  group_by(subject_number, tissue, v_family) %>%
+  summarise(n = sum(n), .groups = "drop") %>%
+  group_by(subject_number, tissue) %>%
+  mutate(rel_freq = n / sum(n)) %>%
+  ungroup() %>%
+  mutate(tissue_type = if_else(tissue %in% c("blood", "CLN"), "extra", "intra"))
+
+results_list  <- list()
+family_values <- unique(plot_dataV_family$v_family)
+
+for (fam in family_values) {
+  subset_data <- plot_dataV_family %>% filter(v_family == fam)
+  
+  n_extra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "extra"]))
+  n_intra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "intra"]))
+  
+  if (n_extra < 2 || n_intra < 2) next
+  
+  wt <- wilcox.test(rel_freq ~ tissue_type, data = subset_data, exact = FALSE)
+  
+  results_list[[length(results_list) + 1]] <- data.frame(
+    v_family       = fam,
+    p_value        = wt$p.value,
+    stringsAsFactors = FALSE
+  )
+}
+
+if (length(results_list) == 0) {
+  results_df <- tibble::tibble(v_family = character(0), p_value = numeric(0))
+} else {
+  results_df <- bind_rows(results_list)
+}
+
+results_df <- results_df %>%
+  group_by(v_family) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  )
+
+plot_dataV_family <- plot_dataV_family %>%
+  select(-any_of(c("p_value", "p_adj", "significance"))) %>%
+  left_join(results_df %>% select(v_family, p_value, p_adj, significance), by = "v_family")
+
+ggplot(
+  plot_dataV_family %>% filter(rel_freq > 0.001),
+  aes(x = v_family, y = rel_freq, fill = tissue_type)
+) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_text(
+    aes(label = significance),
+    y    = -0.01,
+    size = 7,
+    hjust = 0.5
+  ) +
+  labs(
+    x    = "V gene family",
+    y    = "Relative frequency per subject and tissue",
+    fill = "Tissue type"
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# effect size per family: mean, sd, n, abs diff, fold-change
+family_effect <- plot_dataV_family %>%
+  group_by(v_family, tissue_type) %>%
+  summarise(
+    mean_rel = mean(rel_freq),
+    sd_rel   = sd(rel_freq),
+    n_subj   = n_distinct(subject_number),
+    .groups  = "drop"
+  ) %>%
+  tidyr::pivot_wider(
+    names_from  = tissue_type,
+    values_from = c(mean_rel, sd_rel, n_subj),
+    names_sep   = "__"
+  ) %>%
+  mutate(
+    abs_diff    = mean_rel__intra - mean_rel__extra,
+    fold_change = mean_rel__intra / mean_rel__extra
+  )
+
+family_effect %>% filter(v_family == "IGHV4")
+
+
+## 5. D GENE DISTRIBUTION ACROSS TISSUES
+
+plot_dataD_tissue <- df %>%
+  group_by(subject_number, tissue, d_gene) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(subject_number, tissue) %>%
+  mutate(total = sum(n)) %>%
+  ungroup() %>%
+  mutate(rel_freq = n / total) %>%
+  select(subject_number, tissue, d_gene, rel_freq) %>%
+  mutate(tissue_type = case_when(
+    tissue %in% c("blood", "CLN") ~ "extra",
+    TRUE                          ~ "intra"
+  ))
+
+d_genes      <- unique(plot_dataD_tissue$d_gene)
+results_list <- list()
+
+# Shapiro (diagnostico)
+normality_results <- plot_dataD_tissue %>%
+  group_by(d_gene, tissue_type) %>%
+  summarise(
+    n         = n_distinct(subject_number),
+    p_shapiro = if (n() >= 3) stats::shapiro.test(rel_freq)$p.value else NA_real_,
+    .groups   = "drop"
+  )
+
+normality_summary <- normality_results %>%
+  tidyr::pivot_wider(
+    names_from  = tissue_type,
+    values_from = c(n, p_shapiro),
+    names_sep   = "__"
+  ) %>%
+  mutate(
+    both_testable = !is.na(p_shapiro__extra) & !is.na(p_shapiro__intra),
+    both_normal   = both_testable & 
+                    p_shapiro__extra >= 0.05 & 
+                    p_shapiro__intra >= 0.05
+  )
+
+normality_summary %>% summarise(
+  total_genes  = n(),
+  both_testable = sum(both_testable, na.rm = TRUE),
+  both_normal   = sum(both_normal,   na.rm = TRUE)
+) %>% print()
+
+# Wilcoxon per d_gene
+for (dg in d_genes) {
+  subset_data <- plot_dataD_tissue %>% filter(d_gene == dg)
+  
+  n_extra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "extra"]))
+  n_intra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "intra"]))
+  
+  if (n_extra < 2 || n_intra < 2) next
+  
+  wt <- wilcox.test(rel_freq ~ tissue_type, data = subset_data, exact = FALSE)
+  
+  results_list[[length(results_list) + 1]] <- data.frame(
+    d_gene         = dg,
+    p_value        = wt$p.value,
+    stringsAsFactors = FALSE
+  )
+}
+
+if (length(results_list) == 0) {
+  results_df <- tibble::tibble(d_gene = character(0), p_value = numeric(0))
+} else {
+  results_df <- bind_rows(results_list)
+}
+
+results_df <- results_df %>%
+  group_by(d_gene) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  )
+
+plot_dataD_tissue <- plot_dataD_tissue %>%
+  select(-any_of(c("p_value", "p_adj", "significance"))) %>%
+  left_join(results_df %>% select(d_gene, p_value, p_adj, significance), by = "d_gene")
+
+plot_for_plotting <- plot_dataD_tissue %>% filter(rel_freq > 0.001)
+plot_df          <- plot_for_plotting
+
+if (nrow(plot_for_plotting) == 0) {
+  stop("No points to plot after rel_freq > 0.001 filter; adjust threshold or skip filter.")
+}
+
+y_min     <- min(plot_for_plotting$rel_freq, na.rm = TRUE)
+y_max     <- max(plot_for_plotting$rel_freq, na.rm = TRUE)
+y_range   <- ifelse(y_max - y_min == 0, abs(y_min) + 1e-6, y_max - y_min)
+asterisk_y <- y_min - 0.01 * y_range
+
+asterisk_data <- results_df %>%
+  filter(significance != "") %>%
+  distinct(d_gene, .keep_all = TRUE) %>%
+  filter(d_gene %in% unique(plot_for_plotting$d_gene)) %>%
+  mutate(y = asterisk_y)
+
+ggplot(plot_df, aes(x = d_gene, y = rel_freq, fill = tissue_type)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_text(
+    data = asterisk_data,
+    aes(x = d_gene, y = y, label = significance),
+    inherit.aes = FALSE,
+    size   = 5,
+    angle  = 0,
+    hjust  = 0.5
+  ) +
+  labs(
+    x   = "d_gene",
+    y   = "Relative Frequency of D Gene Usage per Subject and Tissue",
+    fill = "tissue_type"
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+## 6. J GENE DISTRIBUTION ACROSS TISSUES
+
+plot_dataJ_tissue <- df %>%
+  group_by(subject_number, tissue, j_gene) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(subject_number, tissue) %>%
+  mutate(total = sum(n)) %>%
+  ungroup() %>%
+  mutate(rel_freq = n / total) %>%
+  select(subject_number, tissue, j_gene, rel_freq) %>%
+  mutate(tissue_type = case_when(
+    tissue %in% c("blood", "CLN") ~ "extra",
+    TRUE                          ~ "intra"
+  ))
+
+j_genes     <- unique(plot_dataJ_tissue$j_gene)
+results_list <- list()
+
+normality_results <- plot_dataJ_tissue %>%
+  group_by(j_gene, tissue_type) %>%
+  summarise(
+    n         = n_distinct(subject_number),
+    p_shapiro = if (n() >= 3) stats::shapiro.test(rel_freq)$p.value else NA_real_,
+    .groups   = "drop"
+  )
+
+normality_summary <- normality_results %>%
+  tidyr::pivot_wider(
+    names_from  = tissue_type,
+    values_from = c(n, p_shapiro),
+    names_sep   = "__"
+  ) %>%
+  mutate(
+    both_testable = !is.na(p_shapiro__extra) & !is.na(p_shapiro__intra),
+    both_normal   = both_testable &
+                    p_shapiro__extra >= 0.05 &
+                    p_shapiro__intra >= 0.05
+  )
+
+normality_summary %>% summarise(
+  total_genes  = n(),
+  both_testable = sum(both_testable, na.rm = TRUE),
+  both_normal   = sum(both_normal,   na.rm = TRUE)
+) %>% print()
+
+for (jg in j_genes) {
+  subset_data <- plot_dataJ_tissue %>% filter(j_gene == jg)
+  
+  n_extra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "extra"]))
+  n_intra <- length(unique(subset_data$subject_number[subset_data$tissue_type == "intra"]))
+  
+  if (n_extra < 2 || n_intra < 2) next
+  
+  wt <- wilcox.test(rel_freq ~ tissue_type, data = subset_data, exact = FALSE)
+  
+  results_list[[length(results_list) + 1]] <- data.frame(
+    j_gene         = jg,
+    p_value        = wt$p.value,
+    stringsAsFactors = FALSE
+  )
+}
+
+if (length(results_list) == 0) {
+  results_df <- tibble::tibble(j_gene = character(0), p_value = numeric(0))
+} else {
+  results_df <- bind_rows(results_list)
+}
+
+results_df <- results_df %>%
+  group_by(j_gene) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  )
+
+plot_dataJ_tissue <- plot_dataJ_tissue %>%
+  select(-any_of(c("p_value", "p_adj", "significance"))) %>%
+  left_join(results_df %>% select(j_gene, p_value, p_adj, significance), by = "j_gene")
+
+plot_for_plotting <- plot_dataJ_tissue %>% filter(rel_freq > 0.001)
+plot_df          <- plot_for_plotting
+
+if (nrow(plot_for_plotting) == 0) {
+  stop("No points to plot after rel_freq > 0.001 filter; adjust threshold or skip filter.")
+}
+
+y_min     <- min(plot_for_plotting$rel_freq, na.rm = TRUE)
+y_max     <- max(plot_for_plotting$rel_freq, na.rm = TRUE)
+y_range   <- ifelse(y_max - y_min == 0, abs(y_min) + 1e-6, y_max - y_min)
+asterisk_y <- y_min - 0.01 * y_range
+
+asterisk_data <- results_df %>%
+  filter(significance != "") %>%
+  distinct(j_gene, .keep_all = TRUE) %>%
+  filter(j_gene %in% unique(plot_for_plotting$j_gene)) %>%
+  mutate(y = asterisk_y)
+
+ggplot(plot_df, aes(x = j_gene, y = rel_freq, fill = tissue_type)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_text(
+    data = asterisk_data,
+    aes(x = j_gene, y = y, label = significance),
+    inherit.aes = FALSE,
+    size   = 5,
+    angle  = 0,
+    hjust  = 0.5
+  ) +
+  labs(
+    x   = "j_gene",
+    y   = "Relative Frequency of J Gene Usage per Subject and Tissue",
+    fill = "tissue_type"
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+
+
