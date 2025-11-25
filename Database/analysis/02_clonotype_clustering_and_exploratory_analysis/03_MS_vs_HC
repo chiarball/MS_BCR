@@ -1,0 +1,507 @@
+## 0. LOAD AND PREPARE MS + HC DATA  (USED FOR ANALYSES)
+
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(tibble)
+
+MS_HC_merged <- fread("/doctorai/chiarba/analysis/MS_HC_naive_h0h1.tsv")
+
+# Define diagnosis_type and harmonize tissue label
+MS_HC_merged <- MS_HC_merged %>%
+  mutate(
+    diagnosis_type = ifelse(disease_diagnosis == "Healthy", "HC", "disease"),
+    tissue         = ifelse(tissue == "Peripheral blood", "blood", tissue)
+  )
+
+## 1. V GENE: MS vs HC  
+
+plot_dataV <- MS_HC_merged %>%
+  group_by(subject_number, diagnosis_type, v_gene) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(subject_number, diagnosis_type) %>%
+  mutate(perc = n / sum(n)) %>%
+  ungroup() %>%
+  select(subject_number, diagnosis_type, v_gene, perc)
+
+# Shapiro test
+normality_results <- plot_dataV %>%
+  group_by(v_gene, diagnosis_type) %>%
+  summarise(
+    n         = n_distinct(subject_number),
+    p_shapiro = if (n >= 3) stats::shapiro.test(perc)$p.value else NA_real_,
+    .groups   = "drop"
+  )
+
+normality_summary <- normality_results %>%
+  tidyr::pivot_wider(
+    names_from  = diagnosis_type,
+    values_from = c(n, p_shapiro),
+    names_sep   = "__"
+  ) %>%
+  mutate(
+    both_testable = !is.na(p_shapiro__HC) & !is.na(p_shapiro__disease),
+    both_normal   = both_testable &
+                    p_shapiro__HC      >= 0.05 &
+                    p_shapiro__disease >= 0.05
+  )
+
+normality_summary %>%
+  summarise(
+    total_genes   = n(),
+    both_testable = sum(both_testable, na.rm = TRUE),
+    both_normal   = sum(both_normal,   na.rm = TRUE)
+  ) %>% print()
+
+genes_to_plot <- unique(plot_dataV$v_gene)[1:16]
+
+plot_dataV %>%
+  dplyr::filter(v_gene %in% genes_to_plot) %>%
+  ggplot(aes(sample = perc)) +
+  stat_qq() +
+  stat_qq_line() +
+  facet_wrap(~ v_gene + diagnosis_type, scales = "free") +
+  theme_bw() +
+  labs(title = "QQ-plot for V-gene relative frequencies")
+
+# Wilcoxon for v_gene (>= 2 subject per group)
+results_list   <- list()
+v_gene_values  <- unique(plot_dataV$v_gene)
+
+for (vg in v_gene_values) {
+  subset_data <- plot_dataV %>% filter(v_gene == vg)
+  
+  n_HC      <- length(unique(subset_data$subject_number[subset_data$diagnosis_type == "HC"]))
+  n_disease <- length(unique(subset_data$subject_number[subset_data$diagnosis_type == "disease"]))
+  
+  if (n_HC < 2 || n_disease < 2) next
+  
+  wt <- wilcox.test(perc ~ diagnosis_type, data = subset_data, exact = FALSE)
+  
+  results_list[[length(results_list) + 1]] <- data.frame(
+    v_gene  = vg,
+    p_value = wt$p.value,
+    stringsAsFactors = FALSE
+  )
+}
+
+if (length(results_list) == 0) {
+  results_df <- tibble::tibble(v_gene = character(0), p_value = numeric(0))
+} else {
+  results_df <- bind_rows(results_list)
+}
+
+# FDR + p_value
+results_df <- results_df %>%
+  group_by(v_gene) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  )
+
+plot_dataV <- plot_dataV %>%
+  select(-any_of(c("p_value", "p_adj", "significance"))) %>%
+  left_join(
+    results_df %>% select(v_gene, p_value, p_adj, significance),
+    by = "v_gene"
+  )
+
+ggplot(plot_dataV %>% filter(perc > 0.005),
+       aes(x = v_gene, y = perc, fill = diagnosis_type)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_text(
+    aes(x = v_gene, y = 0.0001, label = significance),
+    inherit.aes = FALSE,
+    size        = 5,
+    angle       = 0,
+    hjust       = 0.5
+  ) +
+  labs(
+    x    = "v_gene",
+    y    = "relative frequency of v gene usage",
+    fill = "status"
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# quantification over-expression IGHV1-69
+effect_sizes <- plot_dataV %>%
+  group_by(v_gene, diagnosis_type) %>%
+  summarise(
+    mean_perc = mean(perc),
+    sd_perc   = sd(perc),
+    n         = n(),
+    .groups   = "drop"
+  ) %>%
+  tidyr::pivot_wider(
+    names_from  = diagnosis_type,
+    values_from = c(mean_perc, sd_perc, n),
+    names_sep   = "__"
+  ) %>%
+  mutate(
+    abs_diff    = mean_perc__disease - mean_perc__HC,
+    fold_change = mean_perc__disease / mean_perc__HC
+  )
+
+effect_sizes %>% filter(v_gene == "IGHV1-69")
+
+
+## 2. D GENE: MS vs HC  
+
+plot_dataD <- MS_HC_merged %>%
+  group_by(subject_number, diagnosis_type, d_gene) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(subject_number, diagnosis_type) %>%
+  mutate(perc = n / sum(n)) %>%
+  ungroup() %>%
+  select(subject_number, diagnosis_type, d_gene, perc)
+
+# Shapiro test
+normality_results <- plot_dataD %>%
+  group_by(d_gene, diagnosis_type) %>%
+  summarise(
+    n         = n_distinct(subject_number),
+    p_shapiro = if (n >= 3) stats::shapiro.test(perc)$p.value else NA_real_,
+    .groups   = "drop"
+  )
+
+normality_summary <- normality_results %>%
+  tidyr::pivot_wider(
+    names_from  = diagnosis_type,
+    values_from = c(n, p_shapiro),
+    names_sep   = "__"
+  ) %>%
+  mutate(
+    both_testable = !is.na(p_shapiro__HC) & !is.na(p_shapiro__disease),
+    both_normal   = both_testable &
+                    p_shapiro__HC      >= 0.05 &
+                    p_shapiro__disease >= 0.05
+  )
+
+normality_summary %>%
+  summarise(
+    total_genes   = n(),
+    both_testable = sum(both_testable, na.rm = TRUE),
+    both_normal   = sum(both_normal,   na.rm = TRUE)
+  ) %>% print()
+
+genes_to_plot <- unique(plot_dataD$d_gene)[1:16]
+
+plot_dataD %>%
+  dplyr::filter(d_gene %in% genes_to_plot) %>%
+  ggplot(aes(sample = perc)) +
+  stat_qq() +
+  stat_qq_line() +
+  facet_wrap(~ d_gene + diagnosis_type, scales = "free") +
+  theme_bw() +
+  labs(title = "QQ-plot for D-gene relative frequencies")
+
+# Wilcoxon for d_gene (>=2 subject per group)
+results_list   <- list()
+d_gene_values  <- unique(plot_dataD$d_gene)
+
+for (dg in d_gene_values) {
+  subset_data <- plot_dataD %>% filter(d_gene == dg)
+  
+  n_HC      <- length(unique(subset_data$subject_number[subset_data$diagnosis_type == "HC"]))
+  n_disease <- length(unique(subset_data$subject_number[subset_data$diagnosis_type == "disease"]))
+  
+  if (n_HC < 2 || n_disease < 2) next
+  
+  wt <- wilcox.test(perc ~ diagnosis_type, data = subset_data, exact = FALSE)
+  
+  results_list[[length(results_list) + 1]] <- data.frame(
+    d_gene  = dg,
+    p_value = wt$p.value,
+    stringsAsFactors = FALSE
+  )
+}
+
+if (length(results_list) == 0) {
+  results_df <- tibble::tibble(d_gene = character(0), p_value = numeric(0))
+} else {
+  results_df <- bind_rows(results_list)
+}
+
+results_df <- results_df %>%
+  group_by(d_gene) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  )
+
+plot_dataD <- plot_dataD %>%
+  select(-any_of(c("p_value", "p_adj", "significance"))) %>%
+  left_join(results_df %>% select(d_gene, p_value, p_adj, significance), by = "d_gene")
+
+ggplot(plot_dataD %>% filter(perc > 0.005),
+       aes(x = d_gene, y = perc, fill = diagnosis_type)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_text(
+    aes(x = d_gene, y = 0.0001, label = significance),
+    inherit.aes = FALSE,
+    size        = 5,
+    angle       = 0,
+    hjust       = 0.5
+  ) +
+  labs(
+    x    = "d_gene",
+    y    = "relative frequency of d gene usage",
+    fill = "status"
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+## 3. J GENE: MS vs HC  
+
+plot_dataJ <- MS_HC_merged %>%
+  group_by(subject_number, diagnosis_type, j_gene) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(subject_number, diagnosis_type) %>%
+  mutate(perc = n / sum(n)) %>%
+  ungroup() %>%
+  select(subject_number, diagnosis_type, j_gene, perc)
+
+# Shapiro test
+normality_results <- plot_dataJ %>%
+  group_by(j_gene, diagnosis_type) %>%
+  summarise(
+    n         = n_distinct(subject_number),
+    p_shapiro = if (n >= 3) stats::shapiro.test(perc)$p.value else NA_real_,
+    .groups   = "drop"
+  )
+
+normality_summary <- normality_results %>%
+  tidyr::pivot_wider(
+    names_from  = diagnosis_type,
+    values_from = c(n, p_shapiro),
+    names_sep   = "__"
+  ) %>%
+  mutate(
+    both_testable = !is.na(p_shapiro__HC) & !is.na(p_shapiro__disease),
+    both_normal   = both_testable &
+                    p_shapiro__HC      >= 0.05 &
+                    p_shapiro__disease >= 0.05
+  )
+
+normality_summary %>%
+  summarise(
+    total_genes   = n(),
+    both_testable = sum(both_testable, na.rm = TRUE),
+    both_normal   = sum(both_normal,   na.rm = TRUE)
+  ) %>% print()
+
+genes_to_plot <- unique(plot_dataJ$j_gene)[1:16]
+
+plot_dataJ %>%
+  dplyr::filter(j_gene %in% genes_to_plot) %>%
+  ggplot(aes(sample = perc)) +
+  stat_qq() +
+  stat_qq_line() +
+  facet_wrap(~ j_gene + diagnosis_type, scales = "free") +
+  theme_bw() +
+  labs(title = "QQ-plot for J-gene relative frequencies")
+
+# Wilcoxon for j_gene (>=2 subject per group)
+results_list   <- list()
+j_gene_values  <- unique(plot_dataJ$j_gene)
+
+for (jg in j_gene_values) {
+  subset_data <- plot_dataJ %>% filter(j_gene == jg)
+  
+  n_HC      <- length(unique(subset_data$subject_number[subset_data$diagnosis_type == "HC"]))
+  n_disease <- length(unique(subset_data$subject_number[subset_data$diagnosis_type == "disease"]))
+  
+  if (n_HC < 2 || n_disease < 2) next
+  
+  wt <- wilcox.test(perc ~ diagnosis_type, data = subset_data, exact = FALSE)
+  
+  results_list[[length(results_list) + 1]] <- data.frame(
+    j_gene  = jg,
+    p_value = wt$p.value,
+    stringsAsFactors = FALSE
+  )
+}
+
+if (length(results_list) == 0) {
+  results_df <- tibble::tibble(j_gene = character(0), p_value = numeric(0))
+} else {
+  results_df <- bind_rows(results_list)
+}
+
+results_df <- results_df %>%
+  group_by(j_gene) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  )
+
+plot_dataJ <- plot_dataJ %>%
+  select(-any_of(c("p_value", "p_adj", "significance"))) %>%
+  left_join(results_df %>% select(j_gene, p_value, p_adj, significance), by = "j_gene")
+
+ggplot(plot_dataJ %>% filter(perc > 0.005),
+       aes(x = j_gene, y = perc, fill = diagnosis_type)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_text(
+    aes(x = j_gene, y = 0.0001, label = significance),
+    inherit.aes = FALSE,
+    size        = 5,
+    angle       = 0,
+    hjust       = 0.5
+  ) +
+  labs(
+    x    = "j_gene",
+    y    = "relative frequency of j gene usage",
+    fill = "status"
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+## 4. CDR3 LENGTH: MS vs HC  
+
+plot_data_cdr3 <- MS_HC_merged %>%
+  group_by(subject_number, diagnosis_type, junction_aa_length) %>%
+  summarise(n = n(), .groups = "drop_last") %>%
+  group_by(subject_number, diagnosis_type) %>%
+  mutate(perc = n / sum(n)) %>%
+  ungroup()
+
+# Shapiro test
+normality_results <- plot_data_cdr3 %>%
+  group_by(junction_aa_length, diagnosis_type) %>%
+  summarise(
+    n         = n_distinct(subject_number),
+    p_shapiro = if (n >= 3) stats::shapiro.test(perc)$p.value else NA_real_,
+    .groups   = "drop"
+  )
+
+normality_summary <- normality_results %>%
+  tidyr::pivot_wider(
+    names_from  = diagnosis_type,
+    values_from = c(n, p_shapiro),
+    names_sep   = "__"
+  ) %>%
+  mutate(
+    both_testable = !is.na(p_shapiro__HC) & !is.na(p_shapiro__disease),
+    both_normal   = both_testable &
+                    p_shapiro__HC      >= 0.05 &
+                    p_shapiro__disease >= 0.05
+  )
+
+normality_summary %>%
+  summarise(
+    total_lenght  = n(),
+    both_testable = sum(both_testable, na.rm = TRUE),
+    both_normal   = sum(both_normal,   na.rm = TRUE)
+  ) %>% print()
+
+genes_to_plot <- unique(plot_data_cdr3$junction_aa_length)[1:16]
+
+plot_data_cdr3 %>%
+  dplyr::filter(junction_aa_length %in% genes_to_plot) %>%
+  ggplot(aes(sample = perc)) +
+  stat_qq() +
+  stat_qq_line() +
+  facet_wrap(~ junction_aa_length + diagnosis_type, scales = "free") +
+  theme_bw() +
+  labs(title = "QQ-plot for CDR3 length relative frequencies")
+
+# Wilcoxon for lunghezza (>=2 subject per group)
+results_listcdr3 <- list()
+junction_values  <- unique(plot_data_cdr3$junction_aa_length) %>% sort()
+
+for (junc in junction_values) {
+  subset_data <- plot_data_cdr3 %>% filter(junction_aa_length == junc)
+  
+  n_HC      <- length(unique(subset_data$subject_number[subset_data$diagnosis_type == "HC"]))
+  n_disease <- length(unique(subset_data$subject_number[subset_data$diagnosis_type == "disease"]))
+  
+  if (n_HC < 2 || n_disease < 2) next
+  
+  wt <- wilcox.test(perc ~ diagnosis_type, data = subset_data, exact = FALSE)
+  
+  results_listcdr3[[length(results_listcdr3) + 1]] <- data.frame(
+    junction_aa_length = junc,
+    p_value            = wt$p.value,
+    stringsAsFactors   = FALSE
+  )
+}
+
+if (length(results_listcdr3) == 0) {
+  results_df <- tibble::tibble(
+    junction_aa_length = integer(0),
+    p_value            = numeric(0)
+  )
+} else {
+  results_df <- dplyr::bind_rows(results_listcdr3)
+}
+
+results_df <- results_df %>%
+  group_by(junction_aa_length) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH"),
+    significance = case_when(
+      p_adj < 0.001 ~ "***",
+      p_adj < 0.01  ~ "**",
+      p_adj < 0.05  ~ "*",
+      TRUE          ~ ""
+    )
+  ) %>%
+  mutate(junction_aa_length = as.integer(as.character(junction_aa_length)))
+
+plot_data_cdr3 <- plot_data_cdr3 %>%
+  select(-any_of(c("p_value", "p_adj", "significance"))) %>%
+  left_join(
+    results_df %>% select(junction_aa_length, p_value, p_adj, significance),
+    by = "junction_aa_length"
+  ) %>%
+  filter(junction_aa_length > 5, junction_aa_length < 36)
+
+ggplot(plot_data_cdr3,
+       aes(x = as.factor(junction_aa_length), y = perc, fill = diagnosis_type)) +
+  geom_boxplot(outliers = FALSE) +
+  geom_text(
+    data = plot_data_cdr3,
+    aes(
+      x     = as.character(junction_aa_length),
+      y     = -0.005,
+      label = significance
+    ),
+    inherit.aes = FALSE,
+    size   = 4,
+    angle  = 0,
+    hjust  = -0.005
+  ) +
+  labs(
+    x    = "Junction AA Length",
+    y    = "Median Junction AA Length Frequencies",
+    fill = "status"
+  ) +
+  theme_bw()
