@@ -6,7 +6,6 @@
 library(data.table)
 library(dplyr)
 library(stringr)
-library(purrr)
 library(tools)
 
 #### 1) BASELINE (Green_all.tsv) #############################################
@@ -101,7 +100,9 @@ read_and_tag <- function(file_path) {
   df
 }
 
-db_t2 <- map_dfr(tsv_files_t2, read_and_tag)
+# Same logic as map_dfr: read each file and row-bind into a single data.table
+db_t2_list <- lapply(tsv_files_t2, read_and_tag)
+db_t2 <- rbindlist(db_t2_list, use.names = TRUE, fill = TRUE)
 
 metadata_t2 <- fread("/doctorai/chiarba/bcr_from_raw/green/green_add_T2/metadata_greenT2.csv") %>%
   rename(SRA_id = Run)
@@ -174,4 +175,3 @@ fwrite(
   sep = "\t",
   row.names = FALSE
 )
-
