@@ -1,0 +1,105 @@
+library(data.table)
+library(dplyr)
+library(ggplot2)
+
+# folder containing metadata-ready files
+folder_path <- "/doctorai/chiarba/dataset/github"
+
+# list all .tsv and .csv files in that folder
+files <- list.files(
+  folder_path,
+  full.names = TRUE,
+  pattern = "\\.(tsv|csv|txt)$"
+)
+
+# function to auto-read and assign to a variable based on filename
+read_and_assign <- function(path) {
+  fname <- tools::file_path_sans_ext(basename(path))
+  df <- fread(path)
+  
+  # English comment: remove TCR immediately if v_call exists
+  if ("v_call" %in% names(df)) {
+    df <- df[!grepl("^TR", df$v_call), ]
+  }
+  
+  assign(fname, df, envir = .GlobalEnv)
+}
+
+# read and create objects (one per file in the folder)
+invisible(lapply(files, read_and_assign))
+
+# dataset names derived *only* from the files in the github folder
+datasets <- unique(vapply(
+  files,
+  function(path) tools::file_path_sans_ext(basename(path)),
+  FUN.VALUE = character(1)
+))
+
+
+# convert AGE to character if present
+
+invisible(lapply(
+  datasets,
+  function(nm) {
+    if (exists(nm, envir = .GlobalEnv)) {
+      df <- get(nm, envir = .GlobalEnv)
+      if ("AGE" %in% names(df)) {
+        df$AGE <- as.character(df$AGE)
+        assign(nm, df, envir = .GlobalEnv)
+      }
+    }
+  }
+))
+
+# convert SRA_id to character if present
+
+invisible(lapply(
+  datasets,
+  function(nm) {
+    if (exists(nm, envir = .GlobalEnv)) {
+      df <- get(nm, envir = .GlobalEnv)
+      if ("SRA_id" %in% names(df)) {
+        df$SRA_id <- as.character(df$SRA_id)
+        assign(nm, df, envir = .GlobalEnv)
+      }
+    }
+  }
+))
+
+# bind rows into MS_DB
+
+existing_dfs <- datasets[sapply(datasets, exists)]
+
+MS_DB <- bind_rows(lapply(existing_dfs, get))
+
+# final TR cleanup safety
+MS_DB <- MS_DB[!grepl("^TR", MS_DB$v_call), ]
+
+ggplot(MS_DB, aes(x = tissue, fill = factor(study))) +
+  geom_bar(color = "black", position = "dodge") +
+  labs(x = "tissue", y = "Number of Sequences", fill = "study") +
+  theme_minimal() +
+  theme_bw() +
+  facet_wrap(~ disease_diagnosis, scales = "free_x", nrow = 1) +
+  scale_y_log10() +
+  # place count labels at half the bar height, rotated, same size/color as original
+  geom_text(
+    stat = "count",
+    aes(y = after_stat(count) / 2, label = after_stat(count)),
+    position = position_dodge(width = 0.9),
+    angle = 90,
+    vjust = 0.5,
+    hjust = 0.5,
+    size = 2,
+    color = "black"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, size = 7))
+
+ggsave("/doctorai/chiarba/dataset/github/plot/overview.png", plot = last_plot())
+
+fwrite(
+  db_meta,
+  "/doctorai/chiarba/dataset/github/MS_BCR_DB.tsv",
+  sep = "\t",
+  row.names = FALSE
+)
