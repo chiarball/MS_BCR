@@ -50,9 +50,7 @@ meta_subset <- metadata %>%
     SRA_id,
     tissue,
     disease,
-    tretment,      
-    BioSample,
-    BioProject
+    tretment
   )
 
 # 5. Merge AIRR table with metadata
