@@ -36,10 +36,8 @@ from urllib3.util.retry import Retry
 # CONFIG (adjust as needed)
 # =========================
 
-# New clean input (output of Step 1)
-INPUT_CSV = Path("/doctorai/chiarba/AbAg_database/clean/agab_cdr3_extracted1.tsv")
+INPUT_CSV = Path("/doctorai/chiarba/AbAg_database/clean/annotation/agab_with_cdr3.tsv")
 
-# New clean output, to avoid overwriting the old one
 OUTPUT_CSV = INPUT_CSV.with_name("agab_cdr3_annotated1.csv")
 
 # Set to an integer (e.g., 300) to run a small sample first; set to None for full DB.
