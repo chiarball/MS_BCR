@@ -1,9 +1,9 @@
-import ast
+mport ast
 import pandas as pd
 
 # English comment: input and output paths
 input_path = "/doctorai/chiarba/AbAg_database/agab_merged.csv"
-output_path = "/doctorai/chiarba/AbAg_database/clean/annotation/agab_with_cdr3.tsv"
+output_path = "/doctorai/chiarba/AbAg_database/1_final/agab_with_cdr3.tsv"
 
 # English comment: auto-detect separator to avoid parsing errors
 with open(input_path, "r") as f:
