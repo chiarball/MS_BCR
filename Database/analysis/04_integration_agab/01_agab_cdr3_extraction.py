@@ -2,7 +2,7 @@ import ast
 import pandas as pd
 
 # English comment: input and output paths
-input_path = "/doctorai/chiarba/AbAg_database/agab_cdr3.csv"
+input_path = "/doctorai/chiarba/AbAg_database/agab_merged.csv"
 output_path = "/doctorai/chiarba/AbAg_database/clean/annotation/agab_with_cdr3.tsv"
 
 # English comment: auto-detect separator to avoid parsing errors
