@@ -8,7 +8,7 @@ Unified pipeline for Ab-Ag DB:
    to extract target_name, target_pdb, target_uniprot.
 2) Build 'antigen' using UniProt / PDB.
 3) Compute 'origin_class' (human / viral / bacteria / other) using
-   UniProt taxonomy + PDB taxonomy (former step3), WITHOUT using 'antigen'.
+   UniProt taxonomy + PDB taxonomy (former step3).
 4) Disambiguate antigens that appear with >1 origin_class by appending
    the origin_class to the antigen name.
 
@@ -303,7 +303,7 @@ def heuristic_tax_family_from_text(s: str):
     txt = str(s).lower().strip().replace("_", " ").replace("-", " ")
 
     RULES = [
-        (r"\b(human|h\.?\s*sapiens|homo sapiens)\b", "Homo sapiens", None),
+        (r"\b(h\.?\s*sapiens|homo sapiens)\b", "Homo sapiens", None),
         (r"\b(mouse|m\.?\s*musculus|mus musculus)\b", "Mus musculus", None),
         (r"\b(sars\s*cov\s*2|sars2|2019[- ]?ncov|ncov)\b", "Severe acute respiratory syndrome coronavirus 2", "Betacoronavirus"),
         # ... (keep other rules if you want; truncated for brevity or copy full block)
@@ -316,8 +316,6 @@ def heuristic_tax_family_from_text(s: str):
         except re.error:
             continue
 
-    if " human" in txt:
-        return ("Homo sapiens", None)
     if " mouse" in txt:
         return ("Mus musculus", None)
     if " sars" in txt:
@@ -660,6 +658,7 @@ def classify_by_text(name: str) -> str:
     """Text-based heuristic when no taxonomy is available."""
     txt = (name or "").lower()
 
+    # 1) Viral: keep this first so viruses always win
     if any(k in txt for k in [
         "virus", "viral", "sars-cov2", "sars cov2", "covid-19",
         "orf", "polyprotein", "gag-pol", "hemagglutinin", "nucleoprotein",
@@ -667,46 +666,38 @@ def classify_by_text(name: str) -> str:
     ]):
         return "viral"
 
+    # 2) Bacterial
     if any(k in txt for k in [
         "escherichia coli", "e. coli", "staphylococcus", "streptococcus",
         "mycobacterium", "pseudomonas", "salmonella", "bacillus",
     ]):
         return "bacteria"
 
+    # 3) Non-human mammals (mouse, rat, etc.) → other
     if any(k in txt for k in [
         "_mouse", " mouse", "mus musculus",
         " rat ", "rattus norvegicus",
     ]):
         return "other"
 
-    if "human" in txt or "homo sapiens" in txt:
+    # 4) Clear human taxonomy
+    if "homo sapiens" in txt:
         return "human"
 
-    return "other"
-
-def classify_by_taxonomy(
-    taxid: Optional[int],
-    organism: Optional[str],
-    lineage_list: Optional[list],
-    name_hint: str = "",
-) -> str:
-    """Human / viral / bacteria / other based on taxonomy + name_hint."""
-    organism = (organism or "").lower()
-    lineage = "; ".join(lineage_list or []).lower()
-    name_hint = (name_hint or "").lower()
-
-    if taxid == 9606 or "homo sapiens" in organism or "human" in organism:
+    # 5) Generic 'human' in the name, but only if it does not look viral/bacterial
+    if "human" in txt and not any(
+        k in txt for k in [
+            "virus", "viral", "hiv", "influenza", "cytomegalovirus",
+            "hepatitis", "herpes", "retrovirus",
+            "bacteria", "bacterial", "bacterium",
+        ]
+    ):
+        # Examples: "human PD-1", "igg4_human", "human igg1"
         return "human"
 
-    if "virus" in organism or "viruses" in lineage:
-        return "viral"
-    if any(k in name_hint for k in ["sars-cov2", "sars-cov-2", "covid-19", "orf", "polyprotein"]):
-        return "viral"
-
-    if "bacteria" in lineage or "bacterium" in organism:
-        return "bacteria"
-
+    # 6) Fallback
     return "other"
+
 
 def classify_origin_row(target_uniprot: str,
                         target_pdb: str,
@@ -714,10 +705,10 @@ def classify_origin_row(target_uniprot: str,
     """
     Origin classification WITHOUT using antigen:
 
-    1) Try free text (target_name).
-    2) If not informative, try UniProt taxonomy (target_uniprot).
-    3) If UniProt not available, try PDB entities (PDB → UniProt or taxonomy).
-    4) Fallback: 'other'.
+    1) Try UniProt taxonomy (target_uniprot).
+    2) If UniProt not available or uninformative, try PDB entities (PDB → UniProt or taxonomy).
+    3) If taxonomy is not available, fall back to text-based heuristic on target_name.
+    4) Final fallback: 'other'.
     """
 
     tn = norm_field(target_name)
@@ -725,11 +716,8 @@ def classify_origin_row(target_uniprot: str,
     tp = norm_field(target_pdb)
 
     name_hint = tn
-    if name_hint:
-        cls_text = classify_by_text(name_hint)
-        if cls_text in {"human", "viral", "bacteria"}:
-            return cls_text
 
+    # ----- 1) UniProt taxonomy -----
     if tu and looks_like_uniprot_accession(tu):
         info = uniprot_fetch_min(tu)
         if info:
@@ -742,6 +730,7 @@ def classify_origin_row(target_uniprot: str,
             if cls_uni in {"human", "viral", "bacteria"}:
                 return cls_uni
 
+    # ----- 2) PDB → UniProt / taxonomy -----
     if tp and looks_like_pdb_id(tp):
         items = pdb_antigen_uniprots_from_entities(tp, name_hint)
         if items:
@@ -783,10 +772,69 @@ def classify_origin_row(target_uniprot: str,
                 if best_rank == 0:
                     break
 
-            if best_class is not None:
+            if best_class is not None and best_class in {"human", "viral", "bacteria"}:
                 return best_class
 
+    # ----- 3) Text-only fallback on target_name -----
+    if name_hint:
+        return classify_by_text(name_hint)
+
+    # ----- 4) Final fallback -----
     return "other"
+
+
+def classify_by_taxonomy(
+    taxid: Optional[int],
+    organism: Optional[str],
+    lineage_list: Optional[list],
+    name_hint: str = "",
+) -> str:
+    """
+    Classify as human / viral / bacteria / other using UniProt taxonomy.
+
+    Priority:
+      1) Viral (based on lineage and organism name)
+      2) Bacteria
+      3) Human (taxid 9606 or 'Homo sapiens')
+      4) Fallback: use text only if taxonomy is missing
+    """
+    org = (organism or "").lower()
+    lineage = "; ".join(lineage_list or []).lower()
+    name_hint_l = (name_hint or "").lower()
+
+    # ----- 1) Viral -----
+    # UniProt viral entries have lineage containing 'Viruses' / 'Viridae'
+    # or organism names ending in 'virus' / 'phage'.
+    if (
+        "viruses" in lineage
+        or "viridae" in lineage
+        or "virus" in org
+        or " phage" in org
+    ):
+        return "viral"
+
+    # Extra safety: if taxonomy is empty but name_hint is clearly viral
+    if not org and not lineage and any(
+        k in name_hint_l for k in ["sars-cov2", "sars-cov-2", "covid-19", "orf", "polyprotein", " virus"]
+    ):
+        return "viral"
+
+    # ----- 2) Bacteria -----
+    if "bacteria" in lineage or "bacterium" in org or "bacterial" in org:
+        return "bacteria"
+
+    # ----- 3) Human -----
+    # Here we are strict: NO plain 'human' to avoid
+    # 'Human cytomegalovirus', 'Human immunodeficiency virus', etc.
+    if taxid == 9606 or "homo sapiens" in org:
+        return "human"
+
+    # ----- 4) Fallback: if taxonomy missing, rely on text heuristic -----
+    if not org and not lineage and name_hint_l:
+        return classify_by_text(name_hint_l)
+
+    return "other"
+
 
 # ============================================================
 # SMALL HELPERS
@@ -946,3 +994,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\n[INTERRUPTED]", file=sys.stderr)
         sys.exit(130)
+
