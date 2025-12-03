@@ -178,58 +178,65 @@ suppressPackageStartupMessages({
 })
 
 
-# ================== ORIGINAL PLOTTING CODE (unchanged) ==================
-
-# Prep
-df_plot <- sig_ms %>%
-  #filter(origin_class != "other", !is.na(std_residual)) %>%
-  mutate(lev = factor(lev))
+### Plotting
 
 df_plot <- sig_ms %>%
   mutate(
-    lev = factor(lev),
+    lev = factor(lev),  # make sure lev is a factor
     origin_class = factor(
       origin_class,
       levels = c("human", "viral", "bacteria", "other")
     )
   )
 
+df_hv   <- df_plot %>% filter(origin_class %in% c("human"))
+df_rest <- df_plot %>% filter(origin_class %in% c("viral","bacteria", "other"))
 
-
-
-df_hv   <- df_plot %>% filter(origin_class %in% c("human","viral","bacteria", "other"))
-df_rest <- df_plot %>% filter(!origin_class %in% c("human","viral","bacteria", "other"))
-
-# Plot: box trasparente (solo bordo) + jitter colorato per lev
 ggplot(df_plot, aes(x = origin_class, y = std_residual)) +
-  geom_hline(yintercept = 0, linetype = 2, linewidth = 0.3, alpha = 0.6) +
-  geom_boxplot(width = 0.65, outlier.shape = NA,
-               fill = NA, color = "black", linewidth = 0.5) +  
-   # jitter "normale" per le etichette meno dense
+  #geom_hline(yintercept = 0, linetype = 2, linewidth = 0.3, alpha = 0.6) +
+  geom_boxplot(
+    width = 0.65, outlier.shape = NA,
+    fill = NA, color = "black", linewidth = 0.5
+  ) +
+
+  # jitter normale per categorie meno dense
   geom_point(
     data = df_rest,
-    aes(color = lev),
-    position = position_jitter(width = 0.15, height = 0.08, seed = 123),
-    size = 1.0,
-    alpha = 0.75
+    aes(color = origin_class),
+    position = position_jitter(width = 0.22, height = 0.12, seed = 123),
+    size = 0.9,
+    alpha = 0.70
   ) +
-  # jitter più ampio (x e y) per human/viral
+
+  # jitter più ampio per human/viral
   geom_point(
     data = df_hv,
-    aes(color = lev),
-    position = position_jitter(width = 0.35, height = 0.15, seed = 456),
-    size = 1.0,
-    alpha = 0.65
-  )  +
-  scale_color_viridis_d(option = "D", end = 0.95) +
+    aes(color = origin_class),
+    position = position_jitter(width = 0.45, height = 0.22, seed = 456),
+    size = 0.7,
+    alpha = 0.5
+  ) +
+
+  # colori non viridis
+  scale_color_manual(values = c(
+  human    = "#E673B5",
+  viral    = "#7A6BBE",
+  bacteria = "#1a9850",
+  other    = "#F4C133"
+  )) +
+
   labs(
     x = NULL,
     y = "Standardized residual (antigen enrichment)",
-    color = "lev"
+    color = "Origin"
   ) +
+
   theme_bw(base_size = 12) +
   theme(
-    axis.text.x = element_text(angle = 30, hjust = 1, vjust = 1),
+    axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
     panel.grid.minor = element_blank()
-  )
+  ) +
 
+  facet_wrap(~ lev, nrow = 1)
+
+print(last_plot())
