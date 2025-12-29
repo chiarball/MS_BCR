@@ -179,6 +179,7 @@ suppressPackageStartupMessages({
 
 
 ### Plotting
+sig_ms <- fread("/doctorai/chiarba/AbAg_database/aggregating_test/fisher_results_annot2_antigen_all_levels_sig.csv")
 
 df_plot <- sig_ms %>%
   mutate(
@@ -192,8 +193,7 @@ df_plot <- sig_ms %>%
 df_hv   <- df_plot %>% filter(origin_class %in% c("human"))
 df_rest <- df_plot %>% filter(origin_class %in% c("viral","bacteria", "other"))
 
-ggplot(df_plot, aes(x = origin_class, y = std_residual)) +
-  #geom_hline(yintercept = 0, linetype = 2, linewidth = 0.3, alpha = 0.6) +
+p <- ggplot(df_plot, aes(x = origin_class, y = std_residual)) +
   geom_boxplot(
     width = 0.65, outlier.shape = NA,
     fill = NA, color = "black", linewidth = 0.5
@@ -217,12 +217,26 @@ ggplot(df_plot, aes(x = origin_class, y = std_residual)) +
     alpha = 0.5
   ) +
 
-  # colori non viridis
-  scale_color_manual(values = c(
-  human    = "#E673B5",
-  viral    = "#7A6BBE",
-  bacteria = "#1a9850",
-  other    = "#F4C133"
+  scale_color_manual(
+  values = c(
+    human    = "#E673B5",
+    viral    = "#7A6BBE",
+    bacteria = "#1a9850",
+    other    = "#F4C133"
+  ),
+  labels = c(
+    human    = "HUMAN",
+    viral    = "VIRUS",
+    bacteria = "BACTERIA",
+    other    = "OTHER"
+  )
+)+
+
+  scale_x_discrete(labels = c(
+    human    = "HUMAN",
+    viral    = "VIRUS",
+    bacteria = "BACTERIA",
+    other    = "OTHER"
   )) +
 
   labs(
@@ -234,9 +248,48 @@ ggplot(df_plot, aes(x = origin_class, y = std_residual)) +
   theme_bw(base_size = 12) +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
+    strip.background = element_rect(fill = "white", color = "black"),
     panel.grid.minor = element_blank()
   ) +
 
-  facet_wrap(~ lev, nrow = 1)
+  scale_y_log10() +
 
-print(last_plot())
+  facet_wrap(
+    ~ lev,
+    nrow = 1,
+    labeller = labeller(
+      lev = c(
+        "lev0" = "Levenshtein = 0",
+        "lev1" = "Levenshtein = 1",
+        "lev2" = "Levenshtein = 2"
+      )
+    )
+  ) +
+
+  # mediane
+  stat_summary(
+    fun = median,
+    geom = "text",
+    aes(label = sprintf("%.2f", after_stat(y))),
+    size = 3.0,
+    color = "white",
+    fontface = "bold",
+    vjust = -0.6
+  ) +
+  stat_summary(
+    fun = median,
+    geom = "text",
+    aes(label = sprintf("%.2f", after_stat(y))),
+    size = 2.0,
+    color = "black",
+    fontface = "bold",
+    vjust = -0.6
+  )
+
+grDevices::svg(
+  filename = "/doctorai/chiarba/analysis/1_plot_svg/agab.svg",
+  width    = 9,
+  height   = 7
+)
+print(p)
+dev.off()
