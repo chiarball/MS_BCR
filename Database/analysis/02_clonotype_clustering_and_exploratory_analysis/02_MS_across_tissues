@@ -157,10 +157,10 @@ plot_data_cdr3 <- plot_data_cdr3 %>%
     TRUE                          ~ "intra"
   ))
 
-unique(df$tissue_type)           # df non ha tissue_type esplicito, verrà NULL
+unique(df$tissue_type)           
 unique(plot_data_cdr3$tissue_type)
 
-# Test for normality distribution (Shapiro per lunghezza x tissue_type)
+# Test for normality distribution (Shapiro for length x tissue_type)
 normality_results <- plot_data_cdr3 %>%
   group_by(junction_aa_length, tissue_type) %>%
   summarise(
@@ -199,7 +199,7 @@ plot_data_cdr3 %>%
   theme_bw() +
   labs(title = "QQ-plot for CDR3 length relative frequencies")
 
-# Wilcoxon tests per lunghezza (>=2 soggetti per gruppo)
+# Wilcoxon tests for length (>=2 subjects per group)
 results_listcdr3 <- list()
 junction_values  <- unique(plot_data_cdr3$junction_aa_length) %>% sort()
 
@@ -488,7 +488,7 @@ plot_dataD_tissue <- df %>%
 d_genes      <- unique(plot_dataD_tissue$d_gene)
 results_list <- list()
 
-# Shapiro (diagnostico)
+# Shapiro 
 normality_results <- plot_dataD_tissue %>%
   group_by(d_gene, tissue_type) %>%
   summarise(
