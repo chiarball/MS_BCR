@@ -431,7 +431,7 @@ plot_data_cdr3 %>%
   theme_bw() +
   labs(title = "QQ-plot for CDR3 length relative frequencies")
 
-# Wilcoxon for lunghezza (>=2 subject per group)
+# Wilcoxon for length (>=2 subject per group)
 results_listcdr3 <- list()
 junction_values  <- unique(plot_data_cdr3$junction_aa_length) %>% sort()
 
