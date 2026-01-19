@@ -75,31 +75,81 @@ MS_DB <- bind_rows(lapply(existing_dfs, get))
 # final TR cleanup safety
 MS_DB <- MS_DB[!grepl("^TR", MS_DB$v_call), ]
 
-ggplot(MS_DB, aes(x = tissue, fill = factor(study))) +
-  geom_bar(color = "black", position = "dodge") +
-  labs(x = "tissue", y = "Number of Sequences", fill = "study") +
-  theme_minimal() +
-  theme_bw() +
-  facet_wrap(~ disease_diagnosis, scales = "free_x", nrow = 1) +
-  scale_y_log10() +
-  # place count labels at half the bar height, rotated, same size/color as original
-  geom_text(
-    stat = "count",
-    aes(y = after_stat(count) / 2, label = after_stat(count)),
-    position = position_dodge(width = 0.9),
-    angle = 90,
-    vjust = 0.5,
-    hjust = 0.5,
-    size = 2,
-    color = "black"
-  ) +
-  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, size = 7))
+###Plotting overview
 
-ggsave("/doctorai/chiarba/dataset/github/plot/overview.png", plot = last_plot())
+# --- Order 
+MS_DB <- MS_DB %>%
+  mutate(
+    tissue = factor(
+      tissue,
+      levels = c(
+        "CLN",           # Chronic: first; PPMS, SPMS: first
+        "Choroid plexus",
+        "blood",         # CIS, MS, PPMS, RRMS
+        "Brain lesion",  # Chronic, PPMS, SPMS
+        "Pia mater",
+        "CSF"            # all CSF last where present
+      )
+    ),
+    study = factor(
+      study,
+      levels = c(
+        # MS / blood: Ruschill -> Greenfield -> Ryback -> Laurent -> Lomakin -> Zvyagin
+        "Ruschill",
+        "Greenfield",
+        "Ryback",
+        "Laurent",
+        "Lomakin",
+        "Zvyagin",
+        # RRMS / blood: Perez_Salvidar -> Ramesh -> Palanichemy
+        "Perez_Salvidar",
+        "Ramesh",
+        "Agrafiotis",   # appears in RRMS CSF
+        "Palanichemy",
+        # other studies
+        "Stern"
+      )
+    )
+  )
 
-fwrite(
-  db_meta,
-  "/doctorai/chiarba/dataset/github/MS_BCR_DB.tsv",
-  sep = "\t",
-  row.names = FALSE
+# --- Define palettes 
+
+d3_11 <- c( '#e31a1c', '#ff7f00', '#fb9a99','#fdbf6f', "#fee08b", 
+'#a6cee3','#1f78b4','#b2df8a','#80cdc1','#d8daeb','#8073ac'
 )
+current_palette <- d3_11
+
+# Plotting overview
+make_overview_plot <- function(palette) {
+  ggplot(MS_DB, aes(x = tissue, fill = study)) +
+    geom_bar(color = "black", position = "dodge") +
+    labs(
+      x = "tissue",
+      y = "Number of Sequences",
+      fill = "study"
+    ) +
+    theme_bw() +
+    facet_wrap(~ disease_diagnosis, scales = "free_x", nrow = 1) +
+    scale_y_log10() +
+    # Add count labels in the middle of each bar
+    geom_text(
+      stat = "count",
+      aes(y = after_stat(count) / 2, label = after_stat(count)),
+      position = position_dodge(width = 0.9),
+      angle = 90,
+      vjust = 0.5,
+      hjust = 0.5,
+      size = 2,
+      color = "black"
+    ) +
+    scale_fill_manual(values = palette, drop = FALSE) +
+    theme(
+      axis.text.x = element_text(angle = 45, vjust = 0.5, size = 7),
+      strip.background = element_rect(fill = "white", color = "black")
+
+    )
+}
+
+# Draw plot with chosen palette
+p_overview <- make_overview_plot(current_palette)
+print(p_overview)
