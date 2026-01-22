@@ -259,9 +259,9 @@ p <- ggplot(df_plot, aes(x = origin_class, y = std_residual)) +
     nrow = 1,
     labeller = labeller(
       lev = c(
-        "lev0" = "Levenshtein = 0",
-        "lev1" = "Levenshtein = 1",
-        "lev2" = "Levenshtein = 2"
+        "lev0" = "Levenshtein distance = 0",
+        "lev1" = "Levenshtein distance = 1",
+        "lev2" = "Levenshtein distance = 2"
       )
     )
   ) +
