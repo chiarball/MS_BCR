@@ -20,6 +20,7 @@ study_col   = 'study'      # optional; if missing, treated as 'Unknown'
 tissue_col  = 'tissue'     # column with tissue information
 top_n       = 106
 alphabet    = list("ACDEFGHIKLMNPQRSTVWY")  # AA alphabet for Hamming-1
+base_folder = '/doctorai/niccoloc/MS_db/MS_BCR/'
 
 # ===================== Fixed tissue universe and colors ======================
 TISSUE_ORDER = [
@@ -328,6 +329,7 @@ ax.set_aspect('equal', adjustable='box')
 plt.axis('off')
 plt.tight_layout()
 plt.show()
+plt.savefig(f"{base_folder}/top_clusters_network_by_tissue.png", dpi=300, bbox_inches="tight")
 
 # Horizontal Separate legend 
 

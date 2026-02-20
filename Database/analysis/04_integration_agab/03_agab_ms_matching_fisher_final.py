@@ -47,24 +47,25 @@ from statsmodels.stats.multitest import multipletests
 from scipy.stats import fisher_exact
 
 # Be nice on shared servers
-os.environ.setdefault("OMP_NUM_THREADS", "1")
-os.environ.setdefault("MKL_NUM_THREADS", "1")
-os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
-os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
-try:
-    os.nice(10)
-except Exception:
-    pass
+# os.environ.setdefault("OMP_NUM_THREADS", "1")
+# os.environ.setdefault("MKL_NUM_THREADS", "1")
+# os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+# os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
+# try:
+#     os.nice(10)
+# except Exception:
+#     pass
 
 # =========================
 # CONFIG
 # =========================
 
-AGAB_PATH      = "/doctorai/chiarba/AbAg_database/aggregating_test/agab_cdr3_annotated1_with_origin_adjustantigen.csv"
-MS_FULL_PATH   = "/doctorai/chiarba/analysis/MS_HC_naive_h0h1.tsv"
+AGAB_PATH      = "/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_cdr3_annotated3_disambiguated.csv"
+MS_FULL_PATH   = "/doctorai/chiarba/analysis/MS_HC_naive_h0h1.tsv" #OLD
+# MS_FULL_PATH   = "/doctorai/chiarba/dataset/FINAL/MS_BCR_DB_Final_Version.tsv"
 MS_ONLY_PATH   = "/doctorai/chiarba/AbAg_database/clean/MS_only1_cdr3.csv"
-MATCHES_PATH   = "/doctorai/chiarba/AbAg_database/clean/agab_vs_ms_lev_matches1.tsv"
-OUT_PREFIX     = "/doctorai/chiarba/AbAg_database/aggregating_test/fisher_results_annot2"
+MATCHES_PATH   = "/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_vs_ms_lev_matches1.tsv"
+OUT_PREFIX     = "/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/fisher_results_annot2"
 
 MIN_LEN        = 5       # AA length filter
 MAX_LEV        = 2       # stop at lev = 2
@@ -170,11 +171,13 @@ def normalize_cdr3_series(s: pd.Series) -> pd.Series:
          .str.replace(r"W$", "", regex=True)
     )
 
-def read_cdr3(path: str, col: str = "cdr3_aa") -> pd.DataFrame:
+def read_cdr3(path: str, col: str = "cdr3_aa", vgene_col=None) -> pd.DataFrame:
     """Read CSV/TSV; keep & normalize a single CDR3 column; drop duplicates."""
 
     # Choose separator based on file extension
-    if path.endswith(".csv"):
+    if isinstance(path, pd.DataFrame):
+        df = path
+    elif path.endswith(".csv"):
         df = pd.read_csv(path, sep=",")
     elif path.endswith(".tsv"):
         df = pd.read_csv(path, sep="\t")
@@ -199,6 +202,9 @@ def read_cdr3(path: str, col: str = "cdr3_aa") -> pd.DataFrame:
     out = out[out["cdr3_aa"].notna() & (out["cdr3_aa"] != "")]
     out["len"] = out["cdr3_aa"].str.len().astype("int32")
     out = out[out["len"] >= MIN_LEN]
+    if vgene_col is not None:
+        print(f"colomns are {df.columns}")
+        out['v_gene']= df[ vgene_col]
     out = out.drop_duplicates(subset=["cdr3_aa"]).reset_index(drop=True)
     return out
 
@@ -288,7 +294,7 @@ class FileLock:
 # Build MS_only1 from MS/HC table
 # =========================
 
-def filter_ms_exclude_H_clusters(ms: pd.DataFrame) -> pd.DataFrame:
+def filter_ms_exclude_H_clusters(ms: pd.DataFrame, return_HC_df: bool = False) -> pd.DataFrame:
     """Remove every row whose cluster_h1 appears in ANY subject_number starting with 'H'."""
     subj_col = COLS_MS["subject"]
     clus_col = COLS_MS["cluster"]
@@ -300,7 +306,10 @@ def filter_ms_exclude_H_clusters(ms: pd.DataFrame) -> pd.DataFrame:
     )
     if len(clusters_with_H) == 0:
         return ms.copy()
-    return ms[~ms[clus_col].isin(clusters_with_H) | ms[clus_col].isna()].copy()
+    if return_HC_df:
+        return (ms[ms[clus_col].isin(clusters_with_H) | ms[clus_col].isna()].copy())
+    else:   
+        return (ms[~ms[clus_col].isin(clusters_with_H) | ms[clus_col].isna()].copy())
 
 def build_ms_only1(ms_full_path: str, ms_only_path: str):
     """Create MS_only1_cdr3.csv from full MS/HC table, excluding H-clusters and duplicates."""
@@ -400,6 +409,175 @@ def match_all(agab_df: pd.DataFrame,
 
     return rows, best_for_ms, checked
 
+
+def match_all_ighv(agab_df: pd.DataFrame,
+              ms_df: pd.DataFrame,
+              max_lev: int,
+              throttle_every: int,
+              sleep_sec: float,
+              min_hits: int = 2,
+              vgene_col='v_gene'):
+    ms_index = MSIndex(ms_df)
+
+    # Build maps cdr3 -> set(v_genes) for quick lookup
+    def _build_vmap(df: pd.DataFrame, cdr3_col: str = "cdr3_aa", vcol: str = vgene_col) -> Dict[str, Set[str]]:
+        vm: Dict[str, Set[str]] = {}
+        if vcol not in df.columns:
+            # no vgene column present -> empty sets
+            for s in df[cdr3_col].astype(str).tolist():
+                vm[s] = set()
+            return vm
+        for _, r in df[[cdr3_col, vcol]].drop_duplicates().iterrows():
+            s = str(r[cdr3_col])
+            v = r[vcol]
+            if pd.isna(v):
+                continue
+            # allow multiple genes separated by '|' or ';' if present
+            if isinstance(v, str) and (("|" in v) or (";" in v)):
+                parts = [p.strip() for delim in ("|", ";") for p in v.split(delim)]
+                vals = {p for p in parts if p}
+            else:
+                vals = {str(v).strip()} if v != "" else set()
+            vm.setdefault(s, set()).update(vals)
+        # ensure every sequence has an entry
+        for s in ms_index.by_len.values():
+            for seq in s:
+                vm.setdefault(seq, set())
+        return vm
+
+    ms_vmap = _build_vmap(ms_df, cdr3_col="cdr3_aa", vcol=vgene_col)
+    agab_vmap = _build_vmap(agab_df, cdr3_col="cdr3_aa", vcol=vgene_col)
+
+    rows: List[Tuple[str, str, int, bool]] = []
+    best_for_ms: Dict[str, Tuple[int, str]] = {}
+    checked = 0
+    t0 = time.time()
+
+    agab_list = agab_df["cdr3_aa"].tolist()
+    n_agab = len(agab_list)
+    hit_by_k = defaultdict(int)
+
+    for i, a in enumerate(agab_list, 1):
+        La = len(a)
+        anchors = tokens_pms4(a)
+
+        for k in range(1, max_lev + 1):
+            Lms = [L for L in range(La - k, La + k + 1) if L in ms_index.by_len]
+            if not Lms:
+                continue
+
+            cand_map = ms_index.candidates(Lms, anchors, min_hits=min_hits)
+            if not cand_map:
+                continue
+
+            local_rows: List[Tuple[str, str, int, bool]] = []
+            for Lm, idxs in cand_map.items():
+                B = ms_index.by_len[Lm]
+                for j in idxs:
+                    b = B[j]
+                    d = edit_distance(a, b, k)
+                    checked += 1
+                    if d <= k:
+                        # check vgene overlap
+                        a_vs = agab_vmap.get(a, set())
+                        b_vs = ms_vmap.get(b, set())
+                        vgene_match = bool(a_vs and b_vs and (a_vs & b_vs))
+                        local_rows.append((a, b, d,vgene_match,a_vs,b_vs))
+
+            if not local_rows:
+                continue
+
+            # Partition by vgene match
+            ok = [r for r in local_rows if r[3]]
+            bad = [r for r in local_rows if not r[3]]
+
+            # Count any hit for reporting
+            hit_by_k[k] += 1
+
+            if ok:
+                # Prefer vgene-matching hits at this k and stop (like original behavior)
+                rows.extend(ok)
+                for (_, b, d, _, _, _) in ok:
+                    if (b not in best_for_ms) or (d < best_for_ms[b][0]) or (d == best_for_ms[b][0] and a < best_for_ms[b][1]):
+                        best_for_ms[b] = (d, a)
+                break
+            else:
+                # No vgene-matching hit: keep non-matching hits (flagged) but continue to next k
+                rows.extend(bad)
+                for (_, b, d, _, _, _) in bad:
+                    if (b not in best_for_ms) or (d < best_for_ms[b][0]) or (d == best_for_ms[b][0] and a < best_for_ms[b][1]):
+                        best_for_ms[b] = (d, a)
+                # continue to next k (do not break)
+
+        if i % 1000 == 0:
+            elapsed = time.time() - t0
+            rate = i / max(elapsed, 1e-9)
+            eta = (n_agab - i) / max(rate, 1e-9)
+            k1, k2 = hit_by_k.get(1, 0), hit_by_k.get(2, 0)
+            print(f"[INFO] processed {i}/{n_agab} AGAB | "
+                  f"matches: {len(rows)} | checked: {checked} | "
+                  f"elapsed: {elapsed:.1f}s | ETA: {eta/3600:.1f}h | "
+                  f"k1={k1} k2={k2}",
+                  flush=True)
+
+    return rows, best_for_ms, checked
+    # ms_index = MSIndex(ms_df)
+    # rows: List[Tuple[str, str, int]] = []
+    # best_for_ms: Dict[str, Tuple[int, str]] = {}
+    # checked = 0
+    # t0 = time.time()
+
+    # agab_list = agab_df["cdr3_aa"].tolist()
+    # n_agab = len(agab_list)
+    # hit_by_k = defaultdict(int)
+
+    # for i, a in enumerate(agab_list, 1):
+    #     La = len(a)
+    #     anchors = tokens_pms4(a)
+
+    #     for k in range(1, max_lev + 1):
+    #         Lms = [L for L in range(La - k, La + k + 1) if L in ms_index.by_len]
+    #         if not Lms:
+    #             continue
+
+    #         cand_map = ms_index.candidates(Lms, anchors, min_hits=min_hits)
+    #         if not cand_map:
+    #             continue
+
+    #         local_rows: List[Tuple[str, str, int]] = []
+    #         for Lm, idxs in cand_map.items():
+    #             B = ms_index.by_len[Lm]
+    #             for j in idxs:
+    #                 b = B[j]
+    #                 d = edit_distance(a, b, k)
+    #                 checked += 1
+    #                 if d <= k:
+    #                     local_rows.append((a, b, d))
+
+    #         if local_rows:
+    #             rows.extend(local_rows)
+    #             hit_by_k[k] += 1
+    #             for (_, b, d) in local_rows:
+    #                 if (b not in best_for_ms) or (d < best_for_ms[b][0]) or (d == best_for_ms[b][0] and a < best_for_ms[b][1]):
+    #                     best_for_ms[b] = (d, a)
+    #             break
+
+    #     if i % 1000 == 0:
+    #         elapsed = time.time() - t0
+    #         rate = i / max(elapsed, 1e-9)
+    #         eta = (n_agab - i) / max(rate, 1e-9)
+    #         k1, k2 = hit_by_k.get(1, 0), hit_by_k.get(2, 0)
+    #         print(f"[INFO] processed {i}/{n_agab} AGAB | "
+    #               f"matches: {len(rows)} | checked: {checked} | "
+    #               f"elapsed: {elapsed:.1f}s | ETA: {eta/3600:.1f}h | "
+    #               f"k1={k1} k2={k2}",
+    #               flush=True)
+
+    # return rows, best_for_ms, checked
+
+
+
+
 def atomic_update_ms(ms_path: str,
                      best_for_ms: Dict[str, Tuple[int, str]],
                      ms_key_col: str = "cdr3_aa"):
@@ -409,7 +587,9 @@ def atomic_update_ms(ms_path: str,
     """
     with FileLock(ms_path):
         # Read with explicit separator to avoid header being split
-        if ms_path.endswith(".csv"):
+        if isinstance(ms_path, pd.DataFrame):
+            ms_df_full = ms_path
+        elif ms_path.endswith(".csv"):
             ms_df_full = pd.read_csv(ms_path, sep=",")
         elif ms_path.endswith(".tsv"):
             ms_df_full = pd.read_csv(ms_path, sep="\t")
@@ -584,7 +764,7 @@ def enrich_matches_with_metadata(matches: pd.DataFrame,
         COLS_AGAB["antigen"], COLS_AGAB["origin"],
     ]
     ordered_cols = front_cols + [c for c in m2.columns if c not in front_cols]
-    return m2.loc[:, ordered_cols]
+    return (m2.loc[:, ordered_cols])
 
 def aggregate_tables(enriched: pd.DataFrame, out_prefix: str):
     """Create tabular summaries (antigen and tissue only)."""
@@ -629,7 +809,7 @@ def aggregate_tables(enriched: pd.DataFrame, out_prefix: str):
     )
     rollup.to_csv(f"{out_prefix}_agab_cdr3_rollup.tsv", sep="\t", index=False)
 
-def compute_fisher_levels_antigen(agab_path: str, ms_path: str, matches_path: str, out_prefix: str):
+def compute_fisher_levels_antigen(agab_path: str, ms_df: str, matches_path: str, out_prefix: str):
     """
     Fisher test on antigen only, with lev 0/1/2 and enriched outputs.
     """
@@ -648,15 +828,16 @@ def compute_fisher_levels_antigen(agab_path: str, ms_path: str, matches_path: st
     ]
     step_i = 0
     total_steps = len(steps)
-
+    COLS_AGAB["antigen"]='single_annotation'  # adjust for new column name
     # 1) Load AgAb annotated
     agab = pd.read_csv(agab_path, sep=None, engine="python")
+    # agab= agab_df
     step_i += 1; _eta_msg(step_i, total_steps, t0, steps[step_i-1])
 
     # 1b) Prep AgAb
     for col in [COLS_AGAB["cdr3"], COLS_AGAB["antigen"], COLS_AGAB["origin"]]:
         if col not in agab.columns:
-            raise ValueError(f"Column '{col}' not found in {agab_path}. Columns: {list(agab.columns)}")
+            raise ValueError(f"Column '{col}' not found in {agab_df}. Columns: {list(agab.columns)}")
     agab[COLS_AGAB["cdr3"]] = normalize_cdr3_series(agab[COLS_AGAB["cdr3"]])
     agab = agab[(agab[COLS_AGAB["cdr3"]].notna()) & (agab[COLS_AGAB["cdr3"]] != "")]
     agab["len"] = agab[COLS_AGAB["cdr3"]].str.len().astype("int32")
@@ -667,7 +848,8 @@ def compute_fisher_levels_antigen(agab_path: str, ms_path: str, matches_path: st
     step_i += 1; _eta_msg(step_i, total_steps, t0, steps[step_i-1])
 
     # 2) Load MS/HC
-    ms = pd.read_csv(ms_path, sep="\t")
+    ms = pd.read_csv(ms_df, sep="\t")
+    # ms=ms_df
     step_i += 1; _eta_msg(step_i, total_steps, t0, steps[step_i-1])
 
     # 2b) Prep MS
@@ -705,11 +887,27 @@ def compute_fisher_levels_antigen(agab_path: str, ms_path: str, matches_path: st
         matches = matches[matches[COLS_MATCH["cdr3_ms"]].isin(valid_ms)].copy()
     step_i += 1; _eta_msg(step_i, total_steps, t0, steps[step_i-1])
 
-    # 4) Group indices (antigen)
+    # 4) Group indices (antigen) -- old, now Ags are from the matched cdr3s
     antigen_index = build_group_index(
         agab[[COLS_AGAB["cdr3"], COLS_AGAB["antigen"]]].copy(),
         COLS_AGAB["antigen"]
     )
+# 4) Group indices (antigen) — restrict to matched AgAb CDR3s
+
+    # matched_agab_cdr3s = set(matches[COLS_MATCH["cdr3_agab"]].unique())
+
+    # agab_matched = agab[
+    #     agab[COLS_AGAB["cdr3"]].isin(matched_agab_cdr3s)
+    # ].copy()
+
+    # antigen_universe = set(agab_matched[COLS_AGAB["cdr3"]].unique())
+
+    # antigen_index = build_group_index(
+    #     agab_matched[[COLS_AGAB["cdr3"], COLS_AGAB["antigen"]]],
+    #     COLS_AGAB["antigen"]
+    # )
+
+
     step_i += 1; _eta_msg(step_i, total_steps, t0, steps[step_i-1])
 
     # Build mapping antigen -> origin_class (pipe-separated if multiple)
@@ -762,60 +960,337 @@ def compute_fisher_levels_antigen(agab_path: str, ms_path: str, matches_path: st
     step_i += 1; _eta_msg(step_i, total_steps, t0, steps[step_i-1])
 
     print(f"[DONE] All Fisher/summary tables written with prefix: {out_prefix}")
+    #print the significant antigens found at lev 0/1/2
+    for df, lev in zip([r_ant_0, r_ant_1, r_ant_2], [0, 1, 2]):
+        sig = df[df["p_adj"] < 0.05]
+        n_sig = len(sig)
+        print(f"[INFO] Lev {lev}: {n_sig} significant antigens (p_adj < 0.05)")
+        if n_sig > 0:
+            print(sig[["group", "p_adj", "std_residual"]].to_string(index=False))
+    
+    COLS_AGAB["antigen"]='antigen'  # reset to original
+
+
+# =========================
+# uniform antigen annotations
+# =========================
+import re
+from typing import Iterable, List, Set, Dict, Any, Optional, Tuple
+import pandas as pd
+
+
+def normalize_antigen(text: str) -> str:
+    """
+    Lowercase, treat '_' and '-' as separators, remove punctuation except alphanumerics/spaces,
+    and collapse whitespace.
+    """
+    if text is None:
+        return ""
+    text = text.lower()
+    text = re.sub(r"[_\-]+", " ", text)          # separators -> space
+    text = re.sub(r"[^a-z0-9 ]+", " ", text)     # keep only alnum + spaces
+    text = re.sub(r"\s+", " ", text).strip()     # collapse whitespace
+    return text
+
+
+def tokenize_antigen(text: str, drop: Optional[Set[str]] = None) -> List[str]:
+    """
+    Normalize + split into tokens; drop generic tokens; return unique tokens (order not important).
+    """
+    if drop is None:
+        drop = {"antigen", "protein", "proteins"}
+
+    norm = normalize_antigen(text)
+    toks = [t for t in norm.split(" ") if t]
+    toks = [t for t in toks if t not in drop]
+    # unique (stable-ish): use dict trick
+    return list(dict.fromkeys(toks))
+
+
+def jaccard_tokens(a_tokens: Iterable[str], b_tokens: Iterable[str]) -> float:
+    """
+    Jaccard similarity between two token sets.
+    """
+    a_set = set(a_tokens)
+    b_set = set(b_tokens)
+    if not a_set or not b_set:
+        return 0.0
+    inter = len(a_set.intersection(b_set))
+    union = len(a_set.union(b_set))
+    return inter / union
+
+
+from itertools import combinations
+
+try:
+    from tqdm.auto import tqdm
+except ImportError:
+    tqdm = None
+
+
+def all_vs_all_jaccard(antigens: List[str], min_sim: float = 0.6, show_progress: bool = True) -> pd.DataFrame:
+    """
+    Compute all unordered pairs (i<j), compute Jaccard on token sets, and return pairs with sim>=min_sim.
+    """
+    # drop NA/empty and unique
+    cleaned = []
+    seen = set()
+    for a in antigens:
+        if a is None:
+            continue
+        a = str(a)
+        if a == "":
+            continue
+        if a not in seen:
+            cleaned.append(a)
+            seen.add(a)
+
+    toks = [tokenize_antigen(a) for a in cleaned]
+
+    pairs = combinations(range(len(cleaned)), 2)
+    if tqdm is not None and show_progress:
+        pairs = tqdm(list(pairs), desc="All-vs-all Jaccard")  # materialize for tqdm
+    else:
+        pairs = list(pairs)
+
+    rows = []
+    for i, j in pairs:
+        sim = jaccard_tokens(toks[i], toks[j])
+        if sim >= min_sim:
+            rows.append((cleaned[i], cleaned[j], sim))
+
+    return pd.DataFrame(rows, columns=["a", "b", "sim"])
+
+
+import networkx as nx
+
+
+def canonicalize(strings: List[str]) -> str:
+    """
+    Pick a canonical representative for a cluster.
+    Default rule: maximum token coverage (largest unique token set).
+    Tie-breaker: longer normalized string.
+    """
+    if not strings:
+        return ""
+    token_lists = [tokenize_antigen(s) for s in strings]
+    sizes = [len(set(t)) for t in token_lists]
+    max_size = max(sizes)
+    candidates = [s for s, sz in zip(strings, sizes) if sz == max_size]
+    # tie-break by longer normalized length
+    candidates.sort(key=lambda s: len(normalize_antigen(s)), reverse=True)
+    return(candidates[0])
+
+
+def build_clusters_with_canonical(pairs: pd.DataFrame, min_sim: float = 0.9) -> Dict[str, Any]:
+    """
+    - Build threshold graph from edges where sim>=min_sim
+    - Connected components define clusters
+    - Build canonical_map: canonical label and members per cluster
+    - Compute avg_edge_sim (on threshold edges) and avg_allpairs_sim (within cluster, from full pairs)
+    - Return graph + membership + canonical_map + stats
+    """
+    required_cols = {"a", "b", "sim"}
+    if not required_cols.issubset(pairs.columns):
+        raise ValueError(f"pairs must contain columns {required_cols}, got {pairs.columns.tolist()}")
+
+    edges_thr = pairs.loc[pairs["sim"] >= min_sim, ["a", "b", "sim"]].copy()
+    if edges_thr.empty:
+        raise ValueError("No edges above min_sim. Lower min_sim or check your similarity computation.")
+
+    # 1) Build graph from threshold edges
+    g = nx.Graph()
+    for a, b, sim in edges_thr.itertuples(index=False):
+        g.add_edge(a, b, sim=float(sim))
+
+    # 2) Connected components -> cluster ids
+    components = list(nx.connected_components(g))
+    membership_rows = []
+    for cid, nodes in enumerate(components, start=1):
+        for node in nodes:
+            membership_rows.append((node, cid))
+    membership = pd.DataFrame(membership_rows, columns=["antigen", "cluster"])
+
+    # 3) Canonical map
+    canonical_map_rows = []
+    for cid, nodes in enumerate(components, start=1):
+        members = sorted(nodes)
+        canon = canonicalize(members)
+        canonical_map_rows.append((cid, canon, members))
+    canonical_map = pd.DataFrame(canonical_map_rows, columns=["cluster", "canonical", "members"])
+
+    # Helper: map antigen -> cluster
+    antigen_to_cluster = dict(membership[["antigen", "cluster"]].itertuples(index=False))
+
+    # 4A) Avg EDGE sim within cluster (threshold edges only)
+    edges_thr2 = edges_thr.copy()
+    edges_thr2["cluster_a"] = edges_thr2["a"].map(antigen_to_cluster)
+    edges_thr2["cluster_b"] = edges_thr2["b"].map(antigen_to_cluster)
+    within_thr = edges_thr2.loc[edges_thr2["cluster_a"] == edges_thr2["cluster_b"], ["cluster_a", "sim"]]
+    avg_edge_sim = (
+        within_thr.groupby("cluster_a")
+        .agg(n_edges=("sim", "size"), avg_edge_sim=("sim", "mean"))
+        .reset_index()
+        .rename(columns={"cluster_a": "cluster"})
+    )
+
+    # 4B) Avg ALL-PAIRS sim within cluster (from full pairs dataframe)
+    pairs2 = pairs.loc[:, ["a", "b", "sim"]].copy()
+    pairs2["cluster_a"] = pairs2["a"].map(antigen_to_cluster)
+    pairs2["cluster_b"] = pairs2["b"].map(antigen_to_cluster)
+    within_all = pairs2.loc[pairs2["cluster_a"] == pairs2["cluster_b"], ["cluster_a", "sim"]]
+    avg_allpairs_sim = (
+        within_all.groupby("cluster_a")
+        .agg(n_pairs=("sim", "size"), avg_allpairs_sim=("sim", "mean"))
+        .reset_index()
+        .rename(columns={"cluster_a": "cluster"})
+    )
+
+    # Cluster sizes
+    cluster_sizes = membership.groupby("cluster").size().reset_index(name="n_nodes")
+
+    # Stats table
+    stats = (
+        cluster_sizes.merge(avg_edge_sim, on="cluster", how="left")
+        .merge(avg_allpairs_sim, on="cluster", how="left")
+        .merge(canonical_map[["cluster", "canonical"]], on="cluster", how="left")
+        .sort_values(["n_nodes", "avg_allpairs_sim"], ascending=[False, False], na_position="last")
+        .reset_index(drop=True)
+    )
+
+    return {
+        "graph": g,
+        "membership": membership,
+        "canonical_map": canonical_map,
+        "stats": stats,
+    }
+
+import pandas as pd
+from typing import Dict
+
+def build_antigen_to_canonical_map(res: dict) -> Dict[str, str]:
+    """
+    Build a dict mapping each antigen string to the canonical antigen of its cluster.
+    """
+    membership = res["membership"]          # columns: antigen, cluster
+    canonical_map = res["canonical_map"]    # columns: cluster, canonical, members
+
+    cluster_to_canonical = dict(
+        canonical_map[["cluster", "canonical"]].itertuples(index=False, name=None)
+    )
+
+    antigen_to_cluster = dict(
+        membership[["antigen", "cluster"]].itertuples(index=False, name=None)
+    )
+
+    antigen_to_canonical = {
+        antigen: cluster_to_canonical[cluster]
+        for antigen, cluster in antigen_to_cluster.items()
+    }
+    return antigen_to_canonical
+
+def add_canonical_column(df0: pd.DataFrame, antigen_col: str, antigen_to_canonical: dict) -> pd.DataFrame:
+    """
+    Add a new column '<antigen_col>_canonical' with the canonical name from clustering.
+    If an antigen was not in the graph, keep the original value.
+    """
+    df = df0.copy()
+    new_col = f"{antigen_col}_canonical"
+    df[new_col] = df[antigen_col].map(antigen_to_canonical).fillna(df[antigen_col])
+    return df
+
 
 # =========================
 # Main
 # =========================
+MS_FULL_PATH = "/doctorai/chiarba/analysis/AT_THE_END/MS_HC_2026_h0h1.tsv"
+# def main():
+parser = argparse.ArgumentParser(description="Step 3: MS_only1 + AGAB–MS matching (lev<=2) + Fisher (antigen only).")
+parser.add_argument("--agab", default=AGAB_PATH, help="Path to AGAB annotated table with 'cdr3_aa' and 'antigen'.")
+parser.add_argument("--ms-full", default=MS_FULL_PATH, help="Full MS/HC table with 'cdr3_aa', 'subject_number', 'tissue', 'cluster_h1'.")
+parser.add_argument("--ms-only", default=MS_ONLY_PATH, help="Output path for MS_only1 CDR3 table.")
+parser.add_argument("--matches-out", default=MATCHES_PATH, help="TSV path for all retained matches (lev<=2).")
+parser.add_argument("--out-prefix", default=OUT_PREFIX, help="Prefix for Fisher and summary outputs.")
+parser.add_argument("--throttle-every", type=int, default=0, help="Sleep every N comparisons (0 = disable).")
+parser.add_argument("--sleep-sec", type=float, default=0.005, help="Sleep seconds when throttling triggers.")
+parser.add_argument("--min-hits", type=int, default=MIN_ANCHOR_HITS, help="Min shared 4-mer anchors to admit a candidate.")
+args = parser.parse_args()
 
-def main():
-    parser = argparse.ArgumentParser(description="Step 3: MS_only1 + AGAB–MS matching (lev<=2) + Fisher (antigen only).")
-    parser.add_argument("--agab", default=AGAB_PATH, help="Path to AGAB annotated table with 'cdr3_aa' and 'antigen'.")
-    parser.add_argument("--ms-full", default=MS_FULL_PATH, help="Full MS/HC table with 'cdr3_aa', 'subject_number', 'tissue', 'cluster_h1'.")
-    parser.add_argument("--ms-only", default=MS_ONLY_PATH, help="Output path for MS_only1 CDR3 table.")
-    parser.add_argument("--matches-out", default=MATCHES_PATH, help="TSV path for all retained matches (lev<=2).")
-    parser.add_argument("--out-prefix", default=OUT_PREFIX, help="Prefix for Fisher and summary outputs.")
-    parser.add_argument("--throttle-every", type=int, default=5000, help="Sleep every N comparisons (0 = disable).")
-    parser.add_argument("--sleep-sec", type=float, default=0.005, help="Sleep seconds when throttling triggers.")
-    parser.add_argument("--min-hits", type=int, default=MIN_ANCHOR_HITS, help="Min shared 4-mer anchors to admit a candidate.")
-    args = parser.parse_args()
+# 1) Build MS_only1
+build_ms_only1(args.ms_full, args.ms_only)
 
-    # 1) Build MS_only1
-    build_ms_only1(args.ms_full, args.ms_only)
+# 2) Matching
+setup_backend()
+print(f"[INFO] Levenshtein backend = {BACKEND}")
 
-    # 2) Matching
-    setup_backend()
-    print(f"[INFO] Levenshtein backend = {BACKEND}")
+ms_df_full = pd.read_csv(args.ms_full , sep="\t")
 
-    agab_df = read_cdr3(args.agab, col=COLS_AGAB["cdr3"])
-    ms_df   = read_cdr3(args.ms_only, col="cdr3_aa")
-    print(f"[STEP 3.2] AGAB unique CDR3: {len(agab_df)} | MS_only1 unique CDR3: {len(ms_df)}")
 
-    t0 = time.time()
-    rows, best_for_ms, checked = match_all(
-        agab_df, ms_df,
-        max_lev=MAX_LEV,
-        throttle_every=max(args.throttle_every, 0),
-        sleep_sec=max(args.sleep_sec, 0.0),
-        min_hits=max(args.min_hits, 1)
-    )
-    elapsed = time.time() - t0
-    print(f"[DONE MATCH] matches kept: {len(rows)} | pairs checked (after prefilter): {checked} | elapsed {elapsed/60:.1f} min")
 
-    res_df = (
-        pd.DataFrame(rows, columns=["cdr3_agab", "cdr3_ms", "lev"])
-        .sort_values(["lev","cdr3_agab","cdr3_ms"])
-        .reset_index(drop=True)
-    )
-    res_df.to_csv(args.matches_out, sep="\t", index=False)
-    print(f"[SAVED] all retained matches (lev<=2): {args.matches_out}")
+ms_only_df_full=filter_ms_exclude_H_clusters(ms_df_full)
+agab_df_full = pd.read_csv(args.agab )
 
-    # Optional: update MS_only1 with best match annotations
-    atomic_update_ms(args.ms_only, best_for_ms, ms_key_col="cdr3_aa")
+# agab_df = read_cdr3(args.agab, col=COLS_AGAB["cdr3"])
+# ms_df   = read_cdr3(args.ms_only, col="cdr3_aa")
 
-    # 3) Fisher (antigen only)
-    compute_fisher_levels_antigen(args.agab, args.ms_full, args.matches_out, args.out_prefix)
+agab_df = read_cdr3(args.agab, col=COLS_AGAB["cdr3"],vgene_col='ighv_v_gene')
+ms_df   = read_cdr3(ms_only_df_full, col="cdr3_aa",vgene_col='v_gene')
+#generate a non-MS dataframe, the HC_df (healthy control), which is the difference between ms_df_full and ms_only_df_full
+HC_df = filter_ms_exclude_H_clusters(ms_df_full, return_HC_df=True)
+HC_df = read_cdr3(HC_df, col="cdr3_aa",vgene_col='v_gene')
 
-    print("[ALL DONE]")
+print(f"[STEP 3.2] AGAB unique CDR3: {len(agab_df)} | MS_only1 unique CDR3: {len(ms_df)}")
 
-if __name__ == "__main__":
-    main()
+t0 = time.time()
+rows, best_for_ms, checked = match_all_ighv(
+    agab_df, ms_df,
+    max_lev=MAX_LEV,
+    throttle_every=max(args.throttle_every, 0),
+    sleep_sec=max(args.sleep_sec, 0.0),
+    min_hits=max(args.min_hits, 1)
+)
+elapsed = time.time() - t0
+print(f"[DONE MATCH] matches kept: {len(rows)} | pairs checked (after prefilter): {checked} | elapsed {elapsed/60:.1f} min")
+
+res_df = (
+    pd.DataFrame(rows, columns=["cdr3_agab", "cdr3_ms", "lev","vgene_match","vgene_agab","vgene_ms"])
+    .sort_values(['vgene_match',"lev","cdr3_agab","cdr3_ms"])
+    .reset_index(drop=True)
+)
+#cluster the antigen names
+ag_jac=all_vs_all_jaccard(agab_df_full['single_annotation'], min_sim=0.3)
+# ag_jac is your pairs dataframe with columns a,b,sim
+res = build_clusters_with_canonical(ag_jac, min_sim=0.7)
+antigen_to_canonical = build_antigen_to_canonical_map(res)
+agab_df_full_clust = add_canonical_column(agab_df_full, antigen_col="single_annotation", antigen_to_canonical=antigen_to_canonical)
+agab_df_full_clust['single_annotation_old']=agab_df_full_clust['single_annotation']
+agab_df_full_clust['single_annotation']=agab_df_full_clust['single_annotation_canonical']
+
+agab_df_full_clust.to_csv('/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_cdr3_annotated3_disambiguated_CLUSTER.csv')
+
+
+
+#match the cdr3 with the antigen name from agab full
+agab_columns= ['cdr3_aa', 'antigen','single_annotation','patent_quality','dataset','ighv_v_gene','mut_stat']
+res_df_metadata = res_df.merge(
+    agab_df_full_clust[agab_columns].drop_duplicates(),
+    left_on="cdr3_agab",
+    right_on="cdr3_aa",
+    how="left")
+
+
+res_df.to_csv(args.matches_out, sep="\t", index=False)
+print(f"[SAVED] all retained matches (lev<=2): {args.matches_out}")
+res_df_metadata.to_csv(args.matches_out.replace(".tsv","_withAgabMetadata_IGHV_v2.tsv"), sep="\t", index=False)
+print(f"[SAVED] file:  {args.matches_out.replace('.tsv','_withAgabMetadata_IGHV_v2.tsv')}")
+      
+
+# 3) Fisher (antigen only)
+compute_fisher_levels_antigen(  
+                                # args.agab,
+                                '/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_cdr3_annotated3_disambiguated_CLUSTER.csv',
+                                args.ms_full,
+                                "/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_vs_ms_lev_matches1_withAgabMetadata_IGHV_v2.tsv",
+                                args.out_prefix)
+
+print("[ALL DONE]")

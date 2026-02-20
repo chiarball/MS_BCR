@@ -39,6 +39,7 @@ from urllib3.util.retry import Retry
 # ============================================================
 
 BASE_DIR = Path("/doctorai/chiarba/AbAg_database")
+# BASE_DIR = Path("/doctorai/niccoloc/MS_db/MS_BCR")
 INPUT_CSV = BASE_DIR / "1_final/agab_with_cdr3.tsv"
 
 OUT_DIR = BASE_DIR / "aggregating_test"
@@ -63,6 +64,7 @@ PDB_ENTITY_CACHE_PATH = CACHE_DIR / "pdb_antigen_entity_cache.json"
 
 # Optional family mapping (kept for compatibility)
 FAMILY_MAPPING_CSV = CACHE_DIR / "family_mapping.csv"
+CONDA_ENV_IGBLAST = "/doctorai/userdata/envs/igblast"
 
 # ============================================================
 # GLOBALS: session + caches
@@ -292,9 +294,143 @@ def safe_literal_eval(s) -> dict:
         except Exception:
             return {}
 
+
+
+import subprocess
+import tempfile
+import os
+import pandas as pd
+from pathlib import Path
+from typing import List
+from io import StringIO
+from tqdm import tqdm
+
+from joblib import Parallel, delayed
+from tqdm import tqdm
+
+def get_ighv_assignments_igblast_fast(
+    aa_sequences,
+    sequence_ids,
+    igblast_path="/doctorai/userdata/envs/igblast/bin/igblastp",
+    germline_db_path="/doctorai/userdata/igblast/igblast/database",
+    batch_size=20000,
+    num_threads=6,
+    n_jobs=4,
+):
+    assert len(aa_sequences) == len(sequence_ids)
+
+    # Preallocate output
+    out = [None] * len(sequence_ids)
+
+    batches = []
+    for i in range(0, len(aa_sequences), batch_size):
+        batches.append((
+            i,
+            aa_sequences[i:i+batch_size],
+            sequence_ids[i:i+batch_size]
+        ))
+
+    outputs = Parallel(n_jobs=n_jobs)(
+        delayed(_run_igblast_batch)(
+            start_idx,
+            batch_seqs,
+            batch_ids,
+            igblast_path,
+            germline_db_path,
+            num_threads
+        )
+        for start_idx, batch_seqs, batch_ids in tqdm(batches, desc="IGHV batches")
+    )
+
+    # FAST linear merge
+    for batch in outputs:
+        for idx, v_gene, pident in batch:
+            out[idx] = {
+                "v_gene": v_gene,
+                "pident": pident
+            }
+
+    return out
+
+def _run_igblast_batch(
+    start_idx,
+    batch_seqs,
+    batch_ids,
+    igblast_path,
+    germline_db_path,
+    num_threads
+):
+    import tempfile
+    from pathlib import Path
+    import subprocess
+
+    results = []
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmpdir = Path(tmpdir)
+
+        fasta = tmpdir / "input.fasta"
+        out   = tmpdir / "out.tsv"
+
+        with open(fasta, "w") as f:
+            for sid, seq in zip(batch_ids, batch_seqs):
+                f.write(f">{sid}\n{seq}\n")
+
+        cmd = [
+            igblast_path,
+            "-query", str(fasta),
+            "-germline_db_V", f"{germline_db_path}/imgt_aa_human_ig_v",
+            "-organism", "human",
+            "-domain_system", "imgt",
+            "-num_threads", str(num_threads),
+            "-outfmt", "7 qseqid sseqid pident bitscore",
+            "-out", str(out),
+        ]
+
+        subprocess.run(cmd, check=True)
+
+        id_to_local = {sid: i for i, sid in enumerate(batch_ids)}
+
+        with open(out) as f:
+            for line in f:
+                if not line or line.startswith("#"):
+                    continue
+
+                fields = line.rstrip().split()
+                if len(fields) < 5:
+                    continue
+
+                chain = fields[0]
+                qid = fields[1]
+
+                # only V-gene hits
+                if chain != "V":
+                    continue
+
+                if qid not in id_to_local:
+                    continue
+
+                sseqid = fields[2]
+
+                try:
+                    pident = float(fields[3])
+                except ValueError:
+                    continue
+
+                local_idx = id_to_local[qid]
+                global_idx = start_idx + local_idx
+
+                results.append(
+                    (global_idx, sseqid.split("*")[0], pident)
+                )
+    return results
 # ============================================================
 # HEURISTIC TAXONOMY (kept but only used for antigen fallback)
 # ============================================================
+
+
+
+
 
 def heuristic_tax_family_from_text(s: str):
     """Infer taxonomy/family from free-text antigen/target_name."""
@@ -853,145 +989,218 @@ def human_time(seconds: float) -> str:
 # MAIN PIPELINE
 # ============================================================
 
-def main():
-    start_ts = time.time()
+# def main():
+start_ts = time.time()
 
-    if not INPUT_CSV.exists():
-        print(f"ERROR: Input file not found: {INPUT_CSV}", file=sys.stderr)
-        sys.exit(1)
+if not INPUT_CSV.exists():
+    print(f"ERROR: Input file not found: {INPUT_CSV}", file=sys.stderr)
+    sys.exit(1)
 
-    print(f"[INFO] Reading input: {INPUT_CSV}")
-    df = read_flexible_csv(INPUT_CSV)
+print(f"[INFO] Reading input: {INPUT_CSV}")
+df = read_flexible_csv(INPUT_CSV)
 
-    if "metadata" not in df.columns:
-        print("ERROR: 'metadata' column not found.", file=sys.stderr)
-        sys.exit(1)
+if "metadata" not in df.columns:
+    print("ERROR: 'metadata' column not found.", file=sys.stderr)
+    sys.exit(1)
 
-    if SAMPLE_N is not None and len(df) > SAMPLE_N:
-        df = df.sample(SAMPLE_N, random_state=42).copy()
-        print(f"[INFO] Sampling {SAMPLE_N} rows.")
+if SAMPLE_N is not None and len(df) > SAMPLE_N:
+    df = df.sample(SAMPLE_N, random_state=42).copy()
+    print(f"[INFO] Sampling {SAMPLE_N} rows.")
 
-    total_rows = len(df)
-    print(f"[INFO] Loaded {total_rows} rows.")
+total_rows = len(df)
+print(f"[INFO] Loaded {total_rows} rows.")
 
-    # ---- parse metadata to targets ----
-    target_name_list, target_pdb_list, target_uniprot_list = [], [], []
-    for val in df["metadata"].tolist():
-        md = safe_literal_eval(val)
-        target_name_list.append(norm_field(md.get("target_name", "")))
-        target_pdb_list.append(norm_field(md.get("target_pdb", "")))
-        target_uniprot_list.append(norm_field(md.get("target_uniprot", "")))
+# ---- parse metadata to targets ----
+target_name_list, target_pdb_list, target_uniprot_list = [], [], []
+for val in df["metadata"].tolist():
+    md = safe_literal_eval(val)
+    target_name_list.append(norm_field(md.get("target_name", "")))
+    target_pdb_list.append(norm_field(md.get("target_pdb", "")))
+    target_uniprot_list.append(norm_field(md.get("target_uniprot", "")))
 
-    df["target_name"] = target_name_list
-    df["target_pdb"] = target_pdb_list
-    df["target_uniprot"] = target_uniprot_list
+df["target_name"] = target_name_list
+df["target_pdb"] = target_pdb_list
+df["target_uniprot"] = target_uniprot_list
+df.to_csv( '/doctorai/niccoloc/MS_db/agab_temp1.csv', index=False)
 
-    # ---- build antigen (former step2) ----
-    print("[INFO] Resolving antigen...")
-    antigens = []
-    for tn, tp, tu in zip(df["target_name"], df["target_pdb"], df["target_uniprot"]):
-        if all(is_empty_or_origin(x) for x in (tn, tp, tu)):
-            antigens.append(pd.NA)
-        else:
-            res = resolve_antigen_tax_family(tn, tp, tu)
-            antigens.append(res.antigen if res.antigen is not None else pd.NA)
-    df["antigen"] = antigens
+# deduplicate df
+df = df.drop_duplicates() 
+print(f"[INFO] Deduplicated to {len(df)} rows.")
+# group by heavy_sequence,light_sequence,antigen_sequence,dataset,target_name, target_pdb,target_uniprot and keep only one row per group (first occurrence)
+#keep the grouping columns
+# df = df.groupby(
+#     ["heavy_sequence", "light_sequence", "antigen_sequence", "dataset", "target_name", "target_pdb", "target_uniprot"],
+#     as_index=False
+# ).first()
+df1 = df.copy()
 
-    # save step2-like output
-    df.to_csv(STEP2_OUT, index=False, quoting=csv.QUOTE_MINIMAL)
-    print(f"[INFO] Step2 output written to: {STEP2_OUT}")
+#Get IGHV and IGHL vgene assignments via IgBLAST
+print("[INFO] Running IgBLAST for IGHV and IGHL assignments...")
+heavy_seqs = df1['heavy_sequence'].fillna('').tolist()
+light_seqs = df1['light_sequence'].fillna('').tolist()
+seq_ids_heavy = [f"heavy_{i+1}" for i in range(len(heavy_seqs))]
+seq_ids_light = [f"light_{i+1}" for i in range(len(light_seqs))]
+ighv_assignments = get_ighv_assignments_igblast_fast(
+    aa_sequences=heavy_seqs,
+    sequence_ids=seq_ids_heavy,
+    # igblast_path=IGBLAST_PATH,
+    germline_db_path='/doctorai/userdata/igblast/igblast/database/',
+    # batch_size=50000,
+    n_jobs=8,
+)
+igl_assignments = get_ighv_assignments_igblast_fast(
+    aa_sequences=light_seqs,
+    sequence_ids=seq_ids_light,
+    # igblast_path=IGBLAST_PATH,
+    germline_db_path='/doctorai/userdata/igblast/igblast/database/',
+    # batch_size=50000,
+    n_jobs=8,
+)
 
-    # ---- origin_class (former step3, no antigen) ----
-    print("[INFO] Computing origin_class...")
-    origins = []
-    for i, row in df.iterrows():
-        origin = classify_origin_row(
-            target_uniprot=row.get("target_uniprot", ""),
-            target_pdb=row.get("target_pdb", ""),
-            target_name=row.get("target_name", ""),
-        )
-        origins.append(origin)
-        if (i + 1) % 1000 == 0:
-            sys.stdout.write(f"\r[origin] {i+1}/{total_rows} rows processed")
-            sys.stdout.flush()
-    if total_rows >= 1000:
-        print()
+#add germaline and pident columns to df1
+v_gene_heavy = []
+pident_heavy = []
+for assign in ighv_assignments:
+    if assign is not None:
+        v_gene_heavy.append(assign['v_gene'])
+        pident_heavy.append(assign['pident'])
+    else:
+        v_gene_heavy.append(pd.NA)
+        pident_heavy.append(pd.NA)
+df1['ighv_v_gene'] = v_gene_heavy
+df1['ighv_pident'] = pident_heavy
 
-    df["origin_class"] = origins
 
-    df.to_csv(STEP3_OUT, index=False)
-    print(f"[INFO] Step3 output written to: {STEP3_OUT}")
+# ---- build antigen (former step2) ----
+print("[INFO] Resolving antigen...")
+antigens = []
+for tn, tp, tu in tqdm(zip(df1["target_name"], df1["target_pdb"], df1["target_uniprot"]), total=len(df1), desc="Resolving antigens"):
+    if all(is_empty_or_origin(x) for x in (tn, tp, tu)):
+        antigens.append(pd.NA)
+    else:
+        res = resolve_antigen_tax_family(tn, tp, tu)
+        antigens.append(res.antigen if res.antigen is not None else pd.NA)
+df1["antigen"] = antigens
 
-    # ---- unresolved antigen report (optional, like step2) ----
-    name_empty = df["target_name"].apply(is_empty_or_origin)
-    pdb_empty = df["target_pdb"].apply(is_empty_or_origin)
-    uniprot_empty = df["target_uniprot"].apply(is_empty_or_origin)
-    all_empty = name_empty & pdb_empty & uniprot_empty
-    any_present = ~all_empty
-    antigen_na_with_targets = df["antigen"].isna() & any_present
 
-    print(f"[REPORT] empty targets — name:{int(name_empty.sum())} "
-          f"pdb:{int(pdb_empty.sum())} uniprot:{int(uniprot_empty.sum())} "
-          f"| all_three_empty:{int(all_empty.sum())}")
-    print(f"[REPORT] with ≥1 target present — antigen_NA:{int(antigen_na_with_targets.sum())}")
+#Run CDR3 grouping and antigen deduplication in R via script
+df1.to_csv( '/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_cdr3_annotated1.csv', index=False)
+#read df1
+df1= pd.read_csv(
+    '/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_cdr3_annotated1.csv')
+R_SCRIPT_PATH = Path("/doctorai/niccoloc/group_filter_agab.R")
+subprocess.run(["Rscript",
+                # str(R_SCRIPT_PATH),
+                "/doctorai/niccoloc/group_filter_agab.R",
+                '/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_cdr3_annotated1.csv',
+                "/doctorai/niccoloc/MS_db/agab_cdr3_annotated_DEDUP.parquet",
+                "true"], check=True)
 
-    export_cols = [c for c in [
-        "dataset", "heavy_sequence", "light_sequence", "scfv",
-        "affinity_type", "affinity", "processed_measurement",
-        "cdr3_aa", "cdr3_aa_len", "cdr3_filtered",
-        "metadata",
-        "target_name", "target_pdb", "target_uniprot",
-        "antigen", "origin_class",
-    ] if c in df.columns]
+df= pd.read_parquet(
+    '/doctorai/niccoloc/MS_db/agab_cdr3_annotated_DEDUP.parquet',
+ 
+                engine="pyarrow",
+                )
 
-    unresolved_df = df.loc[antigen_na_with_targets, export_cols].copy()
-    unresolved_path = OUT_DIR / "agab_cdr3_annotated1_targets_present_antigen_NA.csv"
-    unresolved_df.to_csv(unresolved_path, index=False)
-    print(f"[EXPORT] Unresolved (targets present, antigen NA): {unresolved_path}")
+cols_to_drop = ['support', 'coherence', 'final_score', 'which_ag_clean',
+       'perc_ag_clean', 'target_ag_clean', 'perc_identical_target', 'keep',
+       'bow_terms']
 
-    # ---- step3.5: disambiguate antigen names by origin_class ----
-    print("[INFO] Disambiguating antigens by origin_class (step3.5)...")
-
-    if "antigen" not in df.columns or "origin_class" not in df.columns:
-        raise ValueError("Columns 'antigen' and 'origin_class' must be present.")
-
-    antigen_series = df["antigen"].astype("string")
-    origin_series = df["origin_class"].astype("string")
-
-    n_origins_per_antigen = (
-        df
-        .dropna(subset=["antigen", "origin_class"])
-        .groupby("antigen")["origin_class"]
-        .nunique()
+df.drop(columns=cols_to_drop, inplace=True, errors='ignore')
+print(f"[INFO] Step2 output written to: {STEP2_OUT}")
+df.columns 
+total_rows= len(df)
+# ---- origin_class (former step3, no antigen) ----
+print("[INFO] Computing origin_class...")
+origins = []
+for i, row in df.iterrows():
+    origin = classify_origin_row(
+        target_uniprot=row.get("target_uniprot", ""),
+        target_pdb=row.get("target_pdb", ""),
+        target_name=row.get("target_name", ""),
     )
-    ambiguous_antigens = set(n_origins_per_antigen[n_origins_per_antigen > 1].index)
-    print(f"[INFO] Antigens with >1 origin_class: {len(ambiguous_antigens)}")
+    origins.append(origin)
+    if (i + 1) % 1000 == 0:
+        sys.stdout.write(f"\r[origin] {i+1}/{total_rows} rows processed")
+        sys.stdout.flush()
+if total_rows >= 1000:
+    print()
 
-    def disambiguate(row):
-        a = row["antigen"]
-        o = row["origin_class"]
-        if pd.isna(a):
-            return a
-        if a not in ambiguous_antigens:
-            return a
-        if pd.isna(o):
-            return a
-        return f"{a} ({o})"
+df["origin_class"] = origins
+STEP3_OUT = "/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_cdr3_annotated2_with_origin_class.csv"
+df.to_csv(STEP3_OUT, index=False)
+print(f"[INFO] Step3 output written to: {STEP3_OUT}")
 
-    df["antigen_split"] = df.apply(disambiguate, axis=1)
-    df["antigen"] = df["antigen_split"]
-    df = df.drop(columns=["antigen_split"])
+# ---- unresolved antigen report (optional, like step2) ----
+name_empty = df["target_name"].apply(is_empty_or_origin)
+pdb_empty = df["target_pdb"].apply(is_empty_or_origin)
+uniprot_empty = df["target_uniprot"].apply(is_empty_or_origin)
+all_empty = name_empty & pdb_empty & uniprot_empty
+any_present = ~all_empty
+antigen_na_with_targets = df["antigen"].isna() & any_present
 
-    df.to_csv(STEP35_OUT, index=False)
-    print(f"[INFO] Step3.5 final output written to: {STEP35_OUT}")
+print(f"[REPORT] empty targets — name:{int(name_empty.sum())} "
+        f"pdb:{int(pdb_empty.sum())} uniprot:{int(uniprot_empty.sum())} "
+        f"| all_three_empty:{int(all_empty.sum())}")
+print(f"[REPORT] with ≥1 target present — antigen_NA:{int(antigen_na_with_targets.sum())}")
 
-    elapsed = time.time() - start_ts
-    print(f"[DONE] Total elapsed: {human_time(elapsed)} | rows: {total_rows}")
+export_cols = [c for c in [
+    "dataset", "heavy_sequence", "light_sequence", "scfv",
+    "affinity_type", "affinity", "processed_measurement",
+    "cdr3_aa", "cdr3_aa_len", "cdr3_filtered",
+    "metadata",
+    "target_name", "target_pdb", "target_uniprot",
+    "antigen", "origin_class",
+] if c in df.columns]
 
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\n[INTERRUPTED]", file=sys.stderr)
-        sys.exit(130)
+unresolved_df = df.loc[antigen_na_with_targets, export_cols].copy()
+unresolved_path = OUT_DIR / "agab_cdr3_annotated1_targets_present_antigen_NA.csv"
+unresolved_df.to_csv(unresolved_path, index=False)
+print(f"[EXPORT] Unresolved (targets present, antigen NA): {unresolved_path}")
+
+# ---- step3.5: disambiguate antigen names by origin_class ----
+print("[INFO] Disambiguating antigens by origin_class (step3.5)...")
+
+if "antigen" not in df.columns or "origin_class" not in df.columns:
+    raise ValueError("Columns 'antigen' and 'origin_class' must be present.")
+
+antigen_series = df["antigen"].astype("string")
+origin_series = df["origin_class"].astype("string")
+
+n_origins_per_antigen = (
+    df
+    .dropna(subset=["antigen", "origin_class"])
+    .groupby("antigen")["origin_class"]
+    .nunique()
+)
+ambiguous_antigens = set(n_origins_per_antigen[n_origins_per_antigen > 1].index)
+print(f"[INFO] Antigens with >1 origin_class: {len(ambiguous_antigens)}")
+
+def disambiguate(row):
+    a = row["antigen"]
+    o = row["origin_class"]
+    if pd.isna(a):
+        return a
+    if a not in ambiguous_antigens:
+        return a
+    if pd.isna(o):
+        return a
+    return f"{a} ({o})"
+
+df["antigen_split"] = df.apply(disambiguate, axis=1)
+df["antigen"] = df["antigen_split"]
+df = df.drop(columns=["antigen_split"])
+STEP35_OUT= "/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/agab_cdr3_annotated3_disambiguated.csv"
+df.to_csv(STEP35_OUT, index=False)
+print(f"[INFO] Step3.5 final output written to: {STEP35_OUT}")
+
+elapsed = time.time() - start_ts
+print(f"[DONE] Total elapsed: {human_time(elapsed)} | rows: {total_rows}")
+
+# if __name__ == "__main__":
+#     try:
+#         main()
+#     except KeyboardInterrupt:
+#         print("\n[INTERRUPTED]", file=sys.stderr)
+#         sys.exit(130)
 

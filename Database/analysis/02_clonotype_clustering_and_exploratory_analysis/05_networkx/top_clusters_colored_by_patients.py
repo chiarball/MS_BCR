@@ -20,6 +20,7 @@ patient_col = 'subject_number'
 study_col   = 'study'            # optional; if missing, treated as 'Unknown'
 top_n       = 106
 alphabet    = list("ACDEFGHIKLMNPQRSTVWY")  # AA alphabet for Hamming-1
+base_folder = '/doctorai/niccoloc/MS_db/MS_BCR'
 
 # ===================== 1) Load & patient-only selection ======================
 # NOTE: This block is exactly your requested selection logic
@@ -296,7 +297,7 @@ ax.set_aspect('equal', adjustable='box')
 plt.axis('off')
 plt.tight_layout()
 plt.show()
-
+plt.savefig(f"{base_folder}/top_clusters_network_by_patients.png", dpi=300, bbox_inches="tight")
 
 # --- Legend for node coloring (subjects) ---
 from matplotlib.lines import Line2D

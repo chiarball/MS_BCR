@@ -9,7 +9,7 @@ suppressPackageStartupMessages({
 })
 
 # --- INPUT BASE DIRECTORY (clean version) ---
-base_dir <- "/doctorai/chiarba/AbAg_database/aggregating_test"
+base_dir <- "/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test"
 
 # --- INPUT FILES (from step 3 / Python Fisher) ---
 files <- c(
@@ -20,7 +20,7 @@ files <- c(
 
 # --- READ EACH LEVEL AND ADD 'lev' COLUMN ---
 dfs <- lapply(names(files), function(nm) {
-  df <- read_csv(files[[nm]], show_col_types = FALSE, guess_max = 100000)
+  df <- fread(files[[nm]])
   df$lev <- nm
   df
 })
@@ -44,7 +44,7 @@ sig <- all_levels %>%
 
 # --- OUTPUT (clean, non-overwriting name) ---
 out_path <- file.path(base_dir, "fisher_results_annot2_antigen_all_levels_sig.csv")
-write_csv(sig, out_path)
+fwrite(sig, out_path)
 
 # --- SUMMARY ON STDOUT ---
 cat(
@@ -60,7 +60,7 @@ suppressPackageStartupMessages({
   library(stringr)
 })
 
-sig_ms <- fread("/doctorai/chiarba/AbAg_database/aggregating_test/fisher_results_annot2_antigen_all_levels_sig.csv")
+sig_ms <- fread("/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/fisher_results_annot2_antigen_all_levels_sig.csv")
 
 # Ensure we have a lowercased version of group
 sig_ms <- sig_ms %>%
@@ -173,64 +173,129 @@ table(sig_ms$interest_MS)
 suppressPackageStartupMessages({
   library(dplyr)
   library(readr)
-  library(ggplot2)
+  library(ggplot2, lib.loc ="/doctorai/niccoloc/libR2")
+  library(labeling, lib.loc ="/doctorai/niccoloc/libR2")
+  library(farver, lib.loc ="/doctorai/niccoloc/libR2")
+  library(ggrepel, lib.loc ="/doctorai/niccoloc/libR2")
   library(viridis)
 })
 
 
+origin_manual <- tibble::tribble(
+  ~group_lc, ~origin_class,
+  "lysozyme c", "human",
+  "spike glycoprotein", "viral",
+  "immunoglobulin kappa constant", "human",
+  "superfamily_necrosis_factor_member_tumor_hepatitis_cellular_ligand", "human",
+  "tissue factor", "human",
+  "interleukin_subunit_beta_integrin_alpha", "human",
+  "interleukin_subunit_alpha_granulocyte_stimulating_macrophage_colony_factor", "human",
+  "lymphocyte_antigen_binding_lectin_sialic_acid_cd19_like", "human",
+  "interleukin_necrosis_factor_tumor_17a", "human",
+  "ubiquitin carboxyl-terminal hydrolase 30", "human",
+  "beta-klotho", "human",
+  "immunoglobulin iota chain", "human",
+  "angiopoietin_endothelial_vascular_factor_growth_form_long", "human",
+  "genome polyprotein", "viral",
+  "cytotoxic t-lymphocyte protein 4", "human",
+  "mesothelin", "human",
+  "hemagglutinin", "viral",
+  "inactive tyrosine-protein kinase transmembrane receptor ror1", "human",
+  "integrin_cathepsin_alpha_beta", "human",
+  "epstein-barr nuclear antigen 1", "viral",
+  "cd27 antigen", "human",
+  "thrombopoietin", "human",
+  "c-x-c chemokine receptor type 2", "human",
+  "major prion protein", "human",
+  "neurogenic locus notch homolog protein 1", "human",
+  "coagulation_factor_prothrombin_viii", "human",
+  "interferon gamma", "human",
+  "programmed cell death 1 ligand 1", "human",
+  "transmembrane protease serine 2", "human"
+)
+
+
 ### Plotting
-sig_ms <- fread("/doctorai/chiarba/AbAg_database/aggregating_test/fisher_results_annot2_antigen_all_levels_sig.csv")
+
+# fwrite(df_plot, "/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/old_df_plot_result.csv")  
+# df_old= fread("/doctorai/niccoloc/MS_db/MS_BCR/aggregating_test/old_df_plot_result.csv")
+
+df_plot <- df_old
 
 df_plot <- sig_ms %>%
   mutate(
     lev = factor(lev),  # make sure lev is a factor
-    origin_class = factor(
-      origin_class,
-      levels = c("human", "viral", "bacteria", "other")
+    origin_class= str_remove(origin_class, "\\|other"),
+    origin_class= ifelse(
+      str_detect(origin_class, "\\|viral"), "viral", origin_class
+    ),
+    # origin_class = factor(
+    #   origin_class,
+    #   levels = c("human", "viral", "bacteria", "other")
+    # )
+  )  %>%
+  # ensure group_lc exists and is clean
+  mutate(group_lc = tolower(trimws(group))) %>%
+  left_join(origin_manual, by = "group_lc") %>% 
+  mutate(
+    origin_class = ifelse(
+      is.na(origin_class.x),
+      origin_class.y,
+      origin_class.x
     )
-  )
+  ) %>% select(-origin_class.x, -origin_class.y) %>% 
+  mutate(
+    lev = factor(
+      lev,
+      levels = c("lev0", "lev1", "lev2"),
+      labels = c(
+        "0",
+        "1",
+        "2"
+      ) ) ) 
+
+
+df_plot %>% filter(is.na(origin_class)) %>% pull(group) %>% unique()
 
 df_hv   <- df_plot %>% filter(origin_class %in% c("human"))
 df_rest <- df_plot %>% filter(origin_class %in% c("viral","bacteria", "other"))
 
-p <- ggplot(df_plot, aes(x = origin_class, y = std_residual)) +
+p <- ggplot(df_plot  , aes(x = origin_class, y = std_residual)) +
   geom_boxplot(
     width = 0.65, outlier.shape = NA,
     fill = NA, color = "black", linewidth = 0.5
   ) +
-
-  # jitter normale per categorie meno dense
+  
+  
   geom_point(
-    data = df_rest,
-    aes(color = origin_class),
+    data = df_plot %>% filter(interest_MS == "none"),
+    aes(color = lev),
     position = position_jitter(width = 0.22, height = 0.12, seed = 123),
-    size = 0.9,
-    alpha = 0.70
+    size = 1.2,
+    # star for ebv the rest normal
+    
+    alpha = 0.70,
+    # show.legend = FALSE
   ) +
-
-  # jitter più ampio per human/viral
+  # star for ebv the rest normal
   geom_point(
-    data = df_hv,
-    aes(color = origin_class),
-    position = position_jitter(width = 0.45, height = 0.22, seed = 456),
-    size = 0.7,
-    alpha = 0.5
+    data = df_plot %>% filter(interest_MS == "EBV"),
+    aes(  shape = interest_MS),
+    color= "52d8da",
+ 
+    position = position_jitter(width = 0.22, height = 0.12, seed = 123),
+    size = 5,
+    # star for ebv the rest normal
+    
+    alpha = 1.2 
   ) +
-
-  scale_color_manual(
-  values = c(
-    human    = "#E673B5",
-    viral    = "#7A6BBE",
-    bacteria = "#1a9850",
-    other    = "#F4C133"
-  ),
-  labels = c(
-    human    = "HUMAN",
-    viral    = "VIRUS",
-    bacteria = "BACTERIA",
-    other    = "OTHER"
-  )
-)+
+  scale_shape_manual(
+    name="",
+    values = c(
+      "EBV" = "★"        # This is the 'star' (asterisk)
+ 
+     ))+
+ 
 
   scale_x_discrete(labels = c(
     human    = "HUMAN",
@@ -238,44 +303,44 @@ p <- ggplot(df_plot, aes(x = origin_class, y = std_residual)) +
     bacteria = "BACTERIA",
     other    = "OTHER"
   )) +
-
+  
   labs(
     x = NULL,
     y = "Standardized residual (antigen enrichment)",
-    color = "Origin"
+    color = "Levensthein\ndistance"
   ) +
-
+  
   theme_bw(base_size = 12) +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
     strip.background = element_rect(fill = "white", color = "black"),
     panel.grid.minor = element_blank()
   ) +
-
+  
   scale_y_log10() +
-
-  facet_wrap(
-    ~ lev,
-    nrow = 1,
-    labeller = labeller(
-      lev = c(
-        "lev0" = "Levenshtein distance = 0",
-        "lev1" = "Levenshtein distance = 1",
-        "lev2" = "Levenshtein distance = 2"
-      )
-    )
-  ) +
-
-  # mediane
-  stat_summary(
-    fun = median,
-    geom = "text",
-    aes(label = sprintf("%.2f", after_stat(y))),
-    size = 3.0,
-    color = "white",
-    fontface = "bold",
-    vjust = -0.6
-  ) +
+  
+  # facet_wrap(
+  #   ~ lev,
+  #   nrow = 1,
+  #   labeller = labeller(
+  #     lev = c(
+  #       "lev0" = "Levenshtein distance = 0",
+  #       "lev1" = "Levenshtein distance = 1",
+  #       "lev2" = "Levenshtein distance = 2"
+  #     )
+  #   )
+  # ) +
+  
+  # # mediane
+  # stat_summary(
+  #   fun = median,
+  #   geom = "text",
+  #   aes(label = sprintf("%.2f", after_stat(y))),
+  #   size = 3.0,
+  #   # color = "white",
+  #   fontface = "bold",
+  #   vjust = -0.6
+  # ) +
   stat_summary(
     fun = median,
     geom = "text",
@@ -284,12 +349,18 @@ p <- ggplot(df_plot, aes(x = origin_class, y = std_residual)) +
     color = "black",
     fontface = "bold",
     vjust = -0.6
-  )
+  )  
+
+p
 
 grDevices::svg(
-  filename = "/doctorai/chiarba/analysis/1_plot_svg/agab.svg",
+  filename = "/doctorai/niccoloc/agab.svg",
   width    = 9,
   height   = 7
 )
 print(p)
+
 dev.off()
+
+
+table(df_plot$origin_class)
