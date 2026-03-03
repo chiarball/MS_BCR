@@ -180,7 +180,7 @@ suppressPackageStartupMessages({
   library(viridis)
 })
 
-
+#manual annotation for crashed entries
 origin_manual <- tibble::tribble(
   ~group_lc, ~origin_class,
   "lysozyme c", "human",

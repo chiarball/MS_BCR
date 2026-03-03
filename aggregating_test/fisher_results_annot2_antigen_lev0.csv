@@ -1,0 +1,1903 @@
+group,a_in_data_in_group,b_in_data_not_group,c_not_data_in_group,d_not_data_not_group,p_raw,std_residual,p_adj,origin_class
+sars-cov2_wt,5,5,6355,555681,4.452510979418105e-08,14.610353954691943,8.468675882853237e-05,viral
+Lysozyme C,2,8,244,561792,8.56574586012629e-06,30.17142578382857,0.008146024312980104,human|other
+sars-cov2_omicron,3,7,3591,558445,3.031454069479567e-05,11.648176917579713,0.019219418800500456,viral
+hepatitis_cellular_antigen_virus_cd44,1,9,6,562030,0.00012453898321332238,89.59615783163929,0.0541419999036211,other
+lymphocyte_antigen_cd20,1,9,7,562029,0.00014232912698112802,83.80811466507966,0.0541419999036211,other
+Glycoprotein,1,9,84,561952,0.0015113150216742677,25.67768573179101,0.4790868618707429,viral
+Spike glycoprotein,1,9,1055,560981,0.018630585490405725,7.165208567312232,1.0,human|viral
+tyrosine_kinase_mer,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+tyrosine_kinase_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+tyrosine_insulin_factor_growth_kinase_erbb_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+tumorigenicity_suppressor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+trophinin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transthyretin_cannabinoid,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+4n9g,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+4jlr,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+4g6f,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+3rjq,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+3qwo,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+3lhp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+3lh2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+3hr5,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+3h3p,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+2y5t,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+26S proteasome regulatory subunit RPN8,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+24 kDa ookinete surface protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"1-phosphatidylinositol 4,5-bisphosphate phosphodiesterase gamma-2",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+ubiquitin_ligase_catenin_rnf43_znrf3_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6uym,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6s5a,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6s3d,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6mtq,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6mto,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6lz2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6d2p,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6cxg,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6azz,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"60S acidic ribosomal protein P2, putative",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6 kDa early secretory antigenic target,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+5vjq,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5vjo,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5ukr,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7ams,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7amr,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7amq,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7amp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7a50,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7a4y,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7a48,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+73 kDa paraflagellar rod protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6zqk,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6ywc,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6xxv,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6xsn,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6wit,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6was,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+6vtw,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+A0A8F0ZU44,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+A0A6B9WHD3,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+8vdl,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+8v2e,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+8u08,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+8u03,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+8tzw,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+8tfn,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7xnf,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7sa6,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7ocj,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+7cz0,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"Actin, alpha skeletal muscle",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Acetylcholine receptor subunit epsilon,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Acetylcholine receptor subunit delta,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+ATPase GET3,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+ATP-dependent translocase ABCB1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+ATP-dependent lipid A-core flippase,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+ATP-dependent DNA helicase Q5,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+ALK and LTK ligand 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"ABC superfamily ATP binding cassette transporter, binding protein",0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+A8UCQ5,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+A0A8I6AEJ4,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Agglutinin-like protein 3,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Aegyptin-like protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Adiponectin receptor protein 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Adiponectin receptor protein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Adhesion G protein-coupled receptor L3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Adenylate cyclase,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Acyl carrier protein AcpXL,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Activin receptor type-2B,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Activin receptor type-2A,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Activin receptor type-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Actin-related protein 4,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Alpha-ketoglutarate-dependent dioxygenase alkB homolog 3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Alpha-elapitoxin-Dpp2d,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Alpha-bungarotoxin isoform V31,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Alpha-bungarotoxin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Alpha-1-antitrypsin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Angiopoietin-2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Angiopoietin-1 receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Angiogenin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Alpha-mammal toxin AaH2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Aquaporin-5,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Apoptosis regulator Bcl-2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Apolipoprotein L2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Apolipoprotein B-100,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Antitoxin MazE,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Antigen-presenting glycoprotein CD1d1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Anti-HIV-1 reverse transcriptase single-chain variable,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Annexin A4,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+B-cell antigen receptor complex-associated protein beta chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Atypical chemokine receptor 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Astacin-like metalloendopeptidase,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Aspartate--tRNA ligase, cytoplasmic",0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Asialoglycoprotein receptor 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Arginine--tRNA ligase, cytoplasmic",0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Beta-galactosidase,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Beta-arrestin-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Beta-2-glycoprotein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Beta-1,4-endoglucanase",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Bcl-2 homologous antagonist/killer,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+BDNF/NT-3 growth factors receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Blood group Rh(CE) polypeptide,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Biofilm associated protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Bifunctional arginine demethylase and lysyl-hydroxylase JMJD6,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Beta-toxin Cl13,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Beta-theraphotoxin-Cm1a,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Beta-lactoglobulin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+CAP225 Scaffolded V1V2,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+CAAX prenyl protease 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+C-C motif chemokine 17,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+C-C chemokine receptor type 5,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"C-1-tetrahydrofolate synthase, cytoplasmic",0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Butyrophilin subfamily 3 member A1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Bone morphogenetic protein receptor type-1A,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Calmodulin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Calcitonin gene-related peptide type 1 receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cadherin-3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cadherin-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cathepsin B-like cysteine proteinase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Catalase-peroxidase,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Cassiicolin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Carbonic anhydrase 12,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Chorionic somatomammotropin hormone 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Chitinase-3-like protein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Chitinase, putative",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Chaperonin GroEL 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Chaperonin GroEL,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Chaperone protein HtpG,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Complement component C6,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Complement C2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Collagen alpha-3(IV) chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Colicin-E7 immunity protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Cobalt/magnesium transport protein CorA,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Coagulation factor X,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Clusterin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cyclin-dependent kinase 7,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cyclin-dependent kinase 4,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cyclin-T1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cyclic phosphodiesterase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Cullin-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Corticosteroid-binding globulin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Complement factor H,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Complement decay-accelerating factor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+DNA dC->dU-editing enzyme APOBEC-3G,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cytokine receptor common subunit gamma,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cytokine receptor common subunit beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Cytochrome c oxidase subunit 1-beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+"Cytochrome b-c1 complex subunit 1, mitochondrial",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"Cysteine-rich small secreted protein CSS, putative",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Dipeptide and tripeptide permease B,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Dipeptidase 3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Dihydropyrimidinase-related protein 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Dihydropyrimidinase-related protein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Dihydrolipoyllysine-residue succinyltransferase component of 2-oxoglutarate dehydrogenase complex, mitochondrial",0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Desmoglein-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+DNA-directed RNA polymerase subunit beta',0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+DNA-directed RNA polymerase II subunit RPB1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Elongation factor 1-alpha 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+ER lumen protein-retaining receptor 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+ENVELOPE GLYCOPROTEIN GP120 of HIV-1 clade C,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+E3 ubiquitin-protein ligase RNF31,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+E1C3A0,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Dynactin subunit 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Discoidin-1 subunit A,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Discoidin domain-containing receptor 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Envelope glycoprotein L,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Env polyprotein,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Energy-coupling factor transporter ATP-binding protein EcfA1,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Endoglucanase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Exopolygalacturonase clone GBGE184,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Erythronolide synthase EryA3,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Erythronolide synthase EryA2,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Erythrocyte binding antigen-175,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Epithelial discoidin domain-containing receptor 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Epididymal-specific lipocalin-6,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Ezrin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Exportin-4,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Exotoxin A,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Follicle-stimulating hormone receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Flap endonuclease 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Fibroblast growth factor receptor 4,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Fibroblast growth factor receptor 3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Fibroblast growth factor receptor 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Fibrinogen gamma chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Fibrinogen beta chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+GMP synthase [glutamine-hydrolyzing],0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+G-protein coupled receptor homolog US28,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Furin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Fructose-bisphosphate aldolase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Frizzled-8,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Frizzled-5,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Frizzled-3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Frizzled-2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Galectin-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Galactose/N-acetyl-D-galactosamine lectin heavy subunit 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Gag protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Gag polyprotein,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+GTPase NRas,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Glucose oxidase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Glial fibrillary acidic protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human|other
+Germin-like protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+General control transcription factor GCN4,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Gamma-synuclein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Glycoprotein hormones alpha chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Glycoprotein 42,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Glycine transporter domain-containing protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Glyceraldehyde-3-phosphate dehydrogenase,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Gluten,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Glutathione S-transferase P,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Glutamate carboxypeptidase 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+H(+)/Cl(-) exchange transporter ClcA,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Guanine nucleotide-binding protein G(T) subunit gamma-T1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"GspD, hypothetical type II secretion protein",0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Growth factor receptor-bound protein 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Gremlin-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Golgin subfamily B member 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Golgin subfamily A member 5,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Glycosylated lysosomal membrane protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Hexon protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Hemoglobin subunit gamma-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Hyaluronidase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Histone H2B type 1-C/E/F/G/I,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+High affinity immunoglobulin gamma Fc receptor I,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Immunoglobulin heavy variable 1-69D,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Imipenem-hydrolyzing beta-lactamase,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Ighg protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"Ig kappa chain C region, A allele",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+IGL@ protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Integrin alpha-5,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Integrin alpha-3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Integrin alpha-11,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Insulin-2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Inosine-5'-monophosphate dehydrogenase,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Initiator protein NS1,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Inducible T-cell costimulator,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Induced myeloid leukemia cell differentiation protein Mcl-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Immunoglobulin kappa variable 5-48,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Interleukin-1 alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interferon alpha-6,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Interferon alpha-5,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Interferon alpha-4,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Interferon alpha-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Integrin alpha-6,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-18 receptor 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-17 receptor C,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-17 receptor B,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Interleukin-15,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-13 receptor subunit alpha-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-12 receptor subunit beta-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-10,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-1 receptor-like 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-1 family member 10,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Interleukin-5,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-4,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Interleukin-3 receptor subunit alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Interleukin-22,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Keratin, type I cytoskeletal 17",0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Kallikrein-5,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Isocitrate lyase 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Iron-regulated surface determinant protein H,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Iron-regulated surface determinant protein B,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Iron ABC transporter substrate-binding lipoprotein MtsA,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Intimin,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Large ribosomal subunit protein P2-A,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+L-lactate dehydrogenase (cytochrome),0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Kinetochore protein NDC80 homolog,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Kinesin light chain 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Killer cell immunoglobulin-like receptor 2DL3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Keratin, type II cytoskeletal 8",0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Keratin, type I cytoskeletal 18",0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Lipoprotein GNA1870,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Lipoprotein,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Lipopolysaccharide export system protein LptC,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Lipopolysaccharide export system protein LptA,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Lipopolysaccharide export system permease protein LptG,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Lipopolysaccharide export system permease protein LptF,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Lipopolysaccharide export system ATP-binding protein LptB,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Lipopolysaccharide assembly protein B,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Lipopolysaccharide assembly protein A,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+"Lipoamide acyltransferase component of branched-chain alpha-keto acid dehydrogenase complex, mitochondrial",0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Leucotoxin LukD,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Macrophage colony-stimulating factor 1 receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+MAb 6H10 light chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+MAb 44B1 light chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Lysosome-associated membrane glycoprotein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+LysM type receptor kinase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Ly6/PLAUR domain-containing protein 3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Long neurotoxin 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Long neurotoxin 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Lipoprotein lipase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Major vault protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Major pilin backbone protein T-antigen,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Major capsid protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Major allergen I polypeptide chain 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Merozoite surface protein P12,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Merozoite surface protein 4,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Melanophilin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Melanoma-associated antigen B1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Mediator of RNA polymerase II transcription subunit 23,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Matrix protein VP40,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+"Manganese ABC transporter, ATP-binding protein",0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Mucin-16,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Monoclonal 11D8 anti-human butyrylcholinesterase (BChE) light chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Monellin chain B,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Monellin chain A,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Mite allergen Der p 7,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Minor capsid protein VP1,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+"Methionine--tRNA ligase, cytoplasmic",0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Metalloproteinase inhibitor 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Myosin-7,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Myosin-2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Myosin head,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Myeloid-derived growth factor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Myeloid cell surface antigen CD33,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Myeloblastin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Myelin basic protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Mycobactin import ATP-binding/permease protein IrtA,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Neuronal migration protein doublecortin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Neisserial heparin binding antigen,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Nectin-4,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Na(+)/H(+) antiporter NhaA,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+NADPH oxidase 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+N protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Nucleoporin NUP35,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Nucleoporin NIC96,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Nucleoplasmin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Nuclear factor NF-kappa-B p100 subunit,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Non-structural protein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Nitric oxide reductase subunit B,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Nitrate/nitrite antiporter NarK,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Neutrophil gelatinase-associated lipocalin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Neurotoxin-1'',0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Outer membrane protein P1,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Ookinete surface protein P25,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Nucleosome assembly protein 1-like 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Peripherin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Peptide YY,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Parathyroid hormone-related protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Parathyroid hormone,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Paraflagellar rod protein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+PC4 and SFRS1-interacting protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Oxalate:formate antiporter,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Outer surface protein C,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Outer surface protein B,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Phosphocarrier protein HPr,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Phospho-N-acetylmuramoyl-pentapeptide-transferase,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+"Phosphatidylinositol-3,4,5-trisphosphate 3-phosphatase",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Phage repressor protein CI,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Pesticidal crystal protein Cry2Aa,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Pesticidal crystal protein Cry1Fb,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Pollen allergen Lol p 2-A,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Polcalcin Phl p 7,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Platelet-derived growth factor subunit B,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Plasminogen-binding group A streptococcal M-like protein PAM,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Plasma kallikrein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+PilS cassette,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Phospholipase C,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Phospholipase A2 homolog crotoxin acid subunit CA,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Polysialic acid transport protein KpsD,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Polyprotein,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Polycalin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Prostaglandin G/H synthase 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Properdin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Prominin-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Proliferating cell nuclear antigen,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Proepiregulin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Procathepsin L,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Pro-neuropeptide Y,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Pro-interleukin-16,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Protein TOC75, chloroplastic",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Protein Mdm4,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Protein L,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Protein EDS1L,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Protein E6,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Protachykinin-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Prostaglandin-H2 D-isomerase,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+RPA-related protein RADX,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+RNA-editing complex protein MP81,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+RNA-editing complex protein MP42,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+RNA polymerase sigma factor SigA,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+R2 protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Protein smoothened,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"Protein TOC75-3, chloroplastic",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Reticulon-4 receptor-like 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Reticulon-4 receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Reticulon-4,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Receptor-type tyrosine-protein phosphatase C,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Receptor binding protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+RecQ-like DNA helicase BLM,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Ras-related protein M-Ras,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Ras-like protein rasD,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Ras-like protein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+SUMO-conjugating enzyme UBC9,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+SMUG S protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+SAG1 protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Rhoptry protein ROP1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Rhoptry protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Rhoptry 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Rhombotin-2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Rho-related GTP-binding protein RhoB,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Sm29,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Sillucin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Serum resistance associated; VSG protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Serine protease inhibitor A6,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Serine protease hepsin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Secretin XcpQ,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Secreted cathepsin L 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Succinate receptor 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Subtilisin-like protease 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Substance-P receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Stromal cell-derived factor 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Streptolysin O,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Sonic hedgehog protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Son of sevenless homolog 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Sodium-dependent dopamine transporter,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+T-cell surface antigen CD2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Synaptojanin-1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Surface protein P12p,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Surface protein P113,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Superoxide dismutase [Fe],0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Thermonuclease,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Thaumatin II,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Thaumatin I,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"Terminase, large subunit",0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Telomerase reverse transcriptase,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+"Taste receptor, type 1, member 2a",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Tapasin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+THO complex subunit 4,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+T-cell-specific surface glycoprotein CD28,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Torsin-1A-interacting protein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Torsin-1A,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Toll-like receptor 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Thy-1 membrane glycoprotein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Thrombopoietin receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Transmembrane glycoprotein,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Transgelin,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Transforming protein RhoA,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Transferrin receptor protein 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Transcriptional regulator Myc-A,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Transcriptional activator GLI3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Transcription intermediary factor 1-beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Tox1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Type III secretion protein PcrV,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Tudor domain-containing protein 3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Tudor and KH domain-containing protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Tubulin alpha-1B chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Tryptophan synthase beta chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Triosephosphate isomerase,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Tribbles homolog 2,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Triacylglyceride transporter MHAS_02168/C731_2106,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Trem-like transcript 1 protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Uncharacterized protein DKFZp686I04196,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Uncharacterized protein DKFZp686C11235,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Ubiquitin-like protein SMT3,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Ubiquitin-conjugating enzyme E2 J1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+UBX domain-containing protein 2B,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Tyrosine-protein kinase HCK,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Type-1 angiotensin II receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Type III secretion system protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Variable surface glycoprotein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Vanadium chloroperoxidase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+V-set domain-containing T-cell activation inhibitor 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+V-set and immunoglobulin domain-containing protein 4,0,10,1,562035,1.0,-0.004218114061106045,1.0,human|other
+Urokinase plasminogen activator surface receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Uncharacterized protein MJ0609,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Viral attachment protein sigma 1,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+Very low-density lipoprotein receptor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+acetylglucosaminide_fucosyltransferase_podocalyxin_galactosyl_alpha_fut3,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+acetylglucosaminide_fucosyltransferase_galactosyl_region_alpha_chain_gamma_fut3,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+acetylgalactosaminyltransferase_polypeptide_mucin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+acetylgalactosaminyltransferase_polypeptide_chaperone_specific_c1galt1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+acetylgalactosaminyltransferase_acetylneuraminate_acetyltransferase_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Zinc metalloprotease,0,10,1,562035,1.0,-0.004218114061106045,1.0,bacteria
+Wilms tumor protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Voltage-sensor containing phosphatase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+Voltage-gated delayed rectifier potassium channel KCNH1,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+Virion infectivity factor,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+adhesion_ceacam5_ceacam6,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adhesion_ceacam1_integral_membrane_ceacam6_like_nkg2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adhesion_antigen_ceacam5_ceacam6_mucin_5ac_a33,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+addressin_adhesion_mucosal,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+acyltransferase_phospholipase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+activin_type_differentiation_factor_growth,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+activin_homolog_delta_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+activating_regulatory_amyloid_binding_subunit_enzyme_nedd8,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+acetylneuraminate_sialyltransferase_galactosamide_alpha_beta_cmp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+albumin_afamin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+affinity_factor_growth_nerve_high,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adrenomedullin_pro,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adrenergic_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adp_ribose_poly_polymerase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adp_hydrolase_affinity_cyclase_epsilon_cyclic_gamma_high,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adhesion_tyrosine,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adhesion_selectin_endothelial_platelet_vascular,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adhesion_neural,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adhesion_coupled,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+adhesion_ceacam5_ceacam6_factor_ligand_member_13b,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+angiopoietin_related_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+angiopoietin_neutrophil_elastase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+anaphylatoxin_chemotactic_c5a_superfamily_complement_necrosis_factor_member,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+alpha_acetylgalactosaminyltransferase_acetylneuraminide_sialyltransferase_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+allergen_antigen_major_asp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_like_cd5,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_cd99,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_cd226,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_cd166,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_associated_melanoma_cancer_testis,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_associated_factor_kinase_cd27_cd70_lck_tnf,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+anterior_gradient_homolog,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+annexin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+apoptosis_inhibitor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+apoptosis_effector_related_p53_pmp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+apolipoprotein_neutrophil_elastase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+apolipoprotein_lipoprotein_oxidized_density_100_low,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+apolipoprotein_lipase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+apolipoprotein_iii,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_stromal_marrow_large_bone_fcrn_igg_p51,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_stromal_marrow_bone,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_natural_killer_cd48_2b4,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+antigen_lymphocyte_leukocyte_cd20_cd47,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+autotaxin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+atp_specificity_dependent_cassette_binding_abcb1_abcg2_broad,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+associated_phosphatase_tyrosine_antigen_complex_chain_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+associated_centriole_spindle_cilia,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+associated_antigen_sperm,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+asialoglycoprotein_stimulating_macrophage_colony_factor_interleukin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+asialoglycoprotein_heparanase_inactive,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+arginase_mitochondrial,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+arginase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cannabinoid,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+calmodulin_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+calcitonin_peptide_related_gene,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+c-Myc-binding protein,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+botulinum_substrate_related_toxin_ras,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+biofilm associated protein (bap) of a. baumannii,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+binding_tax1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+binding_dna_tar,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+bifunctional_biosynthesis_purine_atic,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+band_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cathepsin_prolactin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cathepsin_like_ntrk_slit,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cathepsin_antigen_cd166,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+carrier_family_member_solute,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+carboxypeptidase_prothrombin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+carboxypeptidase_glutamate_prostate_antigen_stem,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+capsid_major_vp1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+chain_cd3_phosphatase_alkaline_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+chemokine_type_interleukin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+chemokine_motif_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+chemokine,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+chaperone_cdc37_hsp90_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cofactor_membrane,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+coagulation_kallikrein_factor_plasma_xii,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+coagulation_integrin_factor_alpha_beta_iib,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+coagulation_factor_immunoglobulin_gamma_heavy,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+coagulation_factor_helicase_box_dna_xii,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+coagulation_endothelial_factor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+coagulation_associated_huntingtin_factor_viii_kda,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+claudin_delta_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+claudin_containing_domain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+clathrin_chain_heavy,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+contactin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+constant_beta_chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+component_amyloid_serum,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+component_amyloid_domain_family_lectin_member_serum_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+complement_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+complement_subcomponent,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+complement_component,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+complement_c1q_necrosis_related_factor_tumor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+complement_anaphylatoxin_mitochondrial_chemotactic_synthase_citrate_c5a,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+collagen_binding_alpha_chain_dna_tar_xxv,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+corticotropin_releasing_factor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+control_cycle_50a,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_sclerostin_domain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_oxidase_copper_amine,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_lymphocyte_discoidin_antigen_domain_cd20_lccl_cub,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_epithelial_discoidin_domain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_domain_plexin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_domain_gipc1_pdz,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_coupled_leucine_repeat_rich_interacting_kinase_nck,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_coiled_domain_coil_grip_rna_polymerase_directed,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_coiled_domain_coil_grip,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+containing_binding_octamer_domain_non_pou,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+decarboxylase_glutamate,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cytotoxicity_triggering_envelope_natural_gp160,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cytoskeleton_associated,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cytoskeletal_keratin_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cytidylyltransferase_phosphatidate_rna_polymerase_directed,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cytidylyltransferase_phosphatidate_immunoglobulin_containing_antigen_domain_a33_set,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cytidylyltransferase_phosphatidate_adhesion_neural,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cystinosin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cripto3_cripto,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cripto,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+coxsackievirus_adenovirus_lymphocyte_antigen_cd19,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+coupled,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+cotransporter_hepatic_sodium_acid_bile,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+differentiation_stimulating_macrophage_antigen_cd72,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+dickkopf_related_hepatocyte_factor_growth,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+determinant_regulated_iron_binding_amino_chain_heavy_acid,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+dependent_inhibitor_cyclin_kinase_activator_alpha_brca2_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+dependent_cyclin_kinase_activator,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+dehydrogenase_lactate,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+decarboxylase_glutamate_rna,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+endosialin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+endopeptidase_folate_prolyl_alpha_fap,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+elongation_protease_factor_serine_delta_htra1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+dipeptidase_cathepsin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+dioxygenase_indoleamine,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+dihydropyrimidinase_deaminase_guanine,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+diguanylate_hemolysin_cyclase_alpha_tpbb,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"env, envelope protein, rd114 envelope glycoprotein",0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+enterotoxin_spike_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+enolase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+endothelin_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+endothelin_peptide_signal_dual_vegf,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+endothelin_melanocyte_pmel_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+endothelial_vascular_factor_growth_phosphodiesterase_specific_cyclic_cgmp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+endothelial_vascular_factor_growth_interleukin_subunit,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+endothelial_vascular_factor_growth_ethanolamine_form_long_gpi,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+endosialin_galectin_binding,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+factor_growth_endothelial_vascular_programmed_death,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+factor_coagulation_tissue_vii,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+factor_coagulation_complement_chain_xiii,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+exotoxin_muc18,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+exchanger_sodium_calcium_potassium,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+erythropoietin_thrombopoietin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+envelope_hepcidin_gp160,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+frizzled_secreted_related,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+fractalkine_chemokine_cx3c,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+folate_alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+finger_354c_zinc,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+fibronectin_uteroglobin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+fibroblast_factor_growth_klotho_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+fibroblast_factor_growth_glucagon_peptide_klotho_beta_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+ferritin_chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+family_like_igf,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+granzyme_integral_membrane_nkg2_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+glypican_chain_cd3,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+glycogen_synthase_kinase_factor_member_alpha_beta_10b,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+glucosyltransferase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+gastrokine,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+gamma_constant_variable,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+galectin_binding,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+fucosyltransferase_galactoside_alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+homolog_oxidase_lysyl,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+homolog_heg,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+homeobox_delta_like_dll,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+hepatoma_derived_factor_growth,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+hepatitis_cellular_virus_superfamily_necrosis_homolog_factor_member,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+heparanase_inactive,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+hemolysin_clumping_factor_alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+hemagglutinin_nucleoprotein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+guanylyl_cyclase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+gtpase_kras_nras,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_alpha_chain_heavy,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_affinity_gamma_adhesion_integrin_alpha_high_iii,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_affinity_epsilon_low,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_affinity_domain_family_lectin_member_gamma_low,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+hydroxylase_beta_containing_aspartate_domain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+hydrophobic_small,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+hormones_lutropin_subunit_alpha_chain_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_glycosylation_advanced_affinity_epsilon_product_end_low,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_containing_domain_set,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_containing_domain_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_constant_gamma_heavy_factor_ligand_member_cd40,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_chemokine_constant_gamma_heavy_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_binding_hemolysin_alpha_sbi,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoreceptor_leukocyte_antigen_domains_cd47_itim_with,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_variable_heavy,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_variable_basigin_lambda,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_variable,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_ubiquitin_affinity_ligase_trim21_gamma_high,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_polymeric_alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_plasminogen_constant_alpha_heavy,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+immunoglobulin_lambda_variable_endothelial_vascular_factor_growth,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interactor_interferon_induced_kda_myc,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+integrin_tyrosine_kinase_alpha_beta_erbb,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+integrin_slc3a2_alpha_amino_chain_heavy_acid_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+integrin_beta_proteasome_subunit_alpha_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+integrin_alpha_talin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_factor_subunit_growth_alpha_nerve,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_factor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_chemokine_motif,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_apoptosis_regulator_subunit_alpha_bcl,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_adp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_accessory_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_17c,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interferon_stimulator_genes,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interferon_stimulator_epidermal_factor_growth_genes_pro,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_lymphopoietin_stromal_subunit_thymic_alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_lymphocyte_cytotoxic_17a,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_lymphocyte_activation_antigen_subunit,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_like_17a,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_interferon_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_integral_membrane_nkg2_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_immunoreceptor_programmed_domains_ligand_alpha_death_itim,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_hepcidin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_hepatitis_cellular_subunit_alpha_virus,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_transferrin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_transcription,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_subunit_oncostatin_nuclear_member_alpha_group_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_subunit_domain_family_lectin_member_alpha_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_subunit_disintegrin_containing_antigen_alpha_cd276_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_subunit_carboxypeptidase_glutamate_alpha_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_rna_polymerase_directed_subunit_alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_programmed_necrosis_factor_ligand_member_alpha_death,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_programmed_death_17a_17f,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_neutrophil_elastase_subunit_alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_necrosis_subunit_factor_alpha_tumor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+leukocyte_antigen_claudin_cd47,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+leucotoxin_lukdv_lukev,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+leucotoxin_hemolysin_clumping_factor_alpha_lukdv_lukev,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+leptin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+klotho,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+kininogen,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+isomerase_peptidyl_prolyl_trans_cis,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+ionotropic_glutamate_nmda,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+interleukin_tyrosine_subunit_kinase_alpha_erbb,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lipoprotein_oxidized_density_low,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lipoprotein_glycosylphosphatidylinositol_anchored_binding_density_lipase_high,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lipase_endothelial_lipoprotein,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+like_toll_transporter_domain_family_lectin_member_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+like_s100_toll,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+like_piwi_methyltransferase_arginine,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+melanocyte_pmel,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+megakaryocyte_inhibitory_platelet_g6b,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+mannose_macrophage_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lymphopoietin_cytokine_stromal_factor_thymic_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lymphoma,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lymphocyte_specific,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lymphocyte_neprilysin_antigen_cd20,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lymphocyte_necrosis_antigen_factor_ligand_member_cd20_13b,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lymphocyte_cytotoxic_tyrosine_related_kinase_ligand_fms,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+lymphocyte_cytotoxic_tyrosine_kinase_erbb,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+metalloproteinase_inhibitor_precursor_amyloid_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+metalloproteinase_disintegrin_containing_necrosis_domain_factor_tumor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+metalloproteinase_disintegrin_containing_inactive_rhomboid_domain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+metalloendopeptidase_peptidyl_asp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+metalloendopeptidase_hemolysin_peptidyl_alpha_asp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+membrane_thy,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+membrane_complex_subunit,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+membrane_antigen_apical,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+melanotransferrin_cathepsin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+melanotransferrin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+myocilin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+muc18,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+morphogenetic_bone_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+monocarboxylate_transporter,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+mobility_group_high,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+mismatch_repair_dna,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+microglobulin_leukocyte_antigen_beta_cd47,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+metalloreductase_steap2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+non-specific serine/threonine protein kinase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+nkg2_integral_membrane_antigen_natural_killer_cd94_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+nkg2_immunoglobulin_leukocyte_subfamily_integral_membrane_member_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+neurotrophic_precursor_factor_bdnf_form,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+neurotoxin_botulinum_type_synaptosomal_associated,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+neurotensin_neuromedin_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+neurotensin_mesothelin_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+neuropilin_programmed_death,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+neuronal_leucine_repeat_rich,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+neprilysin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+natriuretic_peptide_atrial,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+oncogene_family_kinase_alpha_proto_gdnf_like_ret,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+oligodendrocyte_myelin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+olfactory_52e8,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+obscurin_telethonin_titin_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+nucleotide_exchange_c9orf72_guanine_factor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+nucleotidase_spike,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+nucleotidase_nad,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+nucleotidase_antigen_cd7,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+nucleotidase_antigen_cd276,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+nucleation_promoting_factor_actin_was,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phosphodiesterase_sphingomyelin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phosphodiesterase_pyrophosphatase_ectonucleotide_somatostatin_family_member_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phosphodiesterase_pyrophosphatase_ectonucleotide_interferon_stimulator_family_member_genes,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phosphodiesterase_pyrophosphatase_ectonucleotide_endopeptidase_family_member_prolyl_fap,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phosphatidylinositol_acyltransferase_mannoside,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phosphatase_specificity_dual,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phosphatase_regulatory_subunit,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+peroxiredoxin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+parathyroid_hormone_necrosis_peptide_related_factor_ligand_member,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+paired_box_pax,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+polypeptide_amyloid_islet,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+polypeptide_acetylgalactosaminyltransferase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+podocalyxin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+plexin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+pleiotrophin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+platelet_factor_variant,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+plasmalemma_associated_vesicle,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phosphoprotein_salivary_proline_acidic_rich,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phospholipid_transporting_atpase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+phospholipid_scramblase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+progonadoliberin_gonadotropin_releasing_hormone_putative,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+potassium_integrin_inwardly_binding_channel_gated_kcnh2_beta,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+polyubiquitin_proteasome_regulatory_subunit_atpase_26s_non,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+polysaccharide_biosynthesis_capsular,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+polyprotein_rna1_rna2,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+polyprotein_programmed_genome_ligand_death,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+polyprotein_genome_orf2p,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+polyprotein_complex_pre,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_death_immunoglobulin_variable_basigin_lambda_ligand,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_death_immunoglobulin_leukocyte_subfamily_ligand_member_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_death_epidermal_factor_growth_ligand_beta_tgf,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_death_determination_factor_ligand_right_left,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_death_chemokine_ligand_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_death_attenuator_lymphocyte_necrosis_factor_ligand_member,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+proteinase_inhibitor_bowman_birk_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+proteinase_activated,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+protease_binding_lectin_mannan_serine_frizzled_factor_12a,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+prostate_antigen_stem,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+prostaglandin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+promoter_binding_myc,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_ligand_death_immunoreceptor_activation_domains_gene_itim,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_ligand_death_carboxypeptidase_glutamate,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_epidermal_factor_growth_death,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+programmed_death_roundabout_homolog_ligand,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+repulsive_guidance_neogenin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+regulatory_cytotoxic,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+region_chain_gamma,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+region_chain,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+reelin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rectifying_potassium_regulator_inwardly_channel_gated_kcnh2_erg,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+recombination_activating_immunoglobulin_polypeptide_lambda_linker_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+pyruvate_kinase_pkm,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+proteoglycan_chondroitin_threonine_sulfate_kinase_serine_raf,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+roundabout_homolog,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_transmembrane_polymerase_directed_inactive_tyrosine_kinase_ror1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_polymerase_hepatitis_cellular_directed_virus,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_polymerase_directed_prostate_antigen_stem,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_polymerase_directed_factor_tissue,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_phosphoprotein_polymerase_directed_kda,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_lymphocyte_polymerase_directed_antigen_cd19,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_immunoglobulin_polypeptide_polymerase_directed_lambda_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_granulocyte_macrophage_polymerase_directed_colony_factor_alpha,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_endothelial_polymerase_directed_vascular_factor_growth,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rna_endoplasmic_polymerase_chaperone_reticulum_directed_bip,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+rhombotin_gtpase_kras,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+responder_retinoic_acid,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+scramblase_putative_clptm1_lipid,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+sclerostin_dickkopf_related,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+scavenger_cysteine_rich_type_m130_m160,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+sars-cov2_mu,0,10,1,562035,1.0,-0.004218114061106045,1.0,viral
+sarcoplasmic_endoplasmic_reticulum_calcium_atpase_phospholamban,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"sap, s-layer protein sap, surface array protein, surface layer protein",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+specificity_transporter_substrate_cassette_binding_abcg2_broad_atp,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+specific_tyrosine_arrest_growth_kinase_ufo,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+specific_cd28_hepatitis_cellular_antigen_homolog_cd276_virus,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+specific_cd28,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+somatotropin_envelope,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+sideroflexin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+semaphorin_plexin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+semaphorin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+seizure_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+superfamily_inhibitor_peptidase_necrosis_factor_member_tumor_12a,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+sulfotransferase_sulfatase_steryl_2a1_2b1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+substrate_insulin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+subcomponent_complement_subunit_c1q_ephrin_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+stimulating_macrophage_programmed_colony_factor_ligand_death,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+stimulating_macrophage_chemokine_colony_factor_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+staphylocoagulase_prothrombin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+threonine_kinase_serine_mtor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+threonine_kinase_serine_ligase_lysine_trna,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+thioredoxin-dependent peroxiredoxin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+synuclein_insulin_factor_growth_alpha_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+synthase_fatty_acid,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+syndecan,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+synaptosomal_associated,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+susceptibility_estrogen_breast_cancer_type,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+superfamily_necrosis_antigen_binding_cancer_factor_member_siso,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transferrin_serotransferrin_binding_domain_sh3,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transferrin_microtubule_associated_slc3a2_amino_chain_heavy_acid,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transducer_binding_lectin_sialic_signal_acid_cd24_like,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transcription_factor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+torsin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+tomoregulin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+thrombospondin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+threonine_kinase_serine_ul97,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transporter_glutamate_cystine,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transporter_cathepsin_neutral_amino_acid,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transporter_amino_neutral_acids_chain_heavy_large_acid,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transmembrane_pvrig,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transmembrane_precursor_inactive_tyrosine_amyloid_kinase_beta_ror1,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transmembrane_interacting_protease_kinase_serine_traf2_nck,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transmembrane_coiled_domain_coil,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transmembrane_associated_adapter_antigen_alpha_pre,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transmembrane_106b,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+translationally_controlled_tumor,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+transitional_endoplasmic_reticulum_atpase,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5tfw,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5t85,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5t80,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5t6l,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5t5b,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5t29,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5sy8,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5if0,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5ies,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5e7f,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5bop,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+5-hydroxytryptamine receptor 2B,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+5-hydroxytryptamine receptor 2A,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+5-hydroxytryptamine receptor 1B,0,10,1,562035,1.0,-0.004218114061106045,1.0,human
+ubiquitin_ligase_trim37,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+uncharacterized_mg281_homolog,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+uncharacterized_phospholipase_envelope_opg057_a56,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+unconventional_myosin_xviiia,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+"urec, ureb, urease subunit beta, urea amidohydrolase subunit beta, urease large subunit",0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+uroplakin,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+variable_beta_constant,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+variable_gamma,0,10,1,562035,1.0,-0.004218114061106045,1.0,other
+troponin_muscle_skeletal,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+transthyretin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+23 kDa integral membrane protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+7a4d,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+A0A0P7QEP7,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+8cwj,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Acetylcholinesterase,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+ADP-ribosyltransferase binding component,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+"Actin, cytoplasmic 1",0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Alpha-fetoprotein,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+"Alkaline phosphatase, tissue-nonspecific isozyme",0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Alpha/beta-gliadin clone PW8142,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Alpha/beta-gliadin clone PW1215,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Alpha/beta-gliadin clone PTO-A10,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Alpha/beta-gliadin A-V,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Alpha/beta-gliadin A-IV,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Alpha/beta-gliadin A-III,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Alpha/beta-gliadin A-II,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Alpha/beta-gliadin A-I,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Alpha-toxin Bot1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Apical membrane antigen 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Annexin A1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Aspartic protease Bla g 2,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+"Arginase-2, mitochondrial",0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Beta-1 adrenergic receptor,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Band 3 anion transport protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+CAMPATH-1 antigen,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Cell surface glycoprotein MUC18,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Caspase-3,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Carboxypeptidase B2,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Class 5c outer membrane protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Centrosomal protein of 164 kDa,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Coagulation factor IX,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Co-chaperonin GroES,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Cyclin-G-associated kinase,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Complement receptor type 2,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Complement receptor type 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Complement factor D,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+D5RWT1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+D(2) dopamine receptor,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Cytochrome c,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Cytochrome b-245 light chain,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Cys-loop ligand-gated ion channel,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Dermonecrotic toxin LruSicTox-alphaIC1d,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Dermonecrotic toxin LiSicTox-alphaIA1a,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Delta-like protein 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+"DNA polymerase I, thermostable",0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria|other
+Endo-polygalacturonase,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+"Elongation factor Tu, mitochondrial",0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+E-selectin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Disintegrin and metalloproteinase domain-containing protein 10,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Dipeptidyl peptidase 4,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Envelope glycoprotein D,0,10,2,562034,1.0,-0.005965319419653944,1.0,viral
+Entry-fusion complex associated protein OPG095,0,10,2,562034,1.0,-0.005965319419653944,1.0,viral
+Endolysin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Envelope protein H3,0,10,2,562034,1.0,-0.005965319419653944,1.0,viral
+Fatty-acid amide hydrolase 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Fascin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Exportin-7,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Folate receptor beta,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Folate receptor alpha,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Fibronectin-binding protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+GDNF family receptor alpha-like,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+GDNF family receptor alpha-4,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Frizzled-7,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Frizzled-10,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Gamma-gliadin B-I,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Gamma-gliadin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Galectin-10,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Glucosyltransferase-I,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Glucagon-like peptide 1 receptor,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Gelsolin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Gasdermin-D,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+"Glutamate receptor ionotropic, NMDA 1",0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Granzyme B,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Hemoglobin subunit beta,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Hemoglobin subunit alpha,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Hapless 2,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+IGK@ protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|viral
+IGH@ protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,other|viral
+Huntingtin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Histone H1.0,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Histone H1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Ig heavy chain V region PJ14,0,10,2,562034,1.0,-0.005965319419653944,1.0,other|viral
+Ig heavy chain V region 36-60,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+IMV heparin binding surface protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,viral
+Integrin alpha-2,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Inner membrane protein p54,0,10,2,562034,1.0,-0.005965319419653944,1.0,viral
+Immunoglobulin kappa variable 3-20,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Intercellular adhesion molecule 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Integrin subunit alpha 4,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Integrin beta-2,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Integrin alpha-M,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Integrin alpha-L,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Interleukin-17F,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Interleukin-7 receptor subunit alpha,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Interleukin-4 receptor subunit alpha,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Interleukin-34,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Interleukin-21 receptor,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Interleukin-2 receptor subunit beta,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Kell blood group glycoprotein homolog,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Junctional adhesion molecule-like,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+J3L protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,viral
+Izumo sperm-egg fusion protein 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Leptin receptor,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Laminin subunit alpha-1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Lactose permease,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+L-selectin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+"Keratin, type I cytoskeletal 19",0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+LexA repressor,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Leucotoxin LukE,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+"Leucine--tRNA ligase, cytoplasmic",0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+MP18 RNA editing complex protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+MHC class I antigen,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Lysine--tRNA ligase,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Major surface antigen P30,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Major outer membrane protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Major fimbrium subunit FimA type-1,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Magainins,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Matrix metalloproteinase-9,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Mu-type opioid receptor,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Mite group 2 allergen Der p 2,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Myc proto-oncogene protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Mucosal addressin cell adhesion molecule 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Nucleoporin NUP133,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Nucleolin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Outer membrane protein A,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Outer membrane protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Osteopontin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Nucleoside diphosphate kinase B,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Pancreatic secretory granule membrane major glycoprotein GP2,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+PAmCherry1 protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Ovalbumin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Phospholipase A2,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Phospholamban,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Peroxiredoxin-4,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Peroxiredoxin-2,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Plexin-B1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Polyubiquitin-C,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Polyubiquitin-B,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Polymerase basic protein 2,0,10,2,562034,1.0,-0.005965319419653944,1.0,viral
+Procollagen C-endopeptidase enhancer 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Por secretion system protein porM/gldM,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Protein Rev,0,10,2,562034,1.0,-0.005965319419653944,1.0,viral
+Putative zinc metalloprotease aq_1964,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Prothrombin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Protein-glutamine gamma-glutamyltransferase E,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Protein patched homolog 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+SAGA complex subunit ADA2,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+S-layer protein EA1,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Ribonucleoside-diphosphate reductase subunit M2,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Signal-regulatory protein gamma,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+T-cell receptor beta chain V region CTL-F3,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+T-cell receptor alpha chain constant,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+T-cell antigen CD7,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Syndecan-1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Synaptotagmin-1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Thioredoxin 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Tau-tubulin kinase 2,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+T-cell surface protein tactile,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Titin,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Thyrotropin receptor,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+"Thymidine kinase, cytosolic",0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+"Threonine--tRNA ligase 1, cytoplasmic",0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+"Trans-sialidase, putative",0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Tubulin beta-1 chain,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Tryptase alpha/beta-1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Transmembrane protease serine 2,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Uncharacterized leukocidin-like protein 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Ubiquitin-conjugating enzyme E2 C,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Ubiquitin carboxyl-terminal hydrolase 30,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+UV excision repair protein RAD23 homolog B,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Tyrosine-protein kinase SYK,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+Type VI secretion protein IcmF,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Vaginolysin,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+VA11.1 protein,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+V-type immunoglobulin domain-containing suppressor of T-cell activation,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Uncharacterized protein MG281,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+Vascular cell adhesion molecule,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Xaa-Pro aminopeptidase 1,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+Voltage-dependent L-type calcium channel subunit beta-1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+Vitamin K-dependent protein C,0,10,2,562034,1.0,-0.005965319419653944,1.0,human
+adhesion_ceacam1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+activin_type_inhibin_chain_beta,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+activation_antigen_early_cd69,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+adhesion_neural_like,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+adhesion_ceacam6,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+angiopoietin_tyrosine_kinase_tie,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+angiopoietin_related,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+aminopeptidase_cadherin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+alpha_acetylgalactosaminide_sialyltransferase,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+antigen_cd160,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+apelin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+antigen_lymphocyte_leukocyte_cd20_cd37,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+cd200,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+capsid_initiator_ns1_vp1_vp2,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+chain_cd3_programmed_death_ligand,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+chain_cd3_interleukin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+chitinase_like,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+chemokine_like_tafa,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+chemokine_derived_stromal_factor_type,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+chemokine_albumin_cx3c,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+chaperone_molecular_regulator_family_bag,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+channel_sensing_acid_ion,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+coagulation_factor_interferon_alpha_beta,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+cmrf35_like,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+complement_factor_related,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+containing_domain_dependent_calcium_plaur_ly6,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+containing_domain,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+containing_cathepsin_domain_cub,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+costimulator_inducible,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+differentiation_factor_family_growth_alpha_gdnf_like,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+dickkopf_related,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+diacylglycerol_kinase,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+determination_factor_right_left,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+delta_variable,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+delta_like_neurogenic_homolog_ephrin_locus_notch_type,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+elongation_factor_delta,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+elongation_factor,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+"dit, orf46, distal tail protein, baseplate protein",0,10,2,562034,1.0,-0.005965319419653944,1.0,viral
+diphosphohydrolase_ectonucleoside_triphosphate,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+dipeptidyl_peptidase,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+endothelin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+factor_coagulation_willebrand_viii_von,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+erythropoietin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+epithelial_adhesion_membrane_thy,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+envelope_gp160_nef,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+folate,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+family_alpha_gdnf,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+granzyme,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+glucagon,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+fusion,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+histone,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+immunoglobulin_binding,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+immunoglobulin_affinity_necrosis_factor_member_region_gamma_low,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+hypocretin_orexin_type,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+immunoglobulin_interacting_containing_factors_leucine_domain_growth_bdnf,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+immunoglobulin_epsilon_heavy_lymphotoxin_constant_factor_alpha_chain,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+immunoglobulin_domains_leucine_repeats_like_rich,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+immunoglobulin_containing_programmed_domain_death_like,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+immunoglobulin_chain,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+interaction_stromal,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+interacting_lysosome_adapter_slc15a4_like_toll_with_tlr,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+interleukin_alpha,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+interleukin_17a_17f,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+interleukin_like_toll,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+interleukin_like,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+interleukin_sulfotransferase_like_2a1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+ligand_kit,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+leukocyte_antigen_cd37,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+kallikrein,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+junction_alpha_gap,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+itprid2_family_member_slam,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+lymphocyte_antigen_cd19_cd20,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+like_bcl,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+"mcherry, fluorescent protein raspberry",0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+lysophosphatidic_acid,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+lymphocyte_antigen_like_toll,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+mesothelin_like,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+morphogenetic_bone,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+microtubule_associated_containing_domain_finger_ccch_zinc_tau,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+neuropilin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+natriuretic_peptides,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+nucleotide_binding_guanine_subunit_gamma,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+pH-gated potassium channel KcsA,0,10,2,562034,1.0,-0.005965319419653944,1.0,bacteria
+polypeptide_sequence_related_class_mhc_integral_membrane_binding,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+programmed_death_inhibitory_leukemia_factor_ligand,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+programmed_death_immunoreceptor_transmembrane_domains_ligand_pvrig_itim,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+programmed_death_fibroblast_factor_growth_ligand,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+programmed_death_diphosphohydrolase_ectonucleoside_triphosphate_ligand,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+programmed_death_butyrophilin_subfamily_ligand_member,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+programmed_death_apoptosis_regulator_ligand_bcl,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+programmed_death_anaphylatoxin_chemotactic_ligand_c5a,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+programmed_death_phosphodiesterase_pyrophosphatase_ectonucleotide_family_ligand_member,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+programmed_death_ligand_beta_type_tgf,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+replication_licensing_factor_mcm5_dna,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+regulatory_signal_leukocyte_antigen_gamma_beta_cd47_non,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+protransforming_proepiregulin_factor_growth_alpha,0,10,2,562034,1.0,-0.005965319419653944,1.0,human|other
+rna_polymerase_directed_antigen_myeloid_cd33,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+sphingosine_phosphate,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+specific_mucin_cd28,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+subfamily_membrane_spanning_domains_member,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+subfamily_antigen_killer_lectin_member_like_cd7,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+stimulating_macrophage,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+stimulating_hepatocyte_macrophage_factor_growth,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+steap1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+threonine_kinase_serine_dclk1,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+synuclein_homolog_alpha_lsm14_beta,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+synuclein_alpha_beta,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+transducer_signal_cd24,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+transmembrane_calreticulin_family_member,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+transferrin_serotransferrin_tyrosine_kinase_erbb,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+54 kDa nucleoporin,0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+"urea, hpua, urease subunit alpha, urea amidohydrolase subunit alpha",0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+"urea, hpua, urease subunit alpha, urea amidohydrolase subunit alpha|ureb, hpub, urease subunit beta, urea amidohydrolase subunit beta",0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+"1,3-beta-glucanosyltransferase gel4",0,10,2,562034,1.0,-0.005965319419653944,1.0,other
+troponin_cardiac_muscle,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Acetylcholine receptor subunit beta,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Adhesin binding fucosylated histo-blood group antigen,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Adenosine receptor A2a,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Activity-regulated cytoskeleton-associated protein,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+"Alanine--tRNA ligase, cytoplasmic",0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Apolipoprotein L1,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Antigen-presenting glycoprotein CD1d,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Angiotensinogen,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+B-cell receptor CD22,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+"Asparagine--tRNA ligase, cytoplasmic",0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Artemin,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Ara h 2 allergen,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Beta-2-microglobulin,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+B-lymphocyte antigen CD19,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Beta-secretase 2,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Beta-mammal toxin Cn2,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Beta-klotho,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Calcitonin,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+CFTR inhibitory factor,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Cell surface A33 antigen,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Choriogonadotropin subunit beta 3,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Coagulation factor XI,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Clumping factor A,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Cystinosin homolog,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Cysteine-rich protective antigen,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Dihydroflavonol 4-reductase,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Ectodysplasin-A,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Envelope glycoprotein H,0,10,3,562033,1.0,-0.007306000864928623,1.0,viral
+Envelope glycoprotein GP350,0,10,3,562033,1.0,-0.007306000864928623,1.0,viral
+Erythropoietin receptor,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Epithelial cell adhesion molecule,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Ephrin type-A receptor 2,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+"Fatty acid-binding protein, adipocyte",0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+F18 fimbrial adhesin AC,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Fragilysin,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+GTPase HRas,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+GFP-like fluorescent chromoprotein cFP484,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Gamma-secretase subunit Aph-1,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Gamma-secretase subunit APH-1B,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Gamma-secretase subunit APH-1A,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Glucagon receptor,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Gamma-secretase-activating protein,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Gamma-secretase subunit PEN-2,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Glycoprotein D,0,10,3,562033,1.0,-0.007306000864928623,1.0,viral
+Glycine--tRNA ligase,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Hepatocyte growth factor activator serine protease,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Heat shock protein beta-1,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Heat shock 70 kDa protein 1A,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Histone chaperone ASF1,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Immunoglobulin iota chain,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+IgG H chain,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Insulin,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Interferon alpha-2,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Interleukin-9,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Interleukin-6 receptor subunit alpha,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Large T antigen,0,10,3,562033,1.0,-0.007306000864928623,1.0,viral
+Low-density lipoprotein receptor-related protein 6,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+"Malonyl-CoA decarboxylase, mitochondrial",0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Major pollen allergen Aln g 1,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Merozoite surface protein 3,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Mast/stem cell growth factor receptor Kit,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Mucin-like protein,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Neural cell adhesion molecule L1-like protein,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Nuclear pore complex protein Nup98-Nup96,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Nonstructural protein,0,10,3,562033,1.0,-0.007306000864928623,1.0,viral
+Nonstructural glycoprotein NS1,0,10,3,562033,1.0,-0.007306000864928623,1.0,viral
+Non-specific lipid-transfer protein Cor a 8.0101,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Outer surface protein A,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Perfringolysin O,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Peptidase 1,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Pancreatic alpha-amylase,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Paired box pox-neuro protein,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Phosphatidylcholine-sterol acyltransferase,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Phosphate-binding protein PstS 1,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Pesticidal crystal protein Cry1Be,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Polymorphic antigen,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Pollen allergen Phl p 6,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Pollen allergen Phl p 4,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Pollen allergen Phl p 11,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Pro-hevein,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Potassium channel subfamily K member 10,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Protein OPG154,0,10,3,562033,1.0,-0.007306000864928623,1.0,viral
+RAC-gamma serine/threonine-protein kinase,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Putative hydrolase,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Putative gamma-secretase subunit APH-1C,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Protein jagged-1,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+S-layer protein sap,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Roundabout homolog 1,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+"Serine--tRNA ligase, cytoplasmic",0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Sulfhydryl oxidase 1,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+Transmembrane 4 L6 family member 1,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Transcriptional regulator homolog (Lrp/AsnC family),0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+Transcobalamin-2,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+Toxin HigB-2,0,10,3,562033,1.0,-0.007306000864928623,1.0,bacteria
+Triggering receptor expressed on myeloid cells 2,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+adhesion_intercellular,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+aminopeptidase,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+antigen_cd27_cd70,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+baculoviral_containing_repeat_iap,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+"bppu, orf48, upper baseplate protein, baseplate protein",0,10,3,562033,1.0,-0.007306000864928623,1.0,viral
+binding_ul16,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+cd200_membrane,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+cassette_binding_family_member_atp_sub,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+chain_cd3_rna,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+chain_cd3_lymphocyte_antigen,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+chain_cd3_cytidylyltransferase_phosphatidate,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+complement_protease_binding_lectin_mannan_serine,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+complement_factor,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+coupled_family_member_group,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+"eda, eda1, eda2, ectodysplasin-a, ectodermal dysplasia protein",0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+envelope_external_antigen_large_core,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+interferon_alpha_beta,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+inhibitory_leukemia_factor,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+interleukin_beta,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+interleukin_albumin,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+interleukin_accessory,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+interleukin_homolog_viral,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+metabotropic_glutamate,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+multifunctional_interacting_aminoacyl_chemokine_synthase_complex_trna_type,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+muellerian_hormone_anti_type,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+metalloproteinase_thrombospondin_disintegrin_motifs_with,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+neutrophil_elastase,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+nuclear_ror_transmembrane_tyrosine_kinase,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+"norc, drug:h+ antiporter norc, dha2 family efflux transporter norc",0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+pappalysin,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+phosphoribosyltransferase_nicotinamide,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+ribonuclease,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+s100,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+serotransferrin_transferrin,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+selectin,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+stimulating_macrophage_triggering_myeloid_colony_factor,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+"tal, orf47, tail fiber protein, baseplate protein",0,10,3,562033,1.0,-0.007306000864928623,1.0,viral
+transcription_factor_sox,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+thyrotropin,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+thrombopoietin_skeletal_tyrosine_kinase_muscle,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+transferrin_transporter_slc3a2_amino_chain_heavy_acid,0,10,3,562033,1.0,-0.007306000864928623,1.0,human|other
+5'-nucleotidase,0,10,3,562033,1.0,-0.007306000864928623,1.0,human
+ubiquitin_ligase_rnf43,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+us28_envelope_coupled_homolog,0,10,3,562033,1.0,-0.007306000864928623,1.0,other
+tyrosine_kinase_flt3_type,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+65 kDa phosphoprotein,0,10,4,562032,1.0,-0.008436250637122535,1.0,viral
+B- and T-lymphocyte attenuator,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+Autotransporter heptosyltransferase TibC,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Autotransporter adhesin/invasin TibA,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Asialoglycoprotein receptor 1,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+BPP,0,10,4,562032,1.0,-0.008436250637122535,1.0,viral
+Beta-secretase 1,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+C3a anaphylatoxin chemotactic receptor,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+CS1 fimbrial subunit A,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+CFA/I fimbrial subunit B,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+CD9 antigen,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+CD40 ligand,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+CD27 antigen,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+Complement control protein C3,0,10,4,562032,1.0,-0.008436250637122535,1.0,viral
+Complement C5,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+Complement C1q subcomponent subunit A,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+Endoplasmin,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+Erythronolide synthase EryA1,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Epstein-Barr nuclear antigen 1,0,10,4,562032,1.0,-0.008436250637122535,1.0,other|viral
+G-protein coupled receptor 68,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+Gamma-aminobutyric acid receptor subunit rho-1,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+Glia-derived nexin,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+Gastric inhibitory polypeptide receptor,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+"H-2 class II histocompatibility antigen, A beta chain",0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+Heat-stable enterotoxin A3/A4,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Heat-labile enterotoxin B chain,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Heat-labile enterotoxin A chain,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Histidine-containing phosphotransfer protein 3,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+Immunoglobulin gamma-1 heavy chain,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+Ig-like domain-containing protein,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+Interleukin-1 beta,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+K88 fimbrial protein AD,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria|other
+K88 fimbrial protein AC,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Invasin IpaD,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+MHC class I chain-related protein A,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+Major surface glycoprotein G,0,10,4,562032,1.0,-0.008436250637122535,1.0,viral
+Major outer membrane protein P.IA,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+"Major histocompatibility complex, class I, A",0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+Monocyte differentiation antigen CD14,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+Myelin-associated glycoprotein,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+Nuclear distribution protein nudE-like 1,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+Outer membrane usher protein CS3-2,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Phospholipase A2 crotoxin basic subunit CBc,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+Pesticidal crystal protein Cry1Fa,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Pneumolysin,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Pilotin AspS 2,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Pollen allergen Phl p 2,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+Protein E7,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|viral
+Prostate-specific antigen,0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+Reticulocyte-binding protein homolog 5,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+Receptor tyrosine-protein kinase erbB-3,0,10,4,562032,1.0,-0.008436250637122535,1.0,human
+Serine protease EatA,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Secretin GspD 2,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Soluble cytochrome b562,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Tetraspanin,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+Toxin A,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+Type II secretion system protein J,0,10,4,562032,1.0,-0.008436250637122535,1.0,bacteria
+"Tyrosine--tRNA ligase, mitochondrial",0,10,4,562032,1.0,-0.008436250637122535,1.0,human|other
+acetylcholine_muscarinic,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+X5DSL3,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+adhesion_vascular,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+amphiregulin_proheparin_binding_factor_growth_like_egf,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+antigen_cd7,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+angiotensin_gasdermin_type,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+asialoglycoprotein_beta_type_tgf,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+cadherin,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+cathepsin,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+chain_cd3_claudin,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+circumsporozoite_antigen_related,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+complement,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+containing_coupled_leucine_repeat_rich,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+epsilon_chain_cd3,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+epithelial_adhesion,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+fibrinogen_chain,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+factors_growth_bdnf,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+inhibiting_muellerian_factor,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+lipoprotein_convertase_proprotein_subtilisin_density_kexin_type_low,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+like_toll,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+metalloproteinase_matrix_metalloelastase_collagenase_macrophage_type_kda,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+midkine,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+microfibril_associated,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+phosphatase_tyrosine_factor_growth_mast_stem_type_kit,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+potassium_subfamily_channel_voltage_member_gated,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+programmed_death_hepatitis_cellular_ligand_virus,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+regulatory_signal_beta,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+sars-cov2_kappa,0,10,4,562032,1.0,-0.008436250637122535,1.0,viral
+specific_cd28_cathepsin_antigen_homolog_cd276,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+selectin_ligand,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+subcomponent_complement_c1r_c1s,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+superfamily_interferon_stimulator_necrosis_factor_member_genes_tumor,0,10,4,562032,1.0,-0.008436250637122535,1.0,other
+triggering_myeloid,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+A-type potassium channel modulatory protein DPP6,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+Adiponectin,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Alpha-hemolysin,0,10,5,562031,1.0,-0.009432023340772448,1.0,bacteria|other
+Apolipoprotein A-I,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+C-X-C motif chemokine 2,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+CD81 antigen,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+Cell adhesion molecule CEACAM8,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Cell adhesion molecule CEACAM4,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Catenin beta-1,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Cholinesterase,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Cholera enterotoxin B-subunit,0,10,5,562031,1.0,-0.009432023340772448,1.0,bacteria|other
+Dipeptide and tripeptide permease A,0,10,5,562031,1.0,-0.009432023340772448,1.0,bacteria
+Egg white lysozyme,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+Envelope small membrane protein,0,10,5,562031,1.0,-0.009432023340772448,1.0,viral
+Ferritin heavy chain,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+FKBP-type peptidyl-prolyl cis-trans isomerase SlyD,0,10,5,562031,1.0,-0.009432023340772448,1.0,bacteria
+Fluorescent protein raspberry,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+Filamentous hemagglutinin,0,10,5,562031,1.0,-0.009432023340772448,1.0,bacteria
+Gametocyte surface protein P45/48,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+"H-2 class I histocompatibility antigen, D-B alpha chain",0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+Golgi SNAP receptor complex member 1,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Hepatitis A virus cellular receptor 2,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Hematopoietic progenitor cell antigen CD34,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+Immunoglobulin G-binding protein A,0,10,5,562031,1.0,-0.009432023340772448,1.0,bacteria
+Interferon gamma receptor 1,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Integrin beta-1,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Interleukin-2 receptor subunit alpha,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+Interleukin-8,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Interleukin-6,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+Kelch-like ECH-associated protein 1,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Myosin-9,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Neuropilin-1,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Natural cytotoxicity triggering receptor 3 ligand 1,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+NSFL1 cofactor p47,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+ORF9b protein,0,10,5,562031,1.0,-0.009432023340772448,1.0,viral
+ORF8 protein,0,10,5,562031,1.0,-0.009432023340772448,1.0,viral
+ORF7a protein,0,10,5,562031,1.0,-0.009432023340772448,1.0,viral
+ORF6 protein,0,10,5,562031,1.0,-0.009432023340772448,1.0,viral
+ORF3a protein,0,10,5,562031,1.0,-0.009432023340772448,1.0,viral
+Polyprotein P1234,0,10,5,562031,1.0,-0.009432023340772448,1.0,viral
+RAC-alpha serine/threonine-protein kinase,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+"Reticulocyte binding protein 2, putative",0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+Ribonuclease pancreatic,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+SbsB protein,0,10,5,562031,1.0,-0.009432023340772448,1.0,bacteria
+Superoxide dismutase [Cu-Zn],0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Synaptosomal-associated protein 25,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Supervillin,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+T-cell surface glycoprotein CD8 alpha chain,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+Transcriptional activator VP30,0,10,5,562031,1.0,-0.009432023340772448,1.0,viral
+Type II secretion system protein I,0,10,5,562031,1.0,-0.009432023340772448,1.0,bacteria
+Tubulointerstitial nephritis antigen,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+Tyrosine-protein kinase transmembrane receptor ROR2,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+Vesicle transport through interaction with t-SNAREs homolog 1A,0,10,5,562031,1.0,-0.009432023340772448,1.0,human
+activation_containing_inhibitor_domain_set,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+antigen_myeloid_cd33,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+attenuator_lymphocyte,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+carboxypeptidase_glutamate_folate_alpha,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+chain_cd3_transmembrane_tyrosine_kinase,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+collagen_integral_membrane_alpha_chain_xxv,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+glycophorin,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+inactive_tyrosine_antigen_kinase_cd70,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+immunoglobulin_killer_3dl2_like,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+interferon_alpha,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+lymphocyte_antigen,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+neuregulin_membrane_tyrosine_isoform_kinase_bound_erbb_pro,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+nectin,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+podoplanin_family_member_ccn,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+prolactin,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+programmed_death_tyrosine_kinase_ligand_erbb,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+purinoceptor_p2x,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+superoxide_dismutase,0,10,5,562031,1.0,-0.009432023340772448,1.0,other
+translation_eukaryotic_initiation_subunit_factor,0,10,5,562031,1.0,-0.009432023340772448,1.0,human|other
+Apolipoprotein E,0,10,6,562030,1.0,-0.010332273085059906,1.0,human
+B-lymphocyte antigen CD20,0,10,6,562030,1.0,-0.010332273085059906,1.0,human
+Bifunctional hemolysin/adenylate cyclase,0,10,6,562030,1.0,-0.010332273085059906,1.0,bacteria
+Beta-lactamase TEM,0,10,6,562030,1.0,-0.010332273085059906,1.0,bacteria
+Cell adhesion molecule CEACAM6,0,10,6,562030,1.0,-0.010332273085059906,1.0,human
+Cell surface-binding protein OPG105,0,10,6,562030,1.0,-0.010332273085059906,1.0,viral
+Conglutin-7,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+Dihydrofolate reductase,0,10,6,562030,1.0,-0.010332273085059906,1.0,bacteria
+Flagellin,0,10,6,562030,1.0,-0.010332273085059906,1.0,bacteria|other
+Glycinin,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+Gly1,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+Glutathione S-transferase class-mu 26 kDa isozyme,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+Histone H3.1,0,10,6,562030,1.0,-0.010332273085059906,1.0,human|other
+Histone H2AX,0,10,6,562030,1.0,-0.010332273085059906,1.0,human|other
+Interleukin-18,0,10,6,562030,1.0,-0.010332273085059906,1.0,human
+Internalin B,0,10,6,562030,1.0,-0.010332273085059906,1.0,bacteria
+Interleukin-33,0,10,6,562030,1.0,-0.010332273085059906,1.0,human
+Major allergen Mal f 1,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+Membrane protein,0,10,6,562030,1.0,-0.010332273085059906,1.0,viral
+Matrix protein,0,10,6,562030,1.0,-0.010332273085059906,1.0,viral
+Myeloperoxidase,0,10,6,562030,1.0,-0.010332273085059906,1.0,human|other
+Neuropilin-2,0,10,6,562030,1.0,-0.010332273085059906,1.0,human
+Plasminogen activator inhibitor 1,0,10,6,562030,1.0,-0.010332273085059906,1.0,human|other
+Pro-secreted protein ORF2,0,10,6,562030,1.0,-0.010332273085059906,1.0,viral
+Pre-glycoprotein polyprotein GP complex,0,10,6,562030,1.0,-0.010332273085059906,1.0,viral
+Protein OPG190,0,10,6,562030,1.0,-0.010332273085059906,1.0,viral
+Protein DETOXIFICATION,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+Replicase polyprotein 1a,0,10,6,562030,1.0,-0.010332273085059906,1.0,viral
+Tissue factor,0,10,6,562030,1.0,-0.010332273085059906,1.0,human|other
+Thrombospondin-1,0,10,6,562030,1.0,-0.010332273085059906,1.0,human
+Thrombopoietin,0,10,6,562030,1.0,-0.010332273085059906,1.0,human|other
+Toxin B,0,10,6,562030,1.0,-0.010332273085059906,1.0,bacteria
+Vacuolating cytotoxin autotransporter,0,10,6,562030,1.0,-0.010332273085059906,1.0,bacteria
+apolipoprotein,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+carboxypeptidase_glutamate_epsilon_chain_cd3,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+collagen_alpha_chain_xxv,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+endoglin,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+enhancer_transducin_like,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+envelope_gp160_cd4,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+folate_beta,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+histone_type_h2a_h2b,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+immunoreceptor_transmembrane_domains_pvrig_itim_with,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+interleukin_glycosylation_advanced_specific_product_like_end,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+lymphocyte_antigen_cd19_cd22,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+metalloproteinase_matrix,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+nucleotidase,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+nucleoprotein_spike,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+plastin,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+polyprotein_genome_uorf2_uorf,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+transmembrane_containing_domain_marvel_cklf_like,0,10,6,562030,1.0,-0.010332273085059906,1.0,other
+25 kDa ookinete surface antigen,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Alpha-enolase,0,10,7,562029,1.0,-0.011160140376483605,1.0,human|other
+Beta-insect excitatory toxin 1,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+C-reactive protein,0,10,7,562029,1.0,-0.011160140376483605,1.0,human
+Claudin-18,0,10,7,562029,1.0,-0.011160140376483605,1.0,human
+Collagen alpha-1(II) chain,0,10,7,562029,1.0,-0.011160140376483605,1.0,human
+Envelope protein,0,10,7,562029,1.0,-0.011160140376483605,1.0,other|viral
+Gametocyte surface protein P230,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Gastrin/cholecystokinin type B receptor,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Glycophorin-A,0,10,7,562029,1.0,-0.011160140376483605,1.0,human
+Growth/differentiation factor 11,0,10,7,562029,1.0,-0.011160140376483605,1.0,human|other
+IAG-nucleoside hydrolase,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Internalin A,0,10,7,562029,1.0,-0.011160140376483605,1.0,bacteria
+Maltose/maltodextrin-binding periplasmic protein,0,10,7,562029,1.0,-0.011160140376483605,1.0,bacteria
+Myosin-6,0,10,7,562029,1.0,-0.011160140376483605,1.0,human|other
+Pesticidal crystal protein Cry1Ac,0,10,7,562029,1.0,-0.011160140376483605,1.0,bacteria
+Platelet glycoprotein VI,0,10,7,562029,1.0,-0.011160140376483605,1.0,human|other
+Polymerase cofactor VP35,0,10,7,562029,1.0,-0.011160140376483605,1.0,other|viral
+Pollen allergen Phl p 5a,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Pollen allergen Phl p 5.0101,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Pollen allergen Phl p 1,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Protein Nef,0,10,7,562029,1.0,-0.011160140376483605,1.0,other|viral
+Structural protein,0,10,7,562029,1.0,-0.011160140376483605,1.0,viral
+Tenascin,0,10,7,562029,1.0,-0.011160140376483605,1.0,human|other
+Thymic stromal lymphopoietin,0,10,7,562029,1.0,-0.011160140376483605,1.0,human|other
+Variant surface glycoprotein Buteba 2,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant surface glycoprotein Bug 2,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant surface glycoprotein Ako 2,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant-specific antigen,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant surface glycoprotein Mul 3,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant surface glycoprotein ILTAT 1.21,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant surface glycoprotein Buw 2,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant surface glycoprotein Buw 1,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant surface glycoprotein Buteba 6,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant surface glycoprotein Buteba 4,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Variant surface glycoprotein Buteba 3,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Vitamin B12-binding protein,0,10,7,562029,1.0,-0.011160140376483605,1.0,bacteria
+activin_type,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+desmoglein,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+extracellular_calcium_sensing,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+interleukin_glucagon_peptide_like_pro,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+lymphocyte_antigen_cd19,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+nucleotide_binding_guanine_subunit_alpha_melanocyte_pmel,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+sclerostin,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+secretase_beta,0,10,7,562029,1.0,-0.011160140376483605,1.0,other
+Alpha/beta-gliadin MM1,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+BATXPLA1,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+"Botulinum neurotoxin type E, nontoxic-nonhemagglutinin component, NTNH",0,10,8,562028,1.0,-0.0119307025215162,1.0,bacteria
+Cell adhesion molecule CEACAM5,0,10,8,562028,1.0,-0.0119307025215162,1.0,human
+Capsid protein VP1,0,10,8,562028,1.0,-0.0119307025215162,1.0,viral
+Chondroitin sulfate proteoglycan 4,0,10,8,562028,1.0,-0.0119307025215162,1.0,human|other
+Complement C3,0,10,8,562028,1.0,-0.0119307025215162,1.0,human|other
+Cryptic protein,0,10,8,562028,1.0,-0.0119307025215162,1.0,human
+Cryptic family protein 1B,0,10,8,562028,1.0,-0.0119307025215162,1.0,human
+Endoribonuclease MazF,0,10,8,562028,1.0,-0.0119307025215162,1.0,bacteria|other
+Fibronectin,0,10,8,562028,1.0,-0.0119307025215162,1.0,human|other
+High affinity immunoglobulin epsilon receptor subunit alpha,0,10,8,562028,1.0,-0.0119307025215162,1.0,human|other
+Hexon protein p72,0,10,8,562028,1.0,-0.0119307025215162,1.0,viral
+Immunoglobulin kappa chain variable 12-41,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+Interleukin-2,0,10,8,562028,1.0,-0.0119307025215162,1.0,human|other
+Latent membrane protein 1,0,10,8,562028,1.0,-0.0119307025215162,1.0,viral
+Low affinity immunoglobulin gamma Fc region receptor III-A,0,10,8,562028,1.0,-0.0119307025215162,1.0,human
+Merozoite surface protein 1,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+Mitogen-activated protein kinase 13,0,10,8,562028,1.0,-0.0119307025215162,1.0,human
+Metallo-beta-lactamase type 2,0,10,8,562028,1.0,-0.0119307025215162,1.0,bacteria
+Phospholipase A2 homolog 1,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+Protein OPG161,0,10,8,562028,1.0,-0.0119307025215162,1.0,viral
+Suppressor of tumorigenicity 14 protein,0,10,8,562028,1.0,-0.0119307025215162,1.0,human
+apoptosis_regulator_caspase_bax,0,10,8,562028,1.0,-0.0119307025215162,1.0,human|other
+butyrophilin_subfamily_member,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+chemokine_atypical,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+endopeptidase_prolyl_fap,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+enterotoxin_type,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+galectin,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+integrin_alpha,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+lipoprotein_density_related_low_programmed_death,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+mesothelin_specific_cd28,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+plasminogen_activator_urokinase_antigen_cd44,0,10,8,562028,1.0,-0.0119307025215162,1.0,human|other
+polypeptide_sequence_related_class_mhc_cathepsin_antigen_cd99,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+programmed_death_costimulator_lymphocyte_cytotoxic_inducible_ligand,0,10,8,562028,1.0,-0.0119307025215162,1.0,other
+tyrosine_kinase_ufo,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+tryptophan_ligase_trna_mitochondrial_cytoplasmic,0,10,9,562027,1.0,-0.01265443224356081,1.0,human|other
+trophoblast,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+Alpha-crystallin,0,10,9,562027,1.0,-0.01265443224356081,1.0,bacteria
+Apelin receptor,0,10,9,562027,1.0,-0.01265443224356081,1.0,human
+Basigin,0,10,9,562027,1.0,-0.01265443224356081,1.0,human|other
+Basic phospholipase A2 homolog bothropstoxin-II,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+Bifunctional epoxide hydrolase 2,0,10,9,562027,1.0,-0.01265443224356081,1.0,human
+Factor H binding protein variant B24,0,10,9,562027,1.0,-0.01265443224356081,1.0,bacteria
+"HLA class II histocompatibility antigen, DQ alpha 1 chain",0,10,9,562027,1.0,-0.01265443224356081,1.0,human
+Phosphoprotein,0,10,9,562027,1.0,-0.01265443224356081,1.0,other|viral
+T-cell immunoreceptor with Ig and ITIM domains,0,10,9,562027,1.0,-0.01265443224356081,1.0,human
+Thyroglobulin,0,10,9,562027,1.0,-0.01265443224356081,1.0,human|other
+associated_antigen_complex_chain_alpha_beta_cd22,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+cd4,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+chemokine_motif,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+ephrin_type,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+gamma_interferon_subunit,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+hemoglobin_subunit,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+immunoglobulin_superfamily_activation_containing_suppressor_domain_member_type,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+metalloproteinase_disintegrin_containing_cathepsin_domain,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+programmed_death_activation_lymphocyte_ribosomal_ligand_large_gene,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+programmed_death_specific_ligand_cd28,0,10,9,562027,1.0,-0.01265443224356081,1.0,other
+"60 kDa heat shock protein, mitochondrial",0,10,10,562026,1.0,-0.013338954661930334,1.0,human|other
+Carbonic anhydrase 9,0,10,10,562026,1.0,-0.013338954661930334,1.0,human
+Copper-transporting ATPase 2,0,10,10,562026,1.0,-0.013338954661930334,1.0,human
+Hypoxia-inducible factor 1-alpha,0,10,10,562026,1.0,-0.013338954661930334,1.0,human
+Integrin alpha-1,0,10,10,562026,1.0,-0.013338954661930334,1.0,other
+Leukocyte surface antigen CD47,0,10,10,562026,1.0,-0.013338954661930334,1.0,human
+S-layer protein,0,10,10,562026,1.0,-0.013338954661930334,1.0,bacteria
+Shiga toxin subunit A,0,10,10,562026,1.0,-0.013338954661930334,1.0,bacteria
+Vesicular glutamate transporter 1,0,10,10,562026,1.0,-0.013338954661930334,1.0,other
+chain_cd3_delta,0,10,10,562026,1.0,-0.013338954661930334,1.0,other
+frizzled,0,10,10,562026,1.0,-0.013338954661930334,1.0,other
+histocompatibility_antigen_chain_class_gamma_hla,0,10,10,562026,1.0,-0.013338954661930334,1.0,other
+leukocyte_antigen_cd47,0,10,10,562026,1.0,-0.013338954661930334,1.0,other
+CD44 antigen,0,10,11,562025,1.0,-0.013990026120623776,1.0,human|other
+Cystic fibrosis transmembrane conductance regulator,0,10,11,562025,1.0,-0.013990026120623776,1.0,human|other
+Enterotoxin type C-1,0,10,11,562025,1.0,-0.013990026120623776,1.0,bacteria
+Enterotoxin type B,0,10,11,562025,1.0,-0.013990026120623776,1.0,bacteria
+Interleukin-17A,0,10,11,562025,1.0,-0.013990026120623776,1.0,human|other
+LicB protein,0,10,11,562025,1.0,-0.013990026120623776,1.0,bacteria
+Major pollen allergen Bet v 1-A,0,10,11,562025,1.0,-0.013990026120623776,1.0,other
+Myelin-oligodendrocyte glycoprotein,0,10,11,562025,1.0,-0.013990026120623776,1.0,other
+Tetanus toxin,0,10,11,562025,1.0,-0.013990026120623776,1.0,bacteria|other
+Vimentin,0,10,11,562025,1.0,-0.013990026120623776,1.0,human|other
+Vascular endothelial growth factor receptor 2,0,10,11,562025,1.0,-0.013990026120623776,1.0,human|other
+anaphylatoxin_chemotactic_c5a_complement,0,10,11,562025,1.0,-0.013990026120623776,1.0,other
+carboxypeptidase_glutamate,0,10,11,562025,1.0,-0.013990026120623776,1.0,other
+envelope_gp160,0,10,11,562025,1.0,-0.013990026120623776,1.0,other
+hydroxytryptamine,0,10,11,562025,1.0,-0.013990026120623776,1.0,other
+inhibitory_macrophage_migration_factor,0,10,11,562025,1.0,-0.013990026120623776,1.0,other
+rRNA N-glycosylase,0,10,11,562025,1.0,-0.013990026120623776,1.0,bacteria
+GTPase KRas,0,10,12,562024,1.0,-0.014612118722324876,1.0,human|other
+"Ig gamma-2A chain C region, A allele",0,10,12,562024,1.0,-0.014612118722324876,1.0,human|other
+Mucin-1,0,10,12,562024,1.0,-0.014612118722324876,1.0,human
+Placenta growth factor,0,10,12,562024,1.0,-0.014612118722324876,1.0,human|other
+T-cell surface glycoprotein CD3 epsilon chain,0,10,12,562024,1.0,-0.014612118722324876,1.0,human|other
+Tissue factor pathway inhibitor,0,10,12,562024,1.0,-0.014612118722324876,1.0,human|other
+VP1,0,10,12,562024,1.0,-0.014612118722324876,1.0,viral
+"edar, dl, tumor necrosis factor receptor superfamily member edar, anhidrotic ectodysplasin receptor 1, downless homolog, eda-a1 receptor, ectodermal dysplasia receptor, ectodysplasin-a receptor",0,10,12,562024,1.0,-0.014612118722324876,1.0,other
+immunoglobulin_associated_osteoclast_polymeric_like,0,10,12,562024,1.0,-0.014612118722324876,1.0,other
+platelet_derived_factor_growth_beta,0,10,12,562024,1.0,-0.014612118722324876,1.0,other
+presenting_antigen_cd1d,0,10,12,562024,1.0,-0.014612118722324876,1.0,other
+polyprotein_replicase_nucleoprotein_spike_1ab,0,10,12,562024,1.0,-0.014612118722324876,1.0,other
+tyrosine_kinase_erbb_epidermal_domain_factor_family_growth,0,10,13,562023,1.0,-0.015208788892351542,1.0,other
+C-X-C chemokine receptor type 2,0,10,13,562023,1.0,-0.015208788892351542,1.0,human|other
+Inactive tyrosine-protein kinase transmembrane receptor ROR1,0,10,13,562023,1.0,-0.015208788892351542,1.0,human|other
+Intestinal-type alkaline phosphatase,0,10,13,562023,1.0,-0.015208788892351542,1.0,human|other
+Matrix protein 2,0,10,13,562023,1.0,-0.015208788892351542,1.0,viral
+Somatotropin,0,10,13,562023,1.0,-0.015208788892351542,1.0,human
+Variant surface glycoprotein AnTaT 1.1,0,10,13,562023,1.0,-0.015208788892351542,1.0,other
+anhydrase_carbonic,0,10,13,562023,1.0,-0.015208788892351542,1.0,other
+chain_cd8_alpha_beta,0,10,13,562023,1.0,-0.015208788892351542,1.0,other
+chemokine_cx3c,0,10,13,562023,1.0,-0.015208788892351542,1.0,other
+layer_ea1_sap,0,10,13,562023,1.0,-0.015208788892351542,1.0,other
+Beta-2 adrenergic receptor,0,10,14,562022,1.0,-0.015782920164103632,1.0,human
+Beta-nerve growth factor,0,10,14,562022,1.0,-0.015782920164103632,1.0,human|other
+CD70 antigen,0,10,14,562022,1.0,-0.015782920164103632,1.0,other
+Duffy receptor,0,10,14,562022,1.0,-0.015782920164103632,1.0,other
+Glypican-3,0,10,14,562022,1.0,-0.015782920164103632,1.0,human
+Interleukin-13,0,10,14,562022,1.0,-0.015782920164103632,1.0,human|other
+Large envelope protein,0,10,14,562022,1.0,-0.015782920164103632,1.0,other|viral
+Snake venom metalloproteinase,0,10,14,562022,1.0,-0.015782920164103632,1.0,other
+factor_interleukin_insulin_growth_like,0,10,14,562022,1.0,-0.015782920164103632,1.0,human|other
+glypican,0,10,14,562022,1.0,-0.015782920164103632,1.0,other
+immunoglobulin_killer_2dl4_cd22_like,0,10,14,562022,1.0,-0.015782920164103632,1.0,other
+pertussis_subunit_toxin,0,10,14,562022,1.0,-0.015782920164103632,1.0,other
+Movement protein,0,10,15,562021,1.0,-0.0163368889804245,1.0,viral
+Replication protein 1a,0,10,15,562021,1.0,-0.0163368889804245,1.0,viral
+beta_transforming_proprotein_integrin_factor_growth,0,10,15,562021,1.0,-0.0163368889804245,1.0,human|other
+chain_cd3_domain_family_lectin_member_type,0,10,15,562021,1.0,-0.0163368889804245,1.0,other
+coagulation_factor_xii,0,10,15,562021,1.0,-0.0163368889804245,1.0,other
+integrin_beta,0,10,15,562021,1.0,-0.0163368889804245,1.0,other
+"Cytochrome c, somatic",0,10,16,562020,1.0,-0.016872681397134024,1.0,other
+Fusion glycoprotein F0,0,10,16,562020,1.0,-0.016872681397134024,1.0,viral
+Serotransferrin,0,10,16,562020,1.0,-0.016872681397134024,1.0,human|other
+chain_cd3_member_gamma,0,10,16,562020,1.0,-0.016872681397134024,1.0,other
+immunoglobulin_epsilon_heavy_constant_necrosis_factor_chain_tumor,0,10,16,562020,1.0,-0.016872681397134024,1.0,other
+Acetylcholine receptor subunit alpha,0,10,17,562019,1.0,-0.017391977369414863,1.0,human|other
+Major prion protein,0,10,17,562019,1.0,-0.017391977369414863,1.0,human|other
+Shiga-like toxin 1 subunit A,0,10,17,562019,1.0,-0.017391977369414863,1.0,bacteria|viral
+Variant surface glycoprotein MITAT 1.2,0,10,17,562019,1.0,-0.017391977369414863,1.0,other
+apolipoprotein_precursor_amyloid_beta,0,10,17,562019,1.0,-0.017391977369414863,1.0,human|other
+immunoglobulin_fibronectin_leukocyte_subfamily_member_like,0,10,17,562019,1.0,-0.017391977369414863,1.0,other
+programmed_antigen_death_activation_leukocyte_ligand_cd47_cd80,0,10,17,562019,1.0,-0.017391977369414863,1.0,other
+related_lipoprotein_dickkopf_density_low,0,10,17,562019,1.0,-0.017391977369414863,1.0,other
+Factor H binding protein,0,10,18,562018,1.0,-0.0178962129911943,1.0,bacteria
+Glycoprotein G,0,10,18,562018,1.0,-0.0178962129911943,1.0,viral
+Mechanosensitive ion channel MscS domain-containing protein,0,10,18,562018,1.0,-0.0178962129911943,1.0,bacteria
+Neurogenic locus notch homolog protein 1,0,10,18,562018,1.0,-0.0178962129911943,1.0,human|other
+Neisseria adhesin A,0,10,18,562018,1.0,-0.0178962129911943,1.0,bacteria
+Outer membrane protein assembly factor BamA,0,10,18,562018,1.0,-0.0178962129911943,1.0,bacteria
+Sodium channel protein type 4 subunit alpha,0,10,18,562018,1.0,-0.0178962129911943,1.0,human|other
+associated_transducer_integrin_calcium_signal_alpha_tumor,0,10,18,562018,1.0,-0.0178962129911943,1.0,human|other
+chemokine_type,0,10,18,562018,1.0,-0.0178962129911943,1.0,other
+homolog_patched,0,10,18,562018,1.0,-0.0178962129911943,1.0,other
+immunoglobulin_subunit_alpha_large_fcrn_igg_p51,0,10,18,562018,1.0,-0.0178962129911943,1.0,human|other
+Blood group Rh(D) polypeptide,0,10,19,562017,1.0,-0.018386627351240616,1.0,human
+FaeJ,0,10,19,562017,1.0,-0.018386627351240616,1.0,bacteria
+FaeI,0,10,19,562017,1.0,-0.018386627351240616,1.0,bacteria
+FaeG,0,10,19,562017,1.0,-0.018386627351240616,1.0,bacteria
+FaeF,0,10,19,562017,1.0,-0.018386627351240616,1.0,bacteria
+Integrin beta-3,0,10,19,562017,1.0,-0.018386627351240616,1.0,human
+immunoglobulin_epidermal_epsilon_factor_growth_heavy_constant_chain,0,10,19,562017,1.0,-0.018386627351240616,1.0,other
+immunoreceptor_programmed_domains_ligand_death_itim_with,0,10,19,562017,1.0,-0.018386627351240616,1.0,other
+programmed_ligand_death_like_toll,0,10,19,562017,1.0,-0.018386627351240616,1.0,other
+threonine_leucine_kinase_repeat_serine_rich,0,10,19,562017,1.0,-0.018386627351240616,1.0,other
+Calmodulin-sensitive adenylate cyclase,0,10,20,562016,1.0,-0.0188642984126145,1.0,bacteria
+Replicase polyprotein 1ab,0,10,20,562016,1.0,-0.0188642984126145,1.0,viral
+immunoreceptor_neuropilin_domains_itim_with,0,10,21,562015,1.0,-0.01933017090371607,1.0,other
+Lethal factor,0,10,22,562014,1.0,-0.019785078292840583,1.0,bacteria
+Neuraminidase,0,10,22,562014,1.0,-0.019785078292840583,1.0,viral
+coagulation_factor_prothrombin_viii,0,10,22,562014,1.0,-0.019785078292840583,1.0,human|other
+delta_like,0,10,22,562014,1.0,-0.019785078292840583,1.0,other
+subunit_interleukin_cytokine_common_gamma_beta,0,10,22,562014,1.0,-0.019785078292840583,1.0,other
+transcript_factor_tissue_like_trem,0,10,22,562014,1.0,-0.019785078292840583,1.0,other
+Calreticulin,0,10,23,562013,1.0,-0.02022976031151602,1.0,human|other
+Envelopment polyprotein,0,10,23,562013,1.0,-0.02022976031151602,1.0,viral
+T-cell surface glycoprotein CD4,0,10,23,562013,1.0,-0.02022976031151602,1.0,human|other|viral
+adp_interleukin_hydrolase_cyclase_ribosyl_cyclic_ribose_alpha,0,10,23,562013,1.0,-0.02022976031151602,1.0,human|other
+associated_surfactant_pulmonary,0,10,23,562013,1.0,-0.02022976031151602,1.0,other
+Neurotoxin,0,10,24,562012,1.0,-0.02066487708141233,1.0,bacteria
+"botc, botulinum neurotoxin type c, bont/c, bontoxilysin-c",0,10,24,562012,1.0,-0.02066487708141233,1.0,other
+mucin,0,10,24,562012,1.0,-0.02066487708141233,1.0,other
+von Willebrand factor,0,10,24,562012,1.0,-0.02066487708141233,1.0,human|other
+Albumin,0,10,25,562011,1.0,-0.02109102061635816,1.0,human|other
+Aminopeptidase N,0,10,25,562011,1.0,-0.02109102061635816,1.0,human|other
+C-type lectin domain family 4 member A,0,10,25,562011,1.0,-0.02109102061635816,1.0,human|other
+antigen_cd276,0,10,25,562011,1.0,-0.02109102061635816,1.0,other
+caprin,0,10,25,562011,1.0,-0.02109102061635816,1.0,other
+Fibroblast growth factor receptor 1,0,10,26,562010,1.0,-0.021508724272048783,1.0,human|other
+interleukin_subunit_alpha_granulocyte_stimulating_macrophage_colony_factor,0,10,26,562010,1.0,-0.021508724272048783,1.0,human|other
+Alpha-cobratoxin,0,10,27,562009,1.0,-0.02191847057402374,1.0,other
+Cellular tumor antigen p53,0,10,27,562009,1.0,-0.02191847057402374,1.0,human|other
+integrin_cathepsin_alpha_beta,0,10,27,562009,1.0,-0.02191847057402374,1.0,human|other
+lymphocyte_antigen_binding_lectin_sialic_acid_cd19_like,0,10,27,562009,1.0,-0.02191847057402374,1.0,human|other
+lymphotoxin_necrosis_factor_alpha_tumor,0,10,27,562009,1.0,-0.02191847057402374,1.0,other
+associated_secretion_virulence_filament_antigen_needle_system_type,0,10,28,562008,1.0,-0.022320697751637506,1.0,other
+differentiation_antigen_cd72,0,10,28,562008,1.0,-0.022320697751637506,1.0,other
+interferon_gamma_interleukin,0,10,28,562008,1.0,-0.022320697751637506,1.0,other
+Structural polyprotein,0,10,29,562007,1.0,-0.022715805230239833,1.0,viral
+Alliin lyase 2,0,10,30,562006,1.0,-0.02310415827766487,1.0,other
+Alliin lyase 1,0,10,30,562006,1.0,-0.02310415827766487,1.0,other
+Alliin lyase,0,10,30,562006,1.0,-0.02310415827766487,1.0,other
+gamma_immunoglobulin_constant_region_chain_heavy,0,10,30,562006,1.0,-0.02310415827766487,1.0,other
+independent_cathepsin_phosphate_mannose_cation,0,10,30,562006,1.0,-0.02310415827766487,1.0,other
+Envelope glycoprotein B,0,10,31,562005,1.0,-0.0234860919589422,1.0,viral
+claudin,0,10,31,562005,1.0,-0.0234860919589422,1.0,other
+immunoglobulin_epsilon_heavy_constant_chain,0,10,31,562005,1.0,-0.0234860919589422,1.0,human|other|viral
+"Erythrocyte membrane protein 1, PfEMP1",0,10,32,562004,1.0,-0.023861914521094655,1.0,other
+Neurotoxin consisting of botulinum neurotoxin D and C1,0,10,32,562004,1.0,-0.023861914521094655,1.0,bacteria
+adhesion,0,10,34,562002,1.0,-0.02459634226466556,1.0,other
+coagulation_factor,0,10,34,562002,1.0,-0.02459634226466556,1.0,other
+Beta-lactamase,0,10,36,562000,1.0,-0.02530947242215314,1.0,bacteria
+"Ig gamma-1 chain C region, membrane-bound form",0,10,36,562000,1.0,-0.02530947242215314,1.0,other
+Protective antigen,0,10,36,562000,1.0,-0.02530947242215314,1.0,bacteria
+ALK tyrosine kinase receptor,0,10,37,561999,1.0,-0.025658607912728493,1.0,human
+Envelope glycoprotein,0,10,37,561999,1.0,-0.025658607912728493,1.0,viral
+Proprotein convertase subtilisin/kexin type 9,0,10,37,561999,1.0,-0.025658607912728493,1.0,human|other
+chain_cd3_phosphodiesterase_specific_cyclic_cgmp_subunit_rod,0,10,37,561999,1.0,-0.025658607912728493,1.0,other
+lymphocyte_cytotoxic,0,10,38,561998,1.0,-0.02600305730248278,1.0,other
+rna_thrombopoietin_polymerase_directed,0,10,38,561998,1.0,-0.02600305730248278,1.0,other|viral
+Gag-Pol polyprotein,0,10,39,561997,1.0,-0.026343004412163737,1.0,viral
+Thyroid peroxidase,0,10,39,561997,1.0,-0.026343004412163737,1.0,human
+transferrin,0,10,40,561996,1.0,-0.026678621350600114,1.0,other
+cd22,0,10,42,561994,1.0,-0.02733750059109124,1.0,other
+interleukin_interferon_subunit_gamma_alpha_beta,0,10,43,561993,1.0,-0.027661057178972562,1.0,other
+interleukin_necrosis_factor_tumor_17a,0,10,44,561992,1.0,-0.027980873704667626,1.0,human|other
+phosphatase_tyrosine_type_iva,0,10,44,561992,1.0,-0.027980873704667626,1.0,other
+cytotoxicity_triggering_albumin_natural,0,10,45,561991,1.0,-0.02829707698018939,1.0,other
+activation_lymphocyte_gene,0,10,46,561990,1.0,-0.028609786809714953,1.0,other
+interleukin_subunit,0,10,46,561990,1.0,-0.028609786809714953,1.0,other
+Desmoglein-3,0,10,48,561988,1.0,-0.029225173440596663,1.0,human
+Green fluorescent protein,0,10,48,561988,1.0,-0.029225173440596663,1.0,other
+immunoglobulin_affinity_region_gamma_iii_low_diphosphohydrolase_ectonucleoside,0,10,51,561985,1.0,-0.030124699660040076,1.0,other
+Alpha-synuclein,0,10,52,561984,1.0,-0.030418633191836898,1.0,human|other
+Capsid protein,0,10,54,561982,1.0,-0.03099814295334283,1.0,other|viral
+like,0,10,55,561981,1.0,-0.03128387399605439,1.0,other
+Circumsporozoite protein,0,10,57,561979,1.0,-0.03184764941854991,1.0,other
+histocompatibility_cytotoxicity_antigen_natural_alpha_chain_class_hla,0,10,57,561979,1.0,-0.03184764941854991,1.0,human|other
+angiopoietin,0,10,59,561977,1.0,-0.03240162076351165,1.0,other
+platelet,0,10,63,561973,1.0,-0.03348208920204231,1.0,other
+A disintegrin and metalloproteinase with thrombospondin motifs 13,0,10,64,561972,1.0,-0.03374680389276275,1.0,human
+antigen_associated_melanoma,0,10,67,561969,1.0,-0.03452877900992034,1.0,other
+interleukin,0,10,68,561968,1.0,-0.03478553304033433,1.0,other
+Mesothelin,0,10,69,561967,1.0,-0.035040406693139486,1.0,human|other
+transferrin_microtubule_associated_tau,0,10,72,561964,1.0,-0.03579414558558633,1.0,human|other
+angiopoietin_hepatocyte_factor_growth,0,10,79,561957,1.0,-0.03749401962963331,1.0,human|other
+angiotensin_converting_enzyme_spike,0,10,82,561954,1.0,-0.03819940006242708,1.0,human|other
+Ricin,0,10,85,561951,1.0,-0.0388919965074989,1.0,other
+Nucleoprotein,0,10,89,561947,1.0,-0.03979672409559223,1.0,other|viral
+immunoglobulin_polymeric_chain,0,10,90,561946,1.0,-0.040019712282802725,1.0,other
+interleukin_subunit_beta_integrin_alpha,0,10,100,561936,1.0,-0.04218485604725405,1.0,human|other
+endothelial_vascular_factor_growth_delta_form_like_long,0,10,104,561932,1.0,-0.04302043394522422,1.0,other
+Cytotoxic T-lymphocyte protein 4,0,10,106,561930,1.0,-0.04343219940870942,1.0,human|other
+clade A/E 93TH057 HIV-1 gp120 core,0,10,110,561926,1.0,-0.04424424395278512,1.0,human|viral
+Envelope glycoprotein gp160,0,10,126,561910,1.0,-0.04735347895486287,1.0,viral
+phosphatase_leukocyte_substrate_tyrosine_antigen_cd47_type_non,0,10,131,561905,1.0,-0.048284106439600946,1.0,human|other
+chain_cd3_antigen,0,10,132,561904,1.0,-0.04846808968641258,1.0,other
+Hemagglutinin,0,10,135,561901,1.0,-0.04901589994620614,1.0,other|viral
+Interferon gamma,0,10,149,561887,1.0,-0.051495424320208344,1.0,human|other
+Programmed cell death 1 ligand 1,0,10,150,561886,1.0,-0.05166798476416239,1.0,human|other
+Immunoglobulin kappa constant,0,10,152,561884,1.0,-0.05201138997397127,1.0,human|other
+programmed_death,0,10,157,561879,1.0,-0.052860154081284944,1.0,other
+HIV,0,10,160,561876,1.0,-0.05336294005555781,1.0,other
+Botulinum neurotoxin type A2,0,10,198,561838,1.0,-0.059364530723099246,1.0,bacteria|other|viral
+interleukin_lymphocyte_programmed_cytotoxic_subunit_alpha_death,0,10,211,561825,1.0,-0.061283095772316665,1.0,other
+Genome polyprotein,0,10,238,561798,1.0,-0.06508761866939938,1.0,human|other|viral
+sars-cov2_alpha,0,10,267,561769,1.0,-0.06894086749037887,1.0,viral
+sars-cov2_delta,0,10,287,561749,1.0,-0.07147757212120041,1.0,viral
+spike,0,10,310,561726,1.0,-0.07428798553464344,1.0,other
+sars-cov2_beta,0,10,336,561700,1.0,-0.07734236081631876,1.0,viral
+superfamily_necrosis_factor_member_tumor_hepatitis_cellular_ligand,0,10,391,561645,1.0,-0.08343675927350813,1.0,human|other
+angiopoietin_endothelial_vascular_factor_growth_form_long,0,10,440,561596,1.0,-0.08851448203010609,1.0,human|other
+tyrosine_kinase_erbb_granzyme,0,10,464,561572,1.0,-0.09089840531965378,1.0,other
+sars-cov2_gamma,0,10,495,561541,1.0,-0.0938883832331654,1.0,viral
+human pd-1,0,10,1251,560785,1.0,-0.14935867491579696,1.0,human
+angiotensin_type,0,10,1319,560717,1.0,-0.15337357015781972,1.0,other
+sars-cov2_rbd,0,10,5920,556116,1.0,-0.32627073182265615,1.0,viral
+human tigit,0,10,10251,551785,1.0,-0.43102067219538803,1.0,human
+Receptor tyrosine-protein kinase erbB-2,0,10,525009,37027,1.0,-11.906094820669185,1.0,human

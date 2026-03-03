@@ -1,0 +1,661 @@
+---
+title: "assemble_databse"
+output: html_document
+date: "2026-02-11"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library("withr", lib.loc= "/doctorai/niccoloc/libR2")
+library(dplyr , lib.loc = "/doctorai/niccoloc/libR2")
+library(tidyr , lib.loc = "/doctorai/niccoloc/libR2")
+library(ggplot2 , lib.loc = "/doctorai/niccoloc/libR2")
+library(viridis , lib.loc = "/doctorai/niccoloc/libR2")
+library(stringr , lib.loc = "/doctorai/niccoloc/libR2")
+library(patchwork , lib.loc = "/doctorai/niccoloc/libR2")
+library(data.table , lib.loc = "/doctorai/niccoloc/libR2")
+library(foreach, lib.loc= "/doctorai/niccoloc/libR2")
+library(ggseqlogo , lib.loc= "/doctorai/niccoloc/libR2")
+
+library("labeling", lib.loc= "/doctorai/niccoloc/libR2")
+library("isoband", lib.loc= "/doctorai/niccoloc/libR2")
+
+library("withr", lib.loc= "/doctorai/niccoloc/libR2")
+
+```
+
+
+
+```{r load raw db}
+
+
+path_db_chiara = '/doctorai/chiarba/dataset/FINAL/MS_BCR_DB_Final_Version_seqID_UPDATED.tsv'
+path_db_chiara = '/doctorai/chiarba/dataset/FINAL/MS_BCR_DB_Final_Version_seqID.tsv'
+db_raw=fread(path_db_chiara) 
+View(db_raw)
+head(db_raw)
+
+
+```
+
+
+```{r fucntions }
+
+# ----------------------------
+# 1) Helper functions
+# ----------------------------
+merge_columns_safe <- function(df,
+                               col_from,
+                               col_to,
+                               drop_source = FALSE,
+                               stop_on_conflict = TRUE,
+                               verbose = TRUE) {
+  
+  # ---- Check columns exist ----
+  if (!col_from %in% colnames(df)) {
+    stop(paste("Column", col_from, "not found in dataframe"))
+  }
+  if (!col_to %in% colnames(df)) {
+    stop(paste("Column", col_to, "not found in dataframe"))
+  }
+  
+  # ---- Extract vectors ----
+  from_vec <- df[[col_from]]
+  to_vec   <- df[[col_to]]
+  
+  # ---- Define what "missing" means ----
+  is_missing <- function(x) {
+    is.na(x) | trimws(as.character(x)) == ""
+  }
+  
+  from_missing <- is_missing(from_vec)
+  to_missing   <- is_missing(to_vec)
+  
+  from_not_missing <- !from_missing
+  to_not_missing   <- !to_missing
+  
+  # ---- Conflict definition ----
+  # Conflict ONLY if both are non-missing AND different
+  conflict_mask <- from_not_missing & 
+                   to_not_missing & 
+                   (trimws(as.character(from_vec)) != trimws(as.character(to_vec)))
+  
+  n_conflicts <- sum(conflict_mask)
+  
+  # ---- Reporting ----
+  if (verbose) {
+    cat("---- Merge Report ----\n")
+    cat("Rows only in", col_from, ":", sum(from_not_missing & to_missing), "\n")
+    cat("Rows only in", col_to, ":", sum(from_missing & to_not_missing), "\n")
+    cat("Rows both identical :", sum(from_not_missing & to_not_missing & !conflict_mask), "\n")
+    cat("Rows conflicting     :", n_conflicts, "\n")
+  }
+  
+  if (n_conflicts > 0 && stop_on_conflict) {
+    stop("Conflicting non-missing values detected. Merge aborted.")
+  } else if (n_conflicts > 0) {
+    warning("Conflicting non-missing values detected. Merge will proceed but check results.")
+    #concated the conflicted labels with a separator (e.g. " ") to keep the information from both columns
+    df[[col_to]][conflict_mask] <- paste0(df[[col_to]][conflict_mask], " ", from_vec[conflict_mask])
+    
+    
+  }
+  
+  # ---- Update col_to where it is missing and not conflicting ---
+  update_mask <- from_not_missing & to_missing & !conflict_mask
+  df[[col_to]][update_mask] <- from_vec[update_mask]
+  
+  # ---- Optionally drop source column ----
+  if (drop_source) {
+    df[[col_from]] <- NULL
+  }
+  
+  return(df)
+}
+
+
+
+
+# Strip allele from AIRR calls, e.g. "IGHV1-69*01" -> "IGHV1-69"
+strip_allele <- function(x) {
+  if (is.null(x)) return(x)
+  x <- as.character(x)
+  # Keep only before '*' if present
+  sub("\\*.*$", "", x)
+}
+
+# Infer receptor locus (IGH/IGK/IGL) from v_call or v_gene
+infer_locus_from_v <- function(v) {
+  v <- as.character(v)
+  locus <- case_when(
+    str_detect(v, "^IGH") ~ "IGH",
+    str_detect(v, "^IGK") ~ "IGK",
+    str_detect(v, "^IGL") ~ "IGL",
+    TRUE ~ NA_character_
+  )
+  locus
+}
+```
+
+
+```{r database preparation}
+db_ms=db_raw #%>% filter( disease_diagnosis !="Healthy")
+
+#look for missing columns and sparse metadata ~ handled separately in the annotations table
+missing_summary <- db_ms %>%
+  select(-ReleaseDate, -create_date, -version) %>% 
+  summarise(across(everything(), ~ mean(is.na(.) | . =="" ))) %>%
+  pivot_longer(cols = everything(),
+               names_to = "column",
+               values_to = "missing_fraction") %>%
+  arrange(desc(missing_fraction))
+
+View(missing_summary)
+
+#merge columns with same annotations 
+db_ms <- merge_columns_safe(db_ms,
+                         col_from = "cell_type",
+                         col_to   = "cell_subtype",
+                         drop_source = TRUE, stop_on_conflict = FALSE)
+#check the conficting rows
+conflicts <- db_ms %>%
+  filter(is.na(cell_type) == FALSE & is.na(cell_subtype) == FALSE & trimws(as.character(cell_type)) != trimws(as.character(cell_subtype))) %>%
+  select(sequence_id, cell_type, cell_subtype)
+
+#unifrom the cell types annotations
+
+db_ms <- db_ms %>%
+  mutate(
+    cell_subtype = str_trim(cell_subtype),
+    cell_subtype = case_when(
+      
+      # Fix spelling
+      cell_subtype == "witched memory B cell" ~ "class-switched memory B cell",
+      
+      # Standardize lymphocyte -> B cell
+      cell_subtype %in% c("Memory B lymphocyte") ~ "Memory B cell",
+      cell_subtype %in% c("Naive B lymphocyte") ~ "Naive B cell",
+      cell_subtype %in% c("Double Negative B lymphocyte") ~ "double negative B cell",
+      
+      # Merge plasmablast labels
+      cell_subtype %in% c("Plasmablast",
+                          "plasmablast/plasma cell B cell") ~ "Plasmablast",
+      
+      # Capitalization normalization
+      cell_subtype == "Naive B cell" ~ "Naive B cell",
+      cell_subtype == "double negative B cell" ~ "double negative B cell",
+      cell_subtype == "regulatory B cell" ~ "regulatory B cell",
+      cell_subtype == "transitional Breg" ~ "transitional Breg",
+      cell_subtype == "B cell" ~ "B cell",
+      cell_subtype == "total B cells" ~ "total B cells",
+      
+      # Empty -> NA
+      cell_subtype == "" ~ NA_character_,
+      
+      TRUE ~ cell_subtype
+    )
+  )
+
+#updated view of missing after update
+missing_summary2 <- db_ms %>%
+  select(-ReleaseDate, -create_date, -version) %>% 
+  summarise(across(everything(), ~ mean(is.na(.) | . =="" ))) %>%
+  pivot_longer(cols = everything(),
+               names_to = "column",
+               values_to = "missing_fraction") %>%
+  arrange(desc(missing_fraction))
+View(missing_summary2)
+
+
+main_cols=missing_summary %>% 
+  filter(missing_fraction < 0.5) %>% pull(column)
+
+db_main = db_ms %>% select(all_of(main_cols))  
+
+#check for duplicated ids
+db_main %>%
+  group_by(sequence_id) %>%
+  filter(n() > 1) %>%
+  arrange(sequence_id)
+
+ 
+#correct the naming for lomakin zyg study
+db_main$subject_number %>% unique() %>% sort()
+# Z5 and Z3 become Lo5 and lo3
+db_main$subject_number <- case_when(
+  db_main$subject_number == "Z5" ~ "Lo5",
+  db_main$subject_number == "Z3" ~ "Lo3",
+  TRUE ~ db_main$subject_number
+)
+
+
+
+colnames(db_main)
+# ----------------------------
+# 2) Build gene-level calls (no allele)
+# ----------------------------
+
+db_main <- db_main %>%
+  mutate(
+    v_gene = strip_allele(v_call),
+    d_gene = strip_allele(d_call),
+    j_gene = strip_allele(j_call)
+  )
+
+# ----------------------------
+# 3) junction_length_aa
+# ----------------------------
+
+db_main= db_main %>%
+  mutate(
+    junction_length_aa = str_length(junction_aa)
+  )
+# ----------------------------
+# 4) Receptor type: heavy / kappa / lambda
+# ----------------------------
+db_main <- db_main %>%
+    mutate(
+      locus = case_when(
+        str_detect(toupper(v_call), "IGH|HEAVY") ~ "IGH",
+        str_detect(toupper(v_call), "IGK|KAPPA") ~ "IGK",
+        str_detect(toupper(v_call), "IGL|LAMBDA") ~ "IGL",
+        TRUE ~ NA
+      )
+ )
+table(db_main$locus , db_main$study)
+table(db_main$study , db_main$locus)
+table(db_main$study , db_main$rev_comp)
+ 
+# ----------------------------
+# 5) Build CORE features
+# ----------------------------
+# Core must contain identity + biology always
+
+core_cols <- c(
+  "sequence_id",
+  "clone_id",
+  "study",
+  "subject_number",
+  "junction_aa",
+  "v_gene",
+  "d_gene",
+  "j_gene",
+  "junction_length_aa",
+  "productive",
+  "disease_diagnosis",
+  "tissue",
+  "tissue_type",
+  "study",'sex', "locus", "cell_subtype"
+)
+setdiff( colnames(db_main), core_cols)
+
+missing_core <- setdiff(core_cols, colnames(db_main))
+if (length(missing_core) > 0) {
+  warning(paste0("Some core columns are missing and will be skipped: ", paste(missing_core, collapse = ", ")))
+}
+
+
+
+
+core_df <- db_main %>% filter( disease_diagnosis =="Healthy")%>% select(any_of(core_cols))
+
+#lightweight version of the datbase with only the core features, to be used for general usage, the annotations and miscellaneouse data are separated and easily mergeable for users interested in specific analyses
+core_df <- core_df %>%
+  mutate(
+    study = as.factor(study),
+    subject_number = as.factor(subject_number),
+    v_gene = as.factor(v_gene),
+    d_gene = as.factor(d_gene),
+    j_gene = as.factor(j_gene)
+  )
+
+fwrite(core_df, "/doctorai/niccoloc/MS_db/MS_BCR/MS_BCR_db_core.csv")
+
+
+
+#alignment and full sequence dataset
+
+
+alignment_columns <- c(
+  "sequence_id",  "duplicate_count",  "sequence",  "sequence_alignment",
+  "germline_alignment",  "v_score",  "d_score",  "j_score",  "v_cigar",
+  "d_cigar",  "j_cigar",  "v_alignment_start",  "v_alignment_end",  "d_alignment_start",  "d_alignment_end",  "j_alignment_start",
+  "j_alignment_end",  "v_germline_start",  "v_germline_end",  "j_germline_start",
+  "j_germline_end",  "v_sequence_start",  "v_sequence_end",
+  "d_call",  "j_sequence_start",  "j_sequence_end",  "np2",  "d_sequence_start",  "d_sequence_end",
+  "SRA_id"    ,  "d_cigar",  "np2_length",  "d_germline_start",
+  "d_sequence_start",  "d_germline_end",  "d_sequence_end",  "d_alignment_start"  ,
+  "d_alignment_end",  "sequence_id_old",  "np1",  "c_call",  "cdr3",  "cdr3_aa",  "j_alignment_start",
+  "j_alignment_end",  "v_alignment_start",  "v_alignment_end" ,
+  "sequence",  "rev_comp",  "productive",   "v_call",   "j_call",   "sequence_alignment",
+  "germline_alignment" ,   "complete_vdj",  "junction" ,   "v_score",   "v_cigar",   "j_score",  "j_cigar",  "junction_length"  ,
+  "np1_length",  "v_germline_start" ,  "v_sequence_start" ,  "v_germline_end",   "v_sequence_end",
+  "j_germline_start",   "j_sequence_start","fwr2", "fwr2_aa","fwr1","fwr1_aa","cdr1","cdr1_aa","cdr2","cdr2_aa","fwr3","fwr3_aa","fwr4","fwr4_aa",
+  "j_germline_end",   "j_sequence_end"
+)
+
+db_alignment <- db_ms %>% select(any_of(alignment_columns), 'sequence_id')
+fwrite(db_alignment, "/doctorai/niccoloc/MS_db/MS_BCR/MS_BCR_db_alignment.csv")
+
+
+#summary to check which column will be part of core, alignment, misceallenous
+missing_summary3 <- db_main %>%
+  summarise(across(everything(), ~ mean(is.na(.) | . =="" ))) %>%
+  pivot_longer(cols = everything(),
+               names_to = "column",
+               values_to = "missing_fraction") %>%
+  arrange(desc(missing_fraction))
+View(missing_summary3)
+
+db_columns=missing_summary3 %>% 
+  mutate(db_type = case_when(
+    column %in% core_cols ~ 'core',
+    column %in% alignment_columns ~  'align',
+    TRUE ~ 'other'))   # %>% fwrite('/doctorai/niccoloc/cols_ab.csv')
+View(db_columns)
+
+other_cols=db_columns %>%  filter(db_type=='other') %>% pull(column)
+
+db_others= db_ms %>% select(any_of(other_cols), 'sequence_id')
+fwrite(db_others, "/doctorai/niccoloc/MS_db/MS_BCR/MS_BCR_db_miscellaneous.csv")
+
+
+# unique_summary <- db_ms %>%
+#   summarise(across(everything(), ~ n_distinct(.))) %>%
+#   pivot_longer(cols = everything(),
+#                names_to = "column",
+#                values_to = "n_unique") %>%
+#   arrange(n_unique)
+# 
+# unique_summary
+
+```
+ 
+```{r study-specific metadata}
+
+
+
+# ============================================
+# Sparse metadata -> LONG "annotations" table
+
+# ============================================
+
+library(tidyverse)
+library(data.table)
+library(janitor)
+
+# ----------------------------
+# Helper: treat NA and "" as missing
+# ----------------------------
+is_missing <- function(x) {
+  is.na(x) | trimws(as.character(x)) == ""
+}
+
+# ----------------------------
+# 1) Build annotations table (LONG)
+# ----------------------------
+# df: original dataframe
+# id_cols: keys to keep (must include sequence_id)
+# threshold: missing fraction threshold to define "sparse" - 0.5 means keep columns with >=50% missing
+# keep_also: columns you always want to keep in core (excluded from sparse selection)
+# out_path: where to save annotations
+build_sparse_annotations <- function(df,
+                                    id_cols = c("sequence_id"),
+                                    context_cols = c("study", "subject_number"),
+                                    threshold = 0.5,
+                                    keep_also = character(0),
+                                    out_path = "annotations_sparse_long.csv",
+                                    write_to_disk = FALSE,
+                                    verbose = TRUE) {
+  # Clean names once (safe even if already clean)
+  df[df == "NA"] <- NA
+  df[df == ""]  <- NA
+  
+  # Checks
+  missing_ids <- setdiff(id_cols, colnames(df))
+  if (length(missing_ids) > 0) {
+    stop(paste0("Missing id columns: ", paste(missing_ids, collapse = ", ")))
+  }
+  
+  # Missing fraction per column (NA + "" considered missing)
+  miss_frac <- sapply(df, function(col) mean(is_missing(col)))
+  
+  # Choose sparse columns
+  exclude_cols <- unique(c(id_cols, context_cols, keep_also))
+  sparse_cols <- names(miss_frac)[miss_frac >= threshold]
+  sparse_cols <- setdiff(sparse_cols, exclude_cols)
+  #add to sparse columns "time_point"  and   "treatment"
+  sparse_cols <- unique(c(sparse_cols))
+  
+  if (verbose) {
+    cat("Sparse columns selected:", length(sparse_cols), "\n")
+    if (length(sparse_cols) > 0) {
+      print(sort(miss_frac[sparse_cols], decreasing = TRUE)[1:min(25, length(sparse_cols))])
+    }
+  }
+  
+  if (length(sparse_cols) == 0) {
+    warning("No sparse columns found for given threshold.")
+    return(list(annotations = NULL, sparse_cols = character(0), missing_fraction = miss_frac))
+  }
+  
+  # Keep only context columns that exist
+  context_cols <- intersect(context_cols, colnames(df))
+  
+  #convert all the sparse columns to character (to avoid issues with factors, numerics, etc.)
+  df <- df %>%
+    mutate(across(all_of(sparse_cols), as.character))
+  
+  # Build LONG annotations: one row per (sequence_id, field, value)
+  annotations <- df %>%
+    select(any_of(c(id_cols, context_cols, sparse_cols))) %>%
+    pivot_longer(
+      cols = all_of(sparse_cols),
+      names_to = "field",
+      values_to = "value"
+    ) %>%
+    mutate(
+      value = trimws(as.character(value)),
+      field = as.character(field)
+    ) %>%
+    filter(!(is.na(value) | value == "")) %>%   # keep only real values
+    distinct()
+  
+  if (write_to_disk) {
+  fwrite(annotations, out_path)
+  }
+  
+  if (verbose) {
+    cat("Saved annotations to:", out_path, "\n")
+    cat("Rows in annotations:", nrow(annotations), "\n")
+  }
+  
+  return(list(
+    annotations = annotations,
+    sparse_cols = sparse_cols,
+    missing_fraction = miss_frac
+  ))
+}
+
+# ----------------------------
+# 2) Merge-back utilities (for users)
+# ----------------------------
+
+
+
+# A) Convert LONG annotations back to WIDE (one col per field)
+annotations_long_to_wide <- function(annotations,
+                                    id_cols = c("sequence_id"),
+                                    context_cols = c("study", "subject_number")) {
+  # Keep only present columns
+  context_cols <- intersect(context_cols, colnames(annotations))
+  id_cols <- intersect(id_cols, colnames(annotations))
+  
+  annotations %>%
+    select(any_of(c(id_cols, context_cols, "field", "value"))) %>%
+    pivot_wider(
+      names_from = field,
+      values_from = value
+    )
+}
+
+# B) Merge WIDE annotations into a core table (left join by keys)
+merge_annotations_into_core <- function(db_ms,
+                                       annotations_long,
+                                       by_cols = c("sequence_id")) {
+  ann_wide <- annotations_long_to_wide(
+    annotations_long,
+    id_cols = by_cols,
+    context_cols = setdiff(intersect(c("study", "subject_number"), colnames(annotations_long)), by_cols)
+  )
+  
+  core_df %>%
+    left_join(ann_wide, by = by_cols)
+}
+
+# ----------------------------
+# Example pipeline
+# ----------------------------
+removed_cols =c( "fwr2", "fwr2_aa","fwr1","fwr1_aa","cdr1","cdr1_aa","cdr2","cdr2_aa","fwr3","fwr3_aa","fwr4","fwr4_aa")
+# Load original DB sparse columns
+study_spec_cols=missing_summary2 %>% 
+  filter(missing_fraction > 0.5) %>% pull(column)
+
+ 
+
+
+# 1) Build annotations for columns with missing fraction >= 0.5  
+res <- build_sparse_annotations(
+  df = db_ms %>% select(all_of(study_spec_cols), "sequence_id") %>% 
+    select(-any_of(removed_cols)),
+  id_cols = c("sequence_id"),
+  context_cols = c("study", "subject_number"),
+  write_to_disk = T,
+  threshold = 0.5,
+  # keep_also = c("clone_id", "junction_aa", "v_gene", "d_gene", "j_gene"), # optional
+  out_path = "/doctorai/niccoloc/MS_db/MS_BCR/MS_BCR_db_metadata_sparse_long.csv"
+)
+
+
+# 2) Later, a user can merge back:
+core_df <- fread("MS_BCR_db_core.csv", data.table = FALSE)
+annotations <- fread( "/doctorai/niccoloc/MS_db/MS_BCR/metadata_sparse_long.csv", data.table = FALSE)
+
+core_plus <- merge_annotations_into_core(core_df, annotations, by_cols = c("sequence_id"))
+
+
+
+
+```
+
+```{r tabel for meatadata sparsity x study}
+library(tidyverse)
+library(data.table)
+
+# Helper: missing definition
+is_missing <- function(x) {
+  is.na(x) | trimws(as.character(x)) == ""
+}
+
+build_study_sparse_coverage <- function(df,
+                                        study_col = "study",
+                                        sparse_cols,
+                                        output_path = NULL,
+                                        verbose = TRUE) {
+  
+  # Check study column
+  if (!study_col %in% colnames(df)) {
+    stop(paste("Study column", study_col, "not found"))
+  }
+  
+  # Keep only existing sparse columns
+  sparse_cols <- intersect(sparse_cols, colnames(df))
+  
+  if (length(sparse_cols) == 0) {
+    stop("No valid sparse columns found in dataframe")
+  }
+  
+  # Convert sparse cols to character (safe)
+  df <- df %>%
+    mutate(across(all_of(sparse_cols), as.character))
+  
+  # Compute % non-missing per study per column
+  coverage_long <- df %>%
+    group_by(.data[[study_col]]) %>%
+    summarise(across(
+      all_of(sparse_cols),
+      ~ mean(!is_missing(.)) * 100,
+      .names = "{.col}"
+    ),
+    .groups = "drop") %>%
+    pivot_longer(
+      cols = -all_of(study_col),
+      names_to = "field",
+      values_to = "percent_annotated"
+    )
+  
+  # Convert to wide matrix
+  coverage_wide <- coverage_long %>%
+    pivot_wider(
+      names_from = field,
+      values_from = percent_annotated
+    ) %>%
+    arrange(.data[[study_col]])
+  
+  if (!is.null(output_path)) {
+    fwrite(coverage_wide, output_path)
+  }
+  
+  if (verbose) {
+    cat("Number of studies:", n_distinct(df[[study_col]]), "\n")
+    cat("Sparse metadata fields analyzed:", length(sparse_cols), "\n")
+  }
+  
+  return(coverage_wide)
+}
+
+
+coverage_table <- build_study_sparse_coverage(
+  df = db_ms,
+  study_col = "study",
+  sparse_cols = study_spec_cols,
+  output_path = "/doctorai/niccoloc/MS_db/study_sparse_metadata_coverage.csv"
+)
+
+View(coverage_table)
+fwrite(coverage_table, "/doctorai/niccoloc/MS_db/study_sparse_metadata_coverage.csv")
+
+
+```
+
+
+```{r get only the healthy for the core database}
+
+ms_hc=fread("/doctorai/chiarba/analysis/AT_THE_END/MS_HC_2026_h0h1.tsv") %>% filter(disease_diagnosis=="Healthy")
+
+
+
+missing_hc = ms_hc %>%
+  summarise(across(everything(), ~ mean(is.na(.) | . =="" ))) %>%
+  pivot_longer(cols = everything(),
+               names_to = "column",
+               values_to = "missing_fraction") %>%
+  arrange(desc(missing_fraction))
+
+hc_cols=missing_hc %>%filter(missing_fraction < 0.5) %>% pull(column)
+
+ms_hc %>% 
+  select(any_of(hc_cols)) %>% fwrite("/doctorai/niccoloc/MS_db/MS_BCR_healthy_ONLY.csv")
+
+
+
+
+
+```
+
+
