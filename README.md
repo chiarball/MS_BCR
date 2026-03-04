@@ -1,10 +1,13 @@
-# MS BCR Database
+# 🧬 MS BCR Database 🔬
 
-A curated B-cell receptor (BCR) repertoire database for Multiple Sclerosis research, compiled and harmonized from publicly available studies. The database is hosted on [Zenodo](#) and distributed as a set of modular CSV files designed for flexible and easy-to-use downstream analysis.
+
+>📊 A curated B-cell receptor (BCR) repertoire database for Multiple Sclerosis research.  
+>📦 The database is hosted on [Zenodo](https://zenodo.org/records/18862069) and distributed as a set of modular CSV files designed for flexible and easy-to-use downstream analysis.
+
 
 ---
 
-## Repository Structure
+## 📂 Repository Structure
 
 The database is split into four CSV files, each serving a distinct purpose:
 
@@ -17,6 +20,12 @@ The database is split into four CSV files, each serving a distinct purpose:
 
 **All files share the `sequence_id` column as a primary key and can be joined as needed.**
 Metadata fields with more than 50% missing values across the dataset were separated from the core table and stored in the long-format annotations file `MS_BCR_db_metadata_sparse_long.csv` to avoid sparse wide matrices. 
+
+### Healthy Control Dataset
+
+To facilitate direct comparison analyses, a harmonized and preprocessed healthy control dataset is also available: `MS_BCR_healthy_ONLY.csv`. The data originate from the Ghraichy et al. study and have been processed using the same pipeline applied to the MS-BCR database to ensure methodological consistency.
+
+The dataset can be downloaded from Zenodo and corresponds to the exact control cohort used in the analyses presented in our manuscript.
 
 ---
 
@@ -64,7 +73,7 @@ Study-specific metadata (e.g. time points, treatment, disease scores) stored in 
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Load the core database
 ```r
