@@ -3,7 +3,7 @@
 >📊 A curated B-cell receptor (BCR) repertoire database for Multiple Sclerosis research.  
 >📦 The database is hosted on [Zenodo](https://zenodo.org/records/18862069) and distributed as a set of modular CSV files designed for flexible and easy-to-use downstream analysis.
 
-[MS-BCR.pdf](https://github.com/user-attachments/files/28600836/MS-BCR.pdf)
+![MS-BCR Graphical Abstract](MS-BCR_abstract.png)
 
 ---
 
@@ -138,6 +138,7 @@ The MS-BCR database is maintained as a living resource and will be continuously 
 If you are aware of relevant publicly available multiple sclerosis B-cell receptor (BCR) datasets that are not currently included, or if you would like to contribute data, suggest corrections, or discuss potential collaborations, please contact us:
 
 > Chiara Ballerini - chiara.ballerini@unifi.it
+> 
 > Niccolò Cardente - niccoloc@uio.no
 
 For questions or issues, please open a GitHub issue or contact victor.greiff@medisin.uio.no.
