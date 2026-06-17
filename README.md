@@ -37,7 +37,7 @@ The main file for most analyses. Contains one row per sequence with the followin
 | Column | Description |
 |--------|-------------|
 | `sequence_id` | Unique sequence identifier (primary key) |
-| `clone_id` | Clonal cluster assignment |
+| `clone_id` | Study-specific clone identifier assigned by MiXCR |
 | `study` | Source study |
 | `subject_number` | Donor identifier |
 | `disease_diagnosis` | Clinical diagnosis (e.g. `Healthy`) |
